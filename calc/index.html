@@ -127,20 +127,45 @@ img{max-width:100%;display:block}
   .hero h1{font-size:26px}
   .cta-box{padding:32px 24px}
 }
+
+/* Sites Dropdown */
+.sites-dropdown{position:relative}
+.sites-dropdown-toggle{font-size:14px;font-weight:500;color:var(--gray-500);cursor:pointer;display:flex;align-items:center;gap:4px;transition:color .2s;background:none;border:none;font-family:inherit}
+.sites-dropdown-toggle:hover{color:var(--black)}
+.sites-dropdown-toggle svg{width:12px;height:12px;transition:transform .2s}
+.sites-dropdown:hover .sites-dropdown-toggle svg{transform:rotate(180deg)}
+.sites-dropdown-menu{position:absolute;top:calc(100% + 8px);right:0;min-width:220px;background:var(--white);border:1px solid var(--gray-200);border-radius:12px;box-shadow:0 8px 32px rgba(0,0,0,0.1);padding:8px;opacity:0;visibility:hidden;transform:translateY(8px);transition:all .2s;z-index:200}
+.sites-dropdown:hover .sites-dropdown-menu{opacity:1;visibility:visible;transform:translateY(0)}
+.sites-dropdown-item{display:flex;align-items:center;gap:10px;padding:10px 12px;border-radius:8px;font-size:13px;font-weight:500;color:var(--black);transition:background .15s}
+.sites-dropdown-item:hover{background:var(--gray-100)}
+.sites-dropdown-item .dd-icon{width:28px;height:28px;border-radius:7px;display:flex;align-items:center;justify-content:center;font-size:14px;flex-shrink:0}
+.sites-dropdown-item.active{color:var(--accent);background:rgba(0,113,227,0.06)}
 </style>
 </head>
 <body>
 
 <nav class="nav">
   <div class="nav-inner">
-    <a href="index.html" class="nav-logo">
+    <a href="/calc/index.html" class="nav-logo">
       <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="4" y="2" width="16" height="20" rx="2"/><line x1="8" y1="6" x2="16" y2="6"/><line x1="8" y1="10" x2="10" y2="10"/><line x1="12" y1="10" x2="14" y2="10"/><line x1="8" y1="14" x2="10" y2="14"/><line x1="12" y1="14" x2="14" y2="14"/><line x1="8" y1="18" x2="14" y2="18"/></svg>
       CalcBox
     </a>
     <div class="nav-links">
       <a href="#calcs">計算ツール</a>
-      <a href="pages/about.html">CalcBoxとは</a>
-      <a href="pages/contact.html">お問い合わせ</a>
+      <a href="/calc/pages/about.html">CalcBoxとは</a>
+      <a href="/calc/pages/contact.html">お問い合わせ</a>
+      <div class="sites-dropdown">
+        <button class="sites-dropdown-toggle">サービス一覧 <svg viewBox="0 0 12 12"><path d="M2.5 4.5L6 8L9.5 4.5" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg></button>
+        <div class="sites-dropdown-menu">
+          <a href="/index.html" class="sites-dropdown-item"><span class="dd-icon" style="background:#dbeafe">🔧</span>ToolBox</a>
+          <a href="/calc/index.html" class="sites-dropdown-item active"><span class="dd-icon" style="background:#dcfce7">🧮</span>CalcBox</a>
+          <a href="/bunrei/index.html" class="sites-dropdown-item"><span class="dd-icon" style="background:#fef3c7">📝</span>文例メーカー</a>
+          <a href="/template/index.html" class="sites-dropdown-item"><span class="dd-icon" style="background:#ede9fe">📄</span>テンプレBOX</a>
+          <a href="/check/index.html" class="sites-dropdown-item"><span class="dd-icon" style="background:#ffedd5">✅</span>チェックノート</a>
+          <a href="/icon/index.html" class="sites-dropdown-item"><span class="dd-icon" style="background:#fce7f3">🎨</span>IconJP</a>
+          <a href="/keiyaku/index.html" class="sites-dropdown-item"><span class="dd-icon" style="background:#e0e7ff">📋</span>契約書メーカー</a>
+        </div>
+      </div>
     </div>
     <button class="nav-mobile-btn" onclick="document.querySelector('.mobile-menu').classList.toggle('open')" aria-label="メニュー">
       <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><line x1="4" y1="7" x2="20" y2="7"/><line x1="4" y1="12" x2="20" y2="12"/><line x1="4" y1="17" x2="20" y2="17"/></svg>
