@@ -131,12 +131,16 @@ img{max-width:100%;display:block}
 .sites-dropdown-toggle:hover{color:var(--black)}
 .sites-dropdown-toggle svg{width:12px;height:12px;transition:transform .2s}
 .sites-dropdown:hover .sites-dropdown-toggle svg{transform:rotate(180deg)}
-.sites-dropdown-menu{position:absolute;top:calc(100% + 8px);right:0;min-width:220px;background:var(--white);border:1px solid var(--gray-200);border-radius:12px;box-shadow:0 8px 32px rgba(0,0,0,0.1);padding:8px;opacity:0;visibility:hidden;transform:translateY(8px);transition:all .2s;z-index:200}
+.sites-dropdown-menu{position:absolute;top:calc(100% + 8px);right:0;min-width:300px;background:var(--white);border:1px solid var(--gray-200);border-radius:12px;box-shadow:0 8px 32px rgba(0,0,0,0.1);padding:8px;opacity:0;visibility:hidden;transform:translateY(8px);transition:all .2s;z-index:200}
 .sites-dropdown:hover .sites-dropdown-menu{opacity:1;visibility:visible;transform:translateY(0)}
 .sites-dropdown-item{display:flex;align-items:center;gap:10px;padding:10px 12px;border-radius:8px;font-size:13px;font-weight:500;color:var(--black);transition:background .15s}
 .sites-dropdown-item:hover{background:var(--gray-100)}
 .sites-dropdown-item .dd-icon{width:28px;height:28px;border-radius:7px;display:flex;align-items:center;justify-content:center;font-size:14px;flex-shrink:0}
 .sites-dropdown-item.active{color:var(--accent);background:rgba(0,113,227,0.06)}
+
+.sites-dropdown-item .dd-text{display:flex;flex-direction:column}
+.sites-dropdown-item .dd-name{font-size:13px;font-weight:600}
+.sites-dropdown-item .dd-desc{font-size:11px;font-weight:400;color:#8e8e93;margin-top:1px}
 </style>
 </head>
 <body>
@@ -152,13 +156,13 @@ img{max-width:100%;display:block}
       <div class="sites-dropdown">
         <button class="sites-dropdown-toggle">サービス一覧 <svg viewBox="0 0 12 12"><path d="M2.5 4.5L6 8L9.5 4.5" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg></button>
         <div class="sites-dropdown-menu">
-          <a href="/index.html" class="sites-dropdown-item"><span class="dd-icon" style="background:#dbeafe">🔧</span>ToolBox</a>
-          <a href="/calc/index.html" class="sites-dropdown-item"><span class="dd-icon" style="background:#dcfce7">🧮</span>CalcBox</a>
-          <a href="/bunrei/index.html" class="sites-dropdown-item"><span class="dd-icon" style="background:#fef3c7">📝</span>文例メーカー</a>
-          <a href="/template/index.html" class="sites-dropdown-item"><span class="dd-icon" style="background:#ede9fe">📄</span>テンプレBOX</a>
-          <a href="/check/index.html" class="sites-dropdown-item active"><span class="dd-icon" style="background:#ffedd5">✅</span>チェックノート</a>
-          <a href="/icon/index.html" class="sites-dropdown-item"><span class="dd-icon" style="background:#fce7f3">🎨</span>IconJP</a>
-          <a href="/keiyaku/index.html" class="sites-dropdown-item"><span class="dd-icon" style="background:#e0e7ff">📋</span>契約書メーカー</a>
+          <a href="/index.html" class="sites-dropdown-item"><span class="dd-icon" style="background:#dbeafe">🔧</span><span class="dd-text"><span class="dd-name">ToolBox</span><span class="dd-desc">画像圧縮・QRコードなど便利ツール</span></span></a>
+            <a href="/calc/index.html" class="sites-dropdown-item"><span class="dd-icon" style="background:#dcfce7">🧮</span><span class="dd-text"><span class="dd-name">CalcBox</span><span class="dd-desc">手取り・ローン・税金の計算</span></span></a>
+            <a href="/bunrei/index.html" class="sites-dropdown-item"><span class="dd-icon" style="background:#fef3c7">📝</span><span class="dd-text"><span class="dd-name">文例メーカー</span><span class="dd-desc">ビジネスメール・挨拶文を自動生成</span></span></a>
+            <a href="/template/index.html" class="sites-dropdown-item"><span class="dd-icon" style="background:#ede9fe">📄</span><span class="dd-text"><span class="dd-name">テンプレBOX</span><span class="dd-desc">請求書・契約書などの雛形</span></span></a>
+            <a href="/check/index.html" class="sites-dropdown-item active"><span class="dd-icon" style="background:#ffedd5">✅</span><span class="dd-text"><span class="dd-name">チェックノート</span><span class="dd-desc">引越し・旅行などのチェックリスト</span></span></a>
+            <a href="/icon/index.html" class="sites-dropdown-item"><span class="dd-icon" style="background:#fce7f3">🎨</span><span class="dd-text"><span class="dd-name">IconJP</span><span class="dd-desc">日本語UIに最適な無料SVGアイコン</span></span></a>
+            <a href="/keiyaku/index.html" class="sites-dropdown-item"><span class="dd-icon" style="background:#e0e7ff">📋</span><span class="dd-text"><span class="dd-name">契約書メーカー</span><span class="dd-desc">契約書をブラウザで簡単作成</span></span></a>
         </div>
       </div>
     </div>
