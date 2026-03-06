@@ -1,0 +1,408 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="【無料】安全なパスワードを自動生成。文字数・文字種を自由にカスタマイズ。ブラウザで完結、サーバー送信なし。">
+  <meta name="keywords" content="パスワード生成, パスワード作成, ランダムパスワード, パスワードジェネレーター, 安全なパスワード">
+  <title>パスワード生成 — 無料オンラインツール | ToolBox</title>
+  <link rel="canonical" href="https://muryo-tool.com/tools/password-generator/">
+  <meta property="og:title" content="パスワード生成 — 無料オンラインツール | ToolBox">
+  <meta property="og:description" content="【無料】安全なパスワードを自動生成。文字数・文字種を自由にカスタマイズ。ブラウザで完結、サーバー送信なし。">
+  <meta property="og:type" content="website">
+  <meta property="og:url" content="https://muryo-tool.com/tools/password-generator/">
+  <meta name="twitter:card" content="summary_large_image">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Noto+Sans+JP:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <style>
+    *,*::before,*::after{margin:0;padding:0;box-sizing:border-box}
+    :root{--black:#1d1d1f;--gray-900:#3a3a3c;--gray-700:#636366;--gray-500:#8e8e93;--gray-300:#d1d1d6;--gray-200:#e5e5ea;--gray-100:#f2f2f7;--white:#fff;--accent:#0071e3;--font:"Inter","Noto Sans JP",-apple-system,sans-serif}
+    html{font-size:16px;-webkit-font-smoothing:antialiased}
+    body{font-family:var(--font);color:var(--black);background:var(--gray-100);line-height:1.7;min-height:100vh}
+    a{color:inherit;text-decoration:none}
+
+    .nav{background:rgba(255,255,255,0.85);backdrop-filter:saturate(180%) blur(20px);border-bottom:1px solid rgba(0,0,0,0.05);position:sticky;top:0;z-index:100}
+    .nav__inner{display:flex;align-items:center;justify-content:space-between;height:52px;max-width:1100px;margin:0 auto;padding:0 24px}
+    .nav__logo{font-size:1.2rem;font-weight:800;letter-spacing:-0.04em}
+    .nav__logo span{color:var(--accent)}
+    .nav__back{font-size:0.82rem;font-weight:500;color:var(--accent);display:flex;align-items:center;gap:4px}
+
+    .tool-page{max-width:900px;margin:0 auto;padding:32px 24px 80px}
+    .tool-header{text-align:center;margin-bottom:32px}
+    .tool-header__icon{display:flex;align-items:center;justify-content:center;margin-bottom:12px;color:var(--accent)}
+    .tool-header__title{font-size:clamp(1.5rem,3vw,2rem);font-weight:800;letter-spacing:-0.03em;margin-bottom:8px}
+    .tool-header__desc{font-size:0.92rem;color:var(--gray-700);max-width:500px;margin:0 auto}
+
+    .tool-main{background:var(--white);border-radius:20px;box-shadow:0 2px 12px rgba(0,0,0,0.04);overflow:hidden;padding:32px}
+
+    .password-display{background:var(--gray-100);border-radius:12px;padding:24px;text-align:center;margin-bottom:24px;position:relative;min-height:80px;display:flex;align-items:center;justify-content:center}
+    .password-display__text{font-family:"Inter",monospace;font-size:clamp(1.1rem,2.5vw,1.5rem);font-weight:600;letter-spacing:0.05em;word-break:break-all;line-height:1.6;color:var(--black);user-select:all}
+
+    .password-actions{display:flex;gap:12px;justify-content:center;margin-bottom:28px}
+    .btn{display:inline-flex;align-items:center;justify-content:center;gap:8px;padding:12px 28px;border-radius:980px;font-size:0.9rem;font-weight:600;font-family:var(--font);cursor:pointer;border:none;transition:background 0.2s,transform 0.1s}
+    .btn:active{transform:scale(0.97)}
+    .btn--primary{background:var(--accent);color:var(--white)}
+    .btn--primary:hover{background:#005bb5}
+    .btn--secondary{background:var(--gray-100);color:var(--gray-700);border:1px solid var(--gray-200)}
+    .btn--secondary:hover{background:var(--gray-200)}
+    .btn--copied{background:#34c759;color:var(--white);border-color:#34c759}
+
+    .strength-bar{margin-bottom:28px}
+    .strength-bar__label{display:flex;justify-content:space-between;align-items:center;margin-bottom:8px;font-size:0.82rem;font-weight:600}
+    .strength-bar__label-text{color:var(--gray-500)}
+    .strength-bar__level{font-weight:700}
+    .strength-bar__track{height:6px;background:var(--gray-200);border-radius:3px;overflow:hidden}
+    .strength-bar__fill{height:100%;border-radius:3px;transition:width 0.3s,background 0.3s}
+
+    .options{border-top:1px solid var(--gray-200);padding-top:24px}
+    .option-group{margin-bottom:20px}
+    .option-group__label{display:flex;justify-content:space-between;align-items:center;font-size:0.88rem;font-weight:600;margin-bottom:8px}
+    .option-group__label span{color:var(--gray-700)}
+    .option-group__value{font-weight:700;color:var(--accent);min-width:40px;text-align:right}
+    .slider{-webkit-appearance:none;appearance:none;width:100%;height:6px;background:var(--gray-200);border-radius:3px;outline:none}
+    .slider::-webkit-slider-thumb{-webkit-appearance:none;appearance:none;width:22px;height:22px;border-radius:50%;background:var(--accent);cursor:pointer;box-shadow:0 1px 4px rgba(0,0,0,0.15)}
+    .slider::-moz-range-thumb{width:22px;height:22px;border-radius:50%;background:var(--accent);cursor:pointer;border:none;box-shadow:0 1px 4px rgba(0,0,0,0.15)}
+
+    .checkboxes{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-top:16px}
+    .checkbox-item{display:flex;align-items:center;gap:10px;font-size:0.88rem;color:var(--gray-700);cursor:pointer}
+    .checkbox-item input[type="checkbox"]{-webkit-appearance:none;appearance:none;width:20px;height:20px;border:2px solid var(--gray-300);border-radius:6px;cursor:pointer;position:relative;flex-shrink:0;transition:background 0.15s,border-color 0.15s}
+    .checkbox-item input[type="checkbox"]:checked{background:var(--accent);border-color:var(--accent)}
+    .checkbox-item input[type="checkbox"]:checked::after{content:'';position:absolute;top:3px;left:6px;width:5px;height:9px;border:solid var(--white);border-width:0 2px 2px 0;transform:rotate(45deg)}
+
+    .details{display:grid;grid-template-columns:1fr 1fr;gap:16px;margin-top:20px}
+    .detail-card{background:var(--white);border-radius:16px;padding:24px;box-shadow:0 2px 12px rgba(0,0,0,0.04)}
+    .detail-card__title{font-size:0.78rem;font-weight:600;color:var(--gray-500);text-transform:uppercase;letter-spacing:0.08em;margin-bottom:14px}
+    .detail-row{display:flex;justify-content:space-between;padding:8px 0;border-bottom:1px solid var(--gray-100);font-size:0.88rem}
+    .detail-row:last-child{border-bottom:none}
+    .detail-row__label{color:var(--gray-700)}
+    .detail-row__value{font-weight:600}
+
+    .seo-section{margin-top:48px;background:var(--white);border-radius:20px;padding:40px;box-shadow:0 2px 12px rgba(0,0,0,0.04)}
+    .seo-section h2{font-size:1.3rem;font-weight:700;margin-bottom:16px;letter-spacing:-0.01em}
+    .seo-section h3{font-size:1.05rem;font-weight:600;margin:28px 0 10px}
+    .seo-section p{font-size:0.92rem;color:var(--gray-700);line-height:1.85;margin-bottom:14px}
+    .seo-section ul{padding-left:20px;margin-bottom:14px}
+    .seo-section li{font-size:0.9rem;color:var(--gray-700);line-height:1.8;margin-bottom:4px}
+
+    .footer{text-align:center;padding:40px 24px;font-size:0.75rem;color:var(--gray-500)}
+    .footer a{color:var(--accent)}
+
+    @media(max-width:640px){
+      .tool-page{padding:20px 16px 60px}
+      .tool-header__title{font-size:1.3rem}
+      .tool-header__desc{font-size:0.85rem}
+      .tool-main{padding:24px 20px}
+      .checkboxes{grid-template-columns:1fr}
+      .details{grid-template-columns:1fr}
+      .password-actions{flex-direction:column;align-items:stretch}
+      .seo-section{padding:24px 20px}
+      .seo-section h2{font-size:1.1rem}
+    }
+  </style>
+<script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-1964975138803092"
+     crossorigin="anonymous"></script>
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "WebApplication",
+  "name": "パスワード生成 — 無料オンラインツール | ToolBox",
+  "url": "https://muryo-tool.com/tools/password-generator/",
+  "description": "【無料】安全なパスワードを自動生成。文字数・文字種を自由にカスタマイズ。ブラウザで完結、サーバー送信なし。",
+  "applicationCategory": "UtilitiesApplication",
+  "operatingSystem": "Web",
+  "offers": {"@type": "Offer", "price": "0", "priceCurrency": "JPY"},
+  "inLanguage": "ja",
+  "isPartOf": {"@type": "WebSite", "name": "ToolBox", "url": "https://muryo-tool.com/"}
+}
+</script>
+</head>
+<body>
+
+  <nav class="nav">
+    <div class="nav__inner">
+      <a href="../../index.html" class="nav__logo">Tool<span>Box</span></a>
+      <a href="../../index.html" class="nav__back">&larr; ツール一覧</a>
+    </div>
+  </nav>
+
+  <main class="tool-page">
+    <div class="tool-header">
+      <div class="tool-header__icon"><svg width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="11" width="18" height="11" rx="2" ry="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/><circle cx="12" cy="16" r="1"/></svg></div>
+      <h1 class="tool-header__title">パスワード生成</h1>
+      <p class="tool-header__desc">安全なパスワードをワンクリックで自動生成。すべてブラウザ内で処理、サーバーには一切送信されません。</p>
+    </div>
+
+    <div class="tool-main">
+      <div class="password-display">
+        <div class="password-display__text" id="password-output"></div>
+      </div>
+
+      <div class="password-actions">
+        <button class="btn btn--primary" id="generate-btn" onclick="generatePassword()">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="23 4 23 10 17 10"/><path d="M20.49 15a9 9 0 1 1-2.12-9.36L23 10"/></svg>
+          生成する
+        </button>
+        <button class="btn btn--secondary" id="copy-btn" onclick="copyPassword()">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/></svg>
+          コピー
+        </button>
+      </div>
+
+      <div class="strength-bar">
+        <div class="strength-bar__label">
+          <span class="strength-bar__label-text">パスワード強度</span>
+          <span class="strength-bar__level" id="strength-level">--</span>
+        </div>
+        <div class="strength-bar__track">
+          <div class="strength-bar__fill" id="strength-fill" style="width:0%;background:var(--gray-300)"></div>
+        </div>
+      </div>
+
+      <div class="options">
+        <div class="option-group">
+          <div class="option-group__label">
+            <span>文字数</span>
+            <span class="option-group__value" id="length-value">16</span>
+          </div>
+          <input type="range" class="slider" id="length-slider" min="8" max="128" value="16">
+        </div>
+
+        <div class="checkboxes">
+          <label class="checkbox-item">
+            <input type="checkbox" id="opt-upper" checked>
+            大文字 (A-Z)
+          </label>
+          <label class="checkbox-item">
+            <input type="checkbox" id="opt-lower" checked>
+            小文字 (a-z)
+          </label>
+          <label class="checkbox-item">
+            <input type="checkbox" id="opt-digits" checked>
+            数字 (0-9)
+          </label>
+          <label class="checkbox-item">
+            <input type="checkbox" id="opt-symbols" checked>
+            記号 (!@#$%...)
+          </label>
+        </div>
+      </div>
+    </div>
+
+    <div class="details">
+      <div class="detail-card">
+        <div class="detail-card__title">生成設定</div>
+        <div class="detail-row"><span class="detail-row__label">文字数</span><span class="detail-row__value" id="info-length">16</span></div>
+        <div class="detail-row"><span class="detail-row__label">使用文字種</span><span class="detail-row__value" id="info-charsets">4種</span></div>
+        <div class="detail-row"><span class="detail-row__label">文字プール数</span><span class="detail-row__value" id="info-pool">94</span></div>
+      </div>
+      <div class="detail-card">
+        <div class="detail-card__title">セキュリティ情報</div>
+        <div class="detail-row"><span class="detail-row__label">エントロピー</span><span class="detail-row__value" id="info-entropy">0 bit</span></div>
+        <div class="detail-row"><span class="detail-row__label">パスワード強度</span><span class="detail-row__value" id="info-strength">--</span></div>
+        <div class="detail-row"><span class="detail-row__label">解読推定時間</span><span class="detail-row__value" id="info-crack">--</span></div>
+      </div>
+    </div>
+
+    <!-- SEO Content -->
+    <div class="seo-section">
+      <h2>パスワード生成ツールの使い方</h2>
+      <p>ページを開くだけで安全なパスワードが自動生成されます。文字数スライダーや文字種チェックボックスで条件をカスタマイズし、「コピー」ボタンでクリップボードに保存できます。生成処理はすべてブラウザ内のJavaScriptで行われ、パスワードがサーバーに送信されることは一切ありません。</p>
+
+      <h3>安全なパスワードの条件</h3>
+      <ul>
+        <li><strong>12文字以上</strong> &#8212; 文字数が長いほど総当たり攻撃への耐性が高まります。16文字以上が推奨です。</li>
+        <li><strong>複数の文字種を組み合わせる</strong> &#8212; 大文字・小文字・数字・記号を混ぜることで、文字プールが広がり安全性が向上します。</li>
+        <li><strong>辞書にある単語を避ける</strong> &#8212; ランダム生成されたパスワードは辞書攻撃に対して非常に強力です。</li>
+        <li><strong>使い回さない</strong> &#8212; サービスごとに異なるパスワードを設定しましょう。</li>
+      </ul>
+
+      <h3>こんな場面で便利</h3>
+      <ul>
+        <li><strong>新規アカウント作成時</strong> &#8212; 安全なパスワードをすばやく生成できます。</li>
+        <li><strong>パスワード変更</strong> &#8212; 定期的なパスワード更新に。</li>
+        <li><strong>開発・テスト</strong> &#8212; ダミーパスワードやAPIキーの生成に。</li>
+        <li><strong>Wi-Fiパスワード</strong> &#8212; 推測されにくいネットワークパスワードの作成に。</li>
+      </ul>
+
+      <h3>特徴</h3>
+      <ul>
+        <li><strong>完全無料</strong> &#8212; 登録不要、回数制限なし。何度でも生成できます。</li>
+        <li><strong>プライバシー安全</strong> &#8212; すべてブラウザ内で処理。サーバー通信は一切ありません。</li>
+        <li><strong>暗号学的に安全</strong> &#8212; Web Crypto API（crypto.getRandomValues）を使用した安全な乱数生成。</li>
+        <li><strong>カスタマイズ自在</strong> &#8212; 文字数8〜128、文字種を自由に選択できます。</li>
+      </ul>
+
+      <h3>パスワードの強度について</h3>
+      <p>パスワードの強度はエントロピー（ビット数）で表されます。エントロピーが高いほど、総当たり攻撃で解読するのに必要な試行回数が増え、安全性が高まります。</p>
+      <ul>
+        <li><strong>40ビット未満</strong>: 弱い &#8212; すぐに解読される危険性があります。</li>
+        <li><strong>40〜59ビット</strong>: 中程度 &#8212; 個人利用には最低限。</li>
+        <li><strong>60〜79ビット</strong>: 強い &#8212; ほとんどの用途で安全です。</li>
+        <li><strong>80ビット以上</strong>: 最強 &#8212; 非常に高いセキュリティレベルです。</li>
+      </ul>
+      <p>本ツールでは16文字・全文字種使用の場合、約105ビットのエントロピーが得られ、現実的な時間での解読は不可能です。</p>
+    </div>
+  </main>
+
+  <footer class="footer">
+    <p>&copy; 2026 <a href="../../index.html">ToolBox</a>. All rights reserved.</p>
+  </footer>
+
+  <script>
+    var UPPER = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ';
+    var LOWER = 'abcdefghijklmnopqrstuvwxyz';
+    var DIGITS = '0123456789';
+    var SYMBOLS = '!@#$%^&*()_+-=[]{}|;:,.<>?/~';
+
+    var lengthSlider = document.getElementById('length-slider');
+    var lengthValue = document.getElementById('length-value');
+    var optUpper = document.getElementById('opt-upper');
+    var optLower = document.getElementById('opt-lower');
+    var optDigits = document.getElementById('opt-digits');
+    var optSymbols = document.getElementById('opt-symbols');
+    var passwordOutput = document.getElementById('password-output');
+    var copyBtn = document.getElementById('copy-btn');
+
+    lengthSlider.addEventListener('input', function() {
+      lengthValue.textContent = this.value;
+      generatePassword();
+    });
+
+    [optUpper, optLower, optDigits, optSymbols].forEach(function(cb) {
+      cb.addEventListener('change', function() {
+        var checked = [optUpper, optLower, optDigits, optSymbols].filter(function(c) { return c.checked; });
+        if (checked.length === 0) {
+          this.checked = true;
+          return;
+        }
+        generatePassword();
+      });
+    });
+
+    function getCharPool() {
+      var pool = '';
+      if (optUpper.checked) pool += UPPER;
+      if (optLower.checked) pool += LOWER;
+      if (optDigits.checked) pool += DIGITS;
+      if (optSymbols.checked) pool += SYMBOLS;
+      return pool;
+    }
+
+    function generatePassword() {
+      var pool = getCharPool();
+      var length = parseInt(lengthSlider.value, 10);
+
+      var array = new Uint32Array(length);
+      crypto.getRandomValues(array);
+
+      // Collect required character sets
+      var required = [];
+      if (optUpper.checked) required.push(UPPER);
+      if (optLower.checked) required.push(LOWER);
+      if (optDigits.checked) required.push(DIGITS);
+      if (optSymbols.checked) required.push(SYMBOLS);
+
+      // Generate full random password from pool
+      var chars = [];
+      for (var i = 0; i < length; i++) {
+        chars.push(pool[array[i] % pool.length]);
+      }
+
+      // Guarantee at least one character from each selected set
+      if (length >= required.length) {
+        var positions = [];
+        for (var i = 0; i < length; i++) positions.push(i);
+        // Fisher-Yates shuffle for positions
+        var extraRand = new Uint32Array(length);
+        crypto.getRandomValues(extraRand);
+        for (var i = positions.length - 1; i > 0; i--) {
+          var j = extraRand[i] % (i + 1);
+          var tmp = positions[i];
+          positions[i] = positions[j];
+          positions[j] = tmp;
+        }
+        var setRand = new Uint32Array(required.length);
+        crypto.getRandomValues(setRand);
+        for (var i = 0; i < required.length; i++) {
+          chars[positions[i]] = required[i][setRand[i] % required[i].length];
+        }
+      }
+
+      var password = chars.join('');
+      passwordOutput.textContent = password;
+      updateStrength(pool, length);
+      updateInfo(pool, length);
+    }
+
+    function updateStrength(pool, length) {
+      var entropy = length * Math.log2(pool.length);
+      var fill = document.getElementById('strength-fill');
+      var level = document.getElementById('strength-level');
+
+      var label, color, width;
+      if (entropy < 40) {
+        label = '弱'; color = '#ff3b30'; width = '20%';
+      } else if (entropy < 60) {
+        label = '中'; color = '#ff9500'; width = '45%';
+      } else if (entropy < 80) {
+        label = '強'; color = '#34c759'; width = '72%';
+      } else {
+        label = '最強'; color = '#0071e3'; width = '100%';
+      }
+
+      fill.style.width = width;
+      fill.style.background = color;
+      level.textContent = label;
+      level.style.color = color;
+    }
+
+    function updateInfo(pool, length) {
+      var charsetCount = [optUpper, optLower, optDigits, optSymbols].filter(function(c) { return c.checked; }).length;
+      var entropy = length * Math.log2(pool.length);
+
+      document.getElementById('info-length').textContent = length;
+      document.getElementById('info-charsets').textContent = charsetCount + '種';
+      document.getElementById('info-pool').textContent = pool.length;
+      document.getElementById('info-entropy').textContent = Math.round(entropy) + ' bit';
+
+      var strengthLabel;
+      if (entropy < 40) strengthLabel = '弱い';
+      else if (entropy < 60) strengthLabel = '中程度';
+      else if (entropy < 80) strengthLabel = '強い';
+      else strengthLabel = '最強';
+      document.getElementById('info-strength').textContent = strengthLabel;
+
+      // Crack time estimate (10 billion guesses/sec)
+      var combinations = Math.pow(pool.length, length);
+      var seconds = combinations / 2 / 1e10;
+      var crackTime;
+      if (seconds < 1) crackTime = '一瞬';
+      else if (seconds < 60) crackTime = Math.round(seconds) + '秒';
+      else if (seconds < 3600) crackTime = Math.round(seconds / 60) + '分';
+      else if (seconds < 86400) crackTime = Math.round(seconds / 3600) + '時間';
+      else if (seconds < 31536000) crackTime = Math.round(seconds / 86400) + '日';
+      else if (seconds < 31536000 * 1e6) crackTime = Math.round(seconds / 31536000).toLocaleString() + '年';
+      else if (seconds < 31536000 * 1e9) crackTime = Math.round(seconds / 31536000 / 1e6).toLocaleString() + '百万年';
+      else crackTime = '天文学的';
+      document.getElementById('info-crack').textContent = crackTime;
+    }
+
+    function copyPassword() {
+      var text = passwordOutput.textContent;
+      if (!text) return;
+      navigator.clipboard.writeText(text).then(function() {
+        copyBtn.classList.add('btn--copied');
+        copyBtn.innerHTML = '<svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg> コピー済み';
+        setTimeout(function() {
+          copyBtn.classList.remove('btn--copied');
+          copyBtn.innerHTML = '<svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/></svg> コピー';
+        }, 2000);
+      });
+    }
+
+    // Auto-generate on page load
+    generatePassword();
+  </script>
+</body>
+</html>

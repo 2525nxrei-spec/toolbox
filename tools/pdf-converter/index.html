@@ -1,0 +1,392 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="【無料】画像ファイル(JPG/PNG)をPDFに変換。複数画像の結合・並び替えも可能。ブラウザで完結、サーバーにアップロード不要。">
+  <meta name="keywords" content="画像 PDF変換, JPG PDF, PNG PDF, 画像結合, PDF作成, 無料">
+  <title>画像→PDF変換 — 無料オンラインツール | ToolBox</title>
+  <link rel="canonical" href="https://muryo-tool.com/tools/pdf-converter/">
+  <meta property="og:title" content="画像→PDF変換 — 無料オンラインツール | ToolBox">
+  <meta property="og:description" content="【無料】画像ファイル(JPG/PNG)をPDFに変換。複数画像の結合・並び替えも可能。ブラウザで完結、サーバーにアップロード不要。">
+  <meta property="og:type" content="website">
+  <meta property="og:url" content="https://muryo-tool.com/tools/pdf-converter/">
+  <meta name="twitter:card" content="summary_large_image">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Noto+Sans+JP:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <style>
+    *,*::before,*::after{margin:0;padding:0;box-sizing:border-box}
+    :root{--black:#1d1d1f;--gray-900:#3a3a3c;--gray-700:#636366;--gray-500:#8e8e93;--gray-300:#d1d1d6;--gray-200:#e5e5ea;--gray-100:#f2f2f7;--white:#fff;--accent:#0071e3;--font:"Inter","Noto Sans JP",-apple-system,sans-serif}
+    html{font-size:16px;-webkit-font-smoothing:antialiased}
+    body{font-family:var(--font);color:var(--black);background:var(--gray-100);line-height:1.7;min-height:100vh}
+    a{color:inherit;text-decoration:none}
+
+    .nav{background:rgba(255,255,255,0.85);backdrop-filter:saturate(180%) blur(20px);border-bottom:1px solid rgba(0,0,0,0.05);position:sticky;top:0;z-index:100}
+    .nav__inner{display:flex;align-items:center;justify-content:space-between;height:52px;max-width:1100px;margin:0 auto;padding:0 24px}
+    .nav__logo{font-size:1.2rem;font-weight:800;letter-spacing:-0.04em}
+    .nav__logo span{color:var(--accent)}
+    .nav__back{font-size:0.82rem;font-weight:500;color:var(--accent);display:flex;align-items:center;gap:4px}
+
+    .tool-page{max-width:900px;margin:0 auto;padding:32px 24px 80px}
+    .tool-header{text-align:center;margin-bottom:32px}
+    .tool-header__icon{display:flex;align-items:center;justify-content:center;margin-bottom:12px;color:var(--accent)}
+    .tool-header__title{font-size:clamp(1.5rem,3vw,2rem);font-weight:800;letter-spacing:-0.03em;margin-bottom:8px}
+    .tool-header__desc{font-size:0.92rem;color:var(--gray-700);max-width:500px;margin:0 auto}
+
+    .tool-main{background:var(--white);border-radius:20px;box-shadow:0 2px 12px rgba(0,0,0,0.04);overflow:hidden;padding:28px}
+
+    .drop-zone{border:2px dashed var(--gray-300);border-radius:16px;padding:48px 24px;text-align:center;cursor:pointer;transition:border-color 0.2s,background 0.2s}
+    .drop-zone.dragover{border-color:var(--accent);background:rgba(0,113,227,0.04)}
+    .drop-zone__icon{margin-bottom:12px;color:var(--gray-500)}
+    .drop-zone__text{font-size:0.95rem;color:var(--gray-700);font-weight:500}
+    .drop-zone__sub{font-size:0.8rem;color:var(--gray-500);margin-top:6px}
+    .drop-zone__input{display:none}
+
+    .thumb-list{display:flex;flex-wrap:wrap;gap:12px;margin-top:20px;min-height:0}
+    .thumb-item{position:relative;width:110px;height:110px;border-radius:12px;overflow:hidden;border:2px solid var(--gray-200);cursor:grab;background:var(--gray-100);flex-shrink:0}
+    .thumb-item.dragging{opacity:0.4}
+    .thumb-item.dragover-item{border-color:var(--accent);box-shadow:0 0 0 2px rgba(0,113,227,0.3)}
+    .thumb-item img{width:100%;height:100%;object-fit:cover;pointer-events:none}
+    .thumb-item__num{position:absolute;top:4px;left:4px;background:var(--accent);color:var(--white);font-size:0.65rem;font-weight:700;width:20px;height:20px;border-radius:50%;display:flex;align-items:center;justify-content:center}
+    .thumb-item__del{position:absolute;top:4px;right:4px;background:rgba(0,0,0,0.55);color:var(--white);border:none;font-size:0.85rem;width:22px;height:22px;border-radius:50%;cursor:pointer;display:flex;align-items:center;justify-content:center;line-height:1;font-family:var(--font);transition:background 0.2s}
+    .thumb-item__del:hover{background:rgba(220,53,69,0.85)}
+
+    .settings{display:grid;grid-template-columns:repeat(auto-fit,minmax(180px,1fr));gap:16px;margin-top:24px}
+    .setting-group label{display:block;font-size:0.78rem;font-weight:600;color:var(--gray-500);text-transform:uppercase;letter-spacing:0.08em;margin-bottom:6px}
+    .setting-group select,.setting-group input{width:100%;font-family:var(--font);font-size:0.9rem;padding:10px 14px;border:1px solid var(--gray-200);border-radius:10px;background:var(--gray-100);color:var(--black);outline:none;transition:border-color 0.2s}
+    .setting-group select:focus,.setting-group input:focus{border-color:var(--accent)}
+
+    .generate-btn{display:block;width:100%;margin-top:24px;padding:16px;background:var(--accent);color:var(--white);border:none;border-radius:14px;font-family:var(--font);font-size:1rem;font-weight:700;cursor:pointer;transition:background 0.2s}
+    .generate-btn:hover{background:#005bb5}
+    .generate-btn:disabled{background:var(--gray-300);cursor:not-allowed}
+
+    .status-msg{text-align:center;margin-top:12px;font-size:0.85rem;color:var(--gray-500)}
+
+    .details{display:grid;grid-template-columns:1fr 1fr;gap:16px;margin-top:20px}
+    .detail-card{background:var(--white);border-radius:16px;padding:24px;box-shadow:0 2px 12px rgba(0,0,0,0.04)}
+    .detail-card__title{font-size:0.78rem;font-weight:600;color:var(--gray-500);text-transform:uppercase;letter-spacing:0.08em;margin-bottom:14px}
+    .detail-row{display:flex;justify-content:space-between;padding:8px 0;border-bottom:1px solid var(--gray-100);font-size:0.88rem}
+    .detail-row:last-child{border-bottom:none}
+    .detail-row__label{color:var(--gray-700)}
+    .detail-row__value{font-weight:600}
+
+    .seo-section{margin-top:48px;background:var(--white);border-radius:20px;padding:40px;box-shadow:0 2px 12px rgba(0,0,0,0.04)}
+    .seo-section h2{font-size:1.3rem;font-weight:700;margin-bottom:16px;letter-spacing:-0.01em}
+    .seo-section h3{font-size:1.05rem;font-weight:600;margin:28px 0 10px}
+    .seo-section p{font-size:0.92rem;color:var(--gray-700);line-height:1.85;margin-bottom:14px}
+    .seo-section ul{padding-left:20px;margin-bottom:14px}
+    .seo-section li{font-size:0.9rem;color:var(--gray-700);line-height:1.8;margin-bottom:4px}
+
+    .footer{text-align:center;padding:40px 24px;font-size:0.75rem;color:var(--gray-500)}
+    .footer a{color:var(--accent)}
+
+    @media(max-width:640px){
+      .tool-page{padding:20px 16px 60px}
+      .tool-header__title{font-size:1.3rem}
+      .tool-header__desc{font-size:0.85rem}
+      .tool-main{padding:20px 16px}
+      .settings{grid-template-columns:1fr 1fr}
+      .details{grid-template-columns:1fr}
+      .seo-section{padding:24px 20px}
+      .seo-section h2{font-size:1.1rem}
+      .thumb-item{width:90px;height:90px}
+    }
+  </style>
+<script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-1964975138803092"
+     crossorigin="anonymous"></script>
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "WebApplication",
+  "name": "画像→PDF変換 — 無料オンラインツール | ToolBox",
+  "url": "https://muryo-tool.com/tools/pdf-converter/",
+  "description": "【無料】画像ファイル(JPG/PNG)をPDFに変換。複数画像の結合・並び替えも可能。ブラウザで完結、サーバーにアップロード不要。",
+  "applicationCategory": "UtilitiesApplication",
+  "operatingSystem": "Web",
+  "offers": {"@type": "Offer", "price": "0", "priceCurrency": "JPY"},
+  "inLanguage": "ja",
+  "isPartOf": {"@type": "WebSite", "name": "ToolBox", "url": "https://muryo-tool.com/"}
+}
+</script>
+</head>
+<body>
+
+  <nav class="nav">
+    <div class="nav__inner">
+      <a href="../../index.html" class="nav__logo">Tool<span>Box</span></a>
+      <a href="../../index.html" class="nav__back">&larr; ツール一覧</a>
+    </div>
+  </nav>
+
+  <main class="tool-page">
+    <div class="tool-header">
+      <div class="tool-header__icon"><svg width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="8.5" cy="8.5" r="1.5"/><path d="m21 15-5-5L5 21"/></svg></div>
+      <h1 class="tool-header__title">画像 → PDF変換</h1>
+      <p class="tool-header__desc">画像ファイルをPDFに変換。複数画像の結合・並び替えも可能。ブラウザで完結、データは一切送信されません。</p>
+    </div>
+
+    <div class="tool-main">
+      <div class="drop-zone" id="drop-zone">
+        <div class="drop-zone__icon"><svg width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="17 8 12 3 7 8"/><line x1="12" y1="3" x2="12" y2="15"/></svg></div>
+        <div class="drop-zone__text">ここに画像をドラッグ＆ドロップ、またはクリックして選択</div>
+        <div class="drop-zone__sub">JPG / PNG / WebP / GIF に対応（複数選択可）</div>
+        <input type="file" class="drop-zone__input" id="file-input" multiple accept="image/jpeg,image/png,image/webp,image/gif">
+      </div>
+
+      <div class="thumb-list" id="thumb-list"></div>
+
+      <div class="settings">
+        <div class="setting-group">
+          <label for="page-size">ページサイズ</label>
+          <select id="page-size">
+            <option value="a4" selected>A4</option>
+            <option value="b5">B5</option>
+            <option value="letter">Letter</option>
+            <option value="l">写真L判</option>
+          </select>
+        </div>
+        <div class="setting-group">
+          <label for="orientation">向き</label>
+          <select id="orientation">
+            <option value="portrait" selected>縦</option>
+            <option value="landscape">横</option>
+          </select>
+        </div>
+        <div class="setting-group">
+          <label for="margin">余白</label>
+          <select id="margin">
+            <option value="0">なし</option>
+            <option value="10">小</option>
+            <option value="20" selected>中</option>
+            <option value="40">大</option>
+          </select>
+        </div>
+      </div>
+
+      <button class="generate-btn" id="generate-btn" disabled>PDFを生成</button>
+      <div class="status-msg" id="status-msg"></div>
+    </div>
+
+    <!-- SEO Content -->
+    <div class="seo-section">
+      <h2>画像→PDF変換ツールの使い方</h2>
+      <p>画像ファイル（JPG、PNG、WebP、GIF）をドラッグ＆ドロップまたはファイル選択で追加し、「PDFを生成」ボタンを押すだけで、画像をPDFファイルに変換してダウンロードできます。複数の画像を1つのPDFにまとめることも可能です。</p>
+
+      <h3>こんな場面で便利</h3>
+      <ul>
+        <li><strong>書類のスキャン画像をPDFに</strong> — スマホで撮影した書類画像をまとめてPDF化。</li>
+        <li><strong>写真アルバムの作成</strong> — 複数の写真を1つのPDFにまとめて共有。</li>
+        <li><strong>プレゼン資料の変換</strong> — スクリーンショットやデザイン画像をPDF形式で配布。</li>
+        <li><strong>レシート・領収書の整理</strong> — 撮影した領収書画像をPDFとして保存・管理。</li>
+        <li><strong>ポートフォリオ作成</strong> — 作品画像をPDFにまとめて提出。</li>
+      </ul>
+
+      <h3>特徴</h3>
+      <ul>
+        <li><strong>完全無料</strong> — 登録不要、制限なし。何度でも使えます。</li>
+        <li><strong>プライバシー安全</strong> — 画像はブラウザ内で処理され、サーバーにはアップロードされません。</li>
+        <li><strong>複数画像対応</strong> — 複数の画像をドラッグ＆ドロップで追加し、並び替えも自由自在。</li>
+        <li><strong>柔軟な設定</strong> — ページサイズ（A4/B5/Letter/写真L判）、向き、余白を自由に設定。</li>
+      </ul>
+
+      <h3>対応フォーマット</h3>
+      <p>入力として対応している画像フォーマットは以下の通りです。</p>
+      <ul>
+        <li><strong>JPEG (.jpg, .jpeg)</strong> — 写真やスキャン画像に最適。</li>
+        <li><strong>PNG (.png)</strong> — スクリーンショットや透過画像に。</li>
+        <li><strong>WebP (.webp)</strong> — 軽量な次世代フォーマット。</li>
+        <li><strong>GIF (.gif)</strong> — シンプルなイラストや図表に。</li>
+      </ul>
+      <p>すべての処理はお使いのブラウザ内で完結します。画像データが外部に送信されることは一切ありません。安心してご利用ください。</p>
+    </div>
+  </main>
+
+  <footer class="footer">
+    <p>&copy; 2026 <a href="../../index.html">ToolBox</a>. All rights reserved.</p>
+  </footer>
+
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.2/jspdf.umd.min.js"></script>
+  <script>
+    const dropZone = document.getElementById('drop-zone');
+    const fileInput = document.getElementById('file-input');
+    const thumbList = document.getElementById('thumb-list');
+    const generateBtn = document.getElementById('generate-btn');
+    const statusMsg = document.getElementById('status-msg');
+
+    let imageFiles = []; // {file, dataUrl}
+
+    // Drop zone events
+    dropZone.addEventListener('click', () => fileInput.click());
+    dropZone.addEventListener('dragover', e => { e.preventDefault(); dropZone.classList.add('dragover'); });
+    dropZone.addEventListener('dragleave', () => dropZone.classList.remove('dragover'));
+    dropZone.addEventListener('drop', e => {
+      e.preventDefault();
+      dropZone.classList.remove('dragover');
+      handleFiles(e.dataTransfer.files);
+    });
+    fileInput.addEventListener('change', e => {
+      handleFiles(e.target.files);
+      fileInput.value = '';
+    });
+
+    function handleFiles(files) {
+      const validTypes = ['image/jpeg', 'image/png', 'image/webp', 'image/gif'];
+      Array.from(files).forEach(file => {
+        if (!validTypes.includes(file.type)) return;
+        const reader = new FileReader();
+        reader.onload = ev => {
+          imageFiles.push({ file, dataUrl: ev.target.result });
+          renderThumbs();
+          updateBtn();
+        };
+        reader.readAsDataURL(file);
+      });
+    }
+
+    function renderThumbs() {
+      thumbList.innerHTML = '';
+      imageFiles.forEach((item, i) => {
+        const div = document.createElement('div');
+        div.className = 'thumb-item';
+        div.draggable = true;
+        div.dataset.index = i;
+        div.innerHTML =
+          '<img src="' + item.dataUrl + '" alt="画像 ' + (i + 1) + '">' +
+          '<span class="thumb-item__num">' + (i + 1) + '</span>' +
+          '<button class="thumb-item__del" data-i="' + i + '">&times;</button>';
+        // Drag events for reorder
+        div.addEventListener('dragstart', onDragStart);
+        div.addEventListener('dragover', onDragOver);
+        div.addEventListener('dragenter', onDragEnter);
+        div.addEventListener('dragleave', onDragLeave);
+        div.addEventListener('drop', onDropItem);
+        div.addEventListener('dragend', onDragEnd);
+        thumbList.appendChild(div);
+      });
+      // Delete buttons
+      thumbList.querySelectorAll('.thumb-item__del').forEach(btn => {
+        btn.addEventListener('click', e => {
+          e.stopPropagation();
+          const idx = parseInt(btn.dataset.i);
+          imageFiles.splice(idx, 1);
+          renderThumbs();
+          updateBtn();
+        });
+      });
+    }
+
+    let dragIdx = null;
+    function onDragStart(e) {
+      dragIdx = parseInt(this.dataset.index);
+      this.classList.add('dragging');
+      e.dataTransfer.effectAllowed = 'move';
+    }
+    function onDragOver(e) { e.preventDefault(); e.dataTransfer.dropEffect = 'move'; }
+    function onDragEnter(e) { e.preventDefault(); this.classList.add('dragover-item'); }
+    function onDragLeave() { this.classList.remove('dragover-item'); }
+    function onDropItem(e) {
+      e.preventDefault();
+      this.classList.remove('dragover-item');
+      const dropIdx = parseInt(this.dataset.index);
+      if (dragIdx === null || dragIdx === dropIdx) return;
+      const moved = imageFiles.splice(dragIdx, 1)[0];
+      imageFiles.splice(dropIdx, 0, moved);
+      renderThumbs();
+    }
+    function onDragEnd() {
+      dragIdx = null;
+      thumbList.querySelectorAll('.thumb-item').forEach(el => {
+        el.classList.remove('dragging', 'dragover-item');
+      });
+    }
+
+    function updateBtn() {
+      generateBtn.disabled = imageFiles.length === 0;
+      statusMsg.textContent = imageFiles.length > 0 ? imageFiles.length + ' 枚の画像が選択されています' : '';
+    }
+
+    // Page size definitions in mm
+    const PAGE_SIZES = {
+      a4: [210, 297],
+      b5: [176, 250],
+      letter: [215.9, 279.4],
+      l: [89, 127]
+    };
+
+    generateBtn.addEventListener('click', async () => {
+      if (imageFiles.length === 0) return;
+      generateBtn.disabled = true;
+      statusMsg.textContent = 'PDF を生成中...';
+
+      try {
+        const { jsPDF } = window.jspdf;
+        const sizeKey = document.getElementById('page-size').value;
+        const orient = document.getElementById('orientation').value;
+        const marginVal = parseInt(document.getElementById('margin').value);
+
+        const [pw, ph] = PAGE_SIZES[sizeKey];
+        const pageW = orient === 'landscape' ? ph : pw;
+        const pageH = orient === 'landscape' ? pw : ph;
+        const orientStr = orient === 'landscape' ? 'l' : 'p';
+
+        const pdf = new jsPDF({
+          orientation: orientStr,
+          unit: 'mm',
+          format: [pageW, pageH]
+        });
+
+        for (let i = 0; i < imageFiles.length; i++) {
+          if (i > 0) pdf.addPage([pageW, pageH], orientStr);
+          statusMsg.textContent = 'PDF を生成中... (' + (i + 1) + '/' + imageFiles.length + ')';
+
+          const img = await loadImage(imageFiles[i].dataUrl);
+          const availW = pageW - marginVal * 2;
+          const availH = pageH - marginVal * 2;
+          const imgRatio = img.width / img.height;
+          const areaRatio = availW / availH;
+
+          let drawW, drawH;
+          if (imgRatio > areaRatio) {
+            drawW = availW;
+            drawH = availW / imgRatio;
+          } else {
+            drawH = availH;
+            drawW = availH * imgRatio;
+          }
+
+          const x = marginVal + (availW - drawW) / 2;
+          const y = marginVal + (availH - drawH) / 2;
+
+          const format = getImgFormat(imageFiles[i].file.type);
+          pdf.addImage(imageFiles[i].dataUrl, format, x, y, drawW, drawH);
+        }
+
+        pdf.save('images.pdf');
+        statusMsg.textContent = 'PDF のダウンロードが完了しました';
+      } catch (err) {
+        console.error(err);
+        statusMsg.textContent = 'エラーが発生しました: ' + err.message;
+      }
+      generateBtn.disabled = false;
+      updateBtn();
+    });
+
+    function loadImage(src) {
+      return new Promise((resolve, reject) => {
+        const img = new Image();
+        img.onload = () => resolve(img);
+        img.onerror = reject;
+        img.src = src;
+      });
+    }
+
+    function getImgFormat(mimeType) {
+      if (mimeType === 'image/png') return 'PNG';
+      if (mimeType === 'image/webp') return 'WEBP';
+      if (mimeType === 'image/gif') return 'GIF';
+      return 'JPEG';
+    }
+  </script>
+</body>
+</html>

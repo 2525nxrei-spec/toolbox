@@ -1,0 +1,582 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="【無料】オンラインタイマー＆ストップウォッチ。ラップ計測・カウントダウン・アラーム機能付き。ブラウザで完結、インストール不要。">
+  <meta name="keywords" content="タイマー, ストップウォッチ, オンラインタイマー, カウントダウン, ラップタイム, 無料">
+  <title>タイマー・ストップウォッチ — 無料オンラインツール | ToolBox</title>
+  <link rel="canonical" href="https://muryo-tool.com/tools/timer/">
+  <meta property="og:title" content="タイマー・ストップウォッチ — 無料オンラインツール | ToolBox">
+  <meta property="og:description" content="【無料】オンラインタイマー＆ストップウォッチ。ラップ計測・カウントダウン・アラーム機能付き。ブラウザで完結、インストール不要。">
+  <meta property="og:type" content="website">
+  <meta property="og:url" content="https://muryo-tool.com/tools/timer/">
+  <meta name="twitter:card" content="summary_large_image">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Noto+Sans+JP:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <style>
+    *,*::before,*::after{margin:0;padding:0;box-sizing:border-box}
+    :root{--black:#1d1d1f;--gray-900:#3a3a3c;--gray-700:#636366;--gray-500:#8e8e93;--gray-300:#d1d1d6;--gray-200:#e5e5ea;--gray-100:#f2f2f7;--white:#fff;--accent:#0071e3;--font:"Inter","Noto Sans JP",-apple-system,sans-serif}
+    html{font-size:16px;-webkit-font-smoothing:antialiased}
+    body{font-family:var(--font);color:var(--black);background:var(--gray-100);line-height:1.7;min-height:100vh}
+    a{color:inherit;text-decoration:none}
+
+    .nav{background:rgba(255,255,255,0.85);backdrop-filter:saturate(180%) blur(20px);border-bottom:1px solid rgba(0,0,0,0.05);position:sticky;top:0;z-index:100}
+    .nav__inner{display:flex;align-items:center;justify-content:space-between;height:52px;max-width:1100px;margin:0 auto;padding:0 24px}
+    .nav__logo{font-size:1.2rem;font-weight:800;letter-spacing:-0.04em}
+    .nav__logo span{color:var(--accent)}
+    .nav__back{font-size:0.82rem;font-weight:500;color:var(--accent);display:flex;align-items:center;gap:4px}
+
+    .tool-page{max-width:900px;margin:0 auto;padding:32px 24px 80px}
+    .tool-header{text-align:center;margin-bottom:32px}
+    .tool-header__icon{display:flex;align-items:center;justify-content:center;margin-bottom:12px;color:var(--accent)}
+    .tool-header__title{font-size:clamp(1.5rem,3vw,2rem);font-weight:800;letter-spacing:-0.03em;margin-bottom:8px}
+    .tool-header__desc{font-size:0.92rem;color:var(--gray-700);max-width:500px;margin:0 auto}
+
+    .tool-main{background:var(--white);border-radius:20px;box-shadow:0 2px 12px rgba(0,0,0,0.04);overflow:hidden}
+
+    /* Tabs */
+    .tabs{display:flex;border-bottom:1px solid var(--gray-200)}
+    .tab{flex:1;padding:16px;text-align:center;font-size:0.92rem;font-weight:600;color:var(--gray-500);cursor:pointer;transition:color 0.2s,border-color 0.2s;border-bottom:2px solid transparent;background:none;border-top:none;border-left:none;border-right:none;font-family:var(--font)}
+    .tab.active{color:var(--accent);border-bottom-color:var(--accent)}
+    .tab:hover{color:var(--accent)}
+
+    .tab-content{display:none;padding:32px 28px}
+    .tab-content.active{display:block}
+
+    /* Stopwatch */
+    .sw-display{text-align:center;padding:24px 0 32px}
+    .sw-time{font-size:clamp(2.5rem,8vw,4.5rem);font-weight:800;letter-spacing:-0.03em;font-variant-numeric:tabular-nums;font-family:"Inter",monospace}
+    .sw-buttons{display:flex;justify-content:center;gap:12px;margin-bottom:24px}
+    .btn-pill{padding:12px 32px;border-radius:980px;border:none;font-size:0.92rem;font-weight:600;font-family:var(--font);cursor:pointer;transition:all 0.2s}
+    .btn-pill--accent{background:var(--accent);color:var(--white)}
+    .btn-pill--accent:hover{background:#005bb5}
+    .btn-pill--gray{background:var(--gray-100);color:var(--gray-700)}
+    .btn-pill--gray:hover{background:var(--gray-200)}
+    .btn-pill--red{background:#ff3b30;color:var(--white)}
+    .btn-pill--red:hover{background:#d62d23}
+    .btn-pill--green{background:#34c759;color:var(--white)}
+    .btn-pill--green:hover{background:#28a745}
+    .btn-pill:disabled{opacity:0.4;cursor:not-allowed}
+
+    .lap-list{max-height:300px;overflow-y:auto}
+    .lap-header,.lap-row{display:grid;grid-template-columns:60px 1fr 1fr;padding:10px 16px;font-size:0.88rem}
+    .lap-header{font-weight:600;color:var(--gray-500);border-bottom:1px solid var(--gray-200);font-size:0.78rem;text-transform:uppercase;letter-spacing:0.06em;position:sticky;top:0;background:var(--white)}
+    .lap-row{border-bottom:1px solid var(--gray-100)}
+    .lap-row:last-child{border-bottom:none}
+    .lap-row.best{color:#34c759;font-weight:600}
+    .lap-row.worst{color:#ff3b30;font-weight:600}
+    .lap-row span:not(:first-child){text-align:right}
+    .lap-header span:not(:first-child){text-align:right}
+
+    /* Timer */
+    .timer-setup{text-align:center;padding:16px 0}
+    .time-inputs{display:flex;justify-content:center;align-items:center;gap:8px;margin-bottom:24px}
+    .time-input-group{display:flex;flex-direction:column;align-items:center;gap:4px}
+    .time-input-group label{font-size:0.72rem;font-weight:600;color:var(--gray-500);text-transform:uppercase;letter-spacing:0.06em}
+    .time-input-group input{width:72px;height:56px;text-align:center;font-size:1.6rem;font-weight:700;font-family:var(--font);border:2px solid var(--gray-200);border-radius:12px;outline:none;color:var(--black);background:var(--gray-100);transition:border-color 0.2s}
+    .time-input-group input:focus{border-color:var(--accent)}
+    .time-sep{font-size:1.6rem;font-weight:700;color:var(--gray-500);padding-top:18px}
+
+    .presets{display:flex;flex-wrap:wrap;justify-content:center;gap:8px;margin-bottom:28px}
+    .preset-btn{padding:8px 18px;border-radius:980px;border:1px solid var(--gray-200);background:var(--white);font-size:0.82rem;font-weight:600;font-family:var(--font);color:var(--gray-700);cursor:pointer;transition:all 0.2s}
+    .preset-btn:hover{background:var(--accent);color:var(--white);border-color:var(--accent)}
+
+    .timer-display{text-align:center;padding:20px 0 32px;position:relative}
+    .timer-circle-wrap{position:relative;width:240px;height:240px;margin:0 auto 24px}
+    .timer-circle-bg,.timer-circle-fg{fill:none;stroke-width:8}
+    .timer-circle-bg{stroke:var(--gray-200)}
+    .timer-circle-fg{stroke:var(--accent);stroke-linecap:round;transition:stroke-dashoffset 0.1s linear;transform:rotate(-90deg);transform-origin:center}
+    .timer-time{position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);font-size:clamp(2rem,6vw,3rem);font-weight:800;letter-spacing:-0.03em;font-variant-numeric:tabular-nums;font-family:"Inter",monospace}
+    .timer-buttons{display:flex;justify-content:center;gap:12px}
+
+    .timer-display.hidden{display:none}
+    .timer-setup.hidden{display:none}
+
+    /* Timer done flash */
+    @keyframes flash{0%,100%{opacity:1}50%{opacity:0.3}}
+    .timer-done .timer-time{animation:flash 0.6s ease-in-out infinite;color:#ff3b30}
+    .timer-done .timer-circle-fg{stroke:#ff3b30}
+
+    .detail-card{background:var(--white);border-radius:16px;padding:24px;box-shadow:0 2px 12px rgba(0,0,0,0.04);margin-top:20px}
+    .detail-card__title{font-size:0.78rem;font-weight:600;color:var(--gray-500);text-transform:uppercase;letter-spacing:0.08em;margin-bottom:14px}
+    .detail-row{display:flex;justify-content:space-between;padding:8px 0;border-bottom:1px solid var(--gray-100);font-size:0.88rem}
+    .detail-row:last-child{border-bottom:none}
+    .detail-row__label{color:var(--gray-700)}
+    .detail-row__value{font-weight:600}
+
+    .seo-section{margin-top:48px;background:var(--white);border-radius:20px;padding:40px;box-shadow:0 2px 12px rgba(0,0,0,0.04)}
+    .seo-section h2{font-size:1.3rem;font-weight:700;margin-bottom:16px;letter-spacing:-0.01em}
+    .seo-section h3{font-size:1.05rem;font-weight:600;margin:28px 0 10px}
+    .seo-section p{font-size:0.92rem;color:var(--gray-700);line-height:1.85;margin-bottom:14px}
+    .seo-section ul{padding-left:20px;margin-bottom:14px}
+    .seo-section li{font-size:0.9rem;color:var(--gray-700);line-height:1.8;margin-bottom:4px}
+
+    .footer{text-align:center;padding:40px 24px;font-size:0.75rem;color:var(--gray-500)}
+    .footer a{color:var(--accent)}
+
+    @media(max-width:640px){
+      .tool-page{padding:20px 16px 60px}
+      .tool-header__title{font-size:1.3rem}
+      .tool-header__desc{font-size:0.85rem}
+      .tab-content{padding:24px 16px}
+      .time-inputs{gap:4px}
+      .time-input-group input{width:60px;height:48px;font-size:1.3rem}
+      .time-sep{font-size:1.3rem}
+      .timer-circle-wrap{width:200px;height:200px}
+      .presets{gap:6px}
+      .preset-btn{padding:7px 14px;font-size:0.78rem}
+      .btn-pill{padding:10px 24px;font-size:0.85rem}
+      .seo-section{padding:24px 20px}
+      .seo-section h2{font-size:1.1rem}
+      .sw-buttons{flex-wrap:wrap}
+    }
+  </style>
+<script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-1964975138803092"
+     crossorigin="anonymous"></script>
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "WebApplication",
+  "name": "タイマー・ストップウォッチ — 無料オンラインツール | ToolBox",
+  "url": "https://muryo-tool.com/tools/timer/",
+  "description": "【無料】オンラインタイマー＆ストップウォッチ。ラップ計測・カウントダウン・アラーム機能付き。ブラウザで完結、インストール不要。",
+  "applicationCategory": "UtilitiesApplication",
+  "operatingSystem": "Web",
+  "offers": {"@type": "Offer", "price": "0", "priceCurrency": "JPY"},
+  "inLanguage": "ja",
+  "isPartOf": {"@type": "WebSite", "name": "ToolBox", "url": "https://muryo-tool.com/"}
+}
+</script>
+</head>
+<body>
+
+  <nav class="nav">
+    <div class="nav__inner">
+      <a href="../../index.html" class="nav__logo">Tool<span>Box</span></a>
+      <a href="../../index.html" class="nav__back">&larr; ツール一覧</a>
+    </div>
+  </nav>
+
+  <main class="tool-page">
+    <div class="tool-header">
+      <div class="tool-header__icon"><svg width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="13" r="8"/><path d="M12 9v4l2 2"/><path d="M5 3L2 6"/><path d="M22 6l-3-3"/><path d="M12 2v3"/></svg></div>
+      <h1 class="tool-header__title">タイマー・ストップウォッチ</h1>
+      <p class="tool-header__desc">カウントダウンタイマーとストップウォッチをブラウザで。ラップ計測・アラーム付き、インストール不要。</p>
+    </div>
+
+    <div class="tool-main">
+      <div class="tabs">
+        <button class="tab active" data-tab="stopwatch">ストップウォッチ</button>
+        <button class="tab" data-tab="timer">タイマー</button>
+      </div>
+
+      <!-- Stopwatch Tab -->
+      <div class="tab-content active" id="tab-stopwatch">
+        <div class="sw-display">
+          <div class="sw-time" id="sw-display">00:00:00.00</div>
+        </div>
+        <div class="sw-buttons">
+          <button class="btn-pill btn-pill--green" id="sw-start">スタート</button>
+          <button class="btn-pill btn-pill--gray" id="sw-lap" disabled>ラップ</button>
+          <button class="btn-pill btn-pill--red" id="sw-reset" disabled>リセット</button>
+        </div>
+        <div class="lap-list" id="lap-list"></div>
+      </div>
+
+      <!-- Timer Tab -->
+      <div class="tab-content" id="tab-timer">
+        <div class="timer-setup" id="timer-setup">
+          <div class="time-inputs">
+            <div class="time-input-group">
+              <label>時間</label>
+              <input type="number" id="t-hours" min="0" max="99" value="0">
+            </div>
+            <span class="time-sep">:</span>
+            <div class="time-input-group">
+              <label>分</label>
+              <input type="number" id="t-minutes" min="0" max="59" value="0">
+            </div>
+            <span class="time-sep">:</span>
+            <div class="time-input-group">
+              <label>秒</label>
+              <input type="number" id="t-seconds" min="0" max="59" value="0">
+            </div>
+          </div>
+          <div class="presets">
+            <button class="preset-btn" data-time="60">1分</button>
+            <button class="preset-btn" data-time="180">3分</button>
+            <button class="preset-btn" data-time="300">5分</button>
+            <button class="preset-btn" data-time="600">10分</button>
+            <button class="preset-btn" data-time="900">15分</button>
+            <button class="preset-btn" data-time="1800">30分</button>
+            <button class="preset-btn" data-time="3600">1時間</button>
+          </div>
+          <div class="timer-buttons">
+            <button class="btn-pill btn-pill--green" id="timer-start">スタート</button>
+          </div>
+        </div>
+
+        <div class="timer-display hidden" id="timer-display">
+          <div class="timer-circle-wrap" id="timer-circle-wrap">
+            <svg width="100%" height="100%" viewBox="0 0 240 240">
+              <circle class="timer-circle-bg" cx="120" cy="120" r="108"/>
+              <circle class="timer-circle-fg" id="timer-circle" cx="120" cy="120" r="108"/>
+            </svg>
+            <div class="timer-time" id="timer-time">00:00:00</div>
+          </div>
+          <div class="timer-buttons">
+            <button class="btn-pill btn-pill--accent" id="timer-pause">一時停止</button>
+            <button class="btn-pill btn-pill--red" id="timer-reset">リセット</button>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- SEO Content -->
+    <div class="seo-section">
+      <h2>オンラインタイマー・ストップウォッチの使い方</h2>
+      <p>ブラウザ上で動作するタイマーとストップウォッチです。タブを切り替えて、ストップウォッチモードとカウントダウンタイマーモードを使い分けることができます。すべての処理はブラウザ内で完結し、データがサーバーに送信されることはありません。</p>
+
+      <h3>ストップウォッチ機能</h3>
+      <ul>
+        <li><strong>ラップ計測</strong> — ラップボタンで区間タイムを記録。最速ラップは緑、最遅ラップは赤でハイライト表示。</li>
+        <li><strong>高精度表示</strong> — 時:分:秒.センチ秒（1/100秒）の精度で表示。</li>
+        <li><strong>スタート/ストップ</strong> — ワンクリックで計測開始・停止。停止後に再開も可能。</li>
+      </ul>
+
+      <h3>カウントダウンタイマー機能</h3>
+      <ul>
+        <li><strong>自由な時間設定</strong> — 時間・分・秒を直接入力して任意の時間をセット。</li>
+        <li><strong>クイックプリセット</strong> — 1分、3分、5分、10分、15分、30分、1時間のワンクリック設定。</li>
+        <li><strong>視覚的な進捗表示</strong> — 円形プログレスバーで残り時間を直感的に把握。</li>
+        <li><strong>アラーム通知</strong> — タイマー終了時にビープ音と画面フラッシュでお知らせ。</li>
+      </ul>
+
+      <h3>こんな場面で便利</h3>
+      <ul>
+        <li><strong>料理</strong> — パスタの茹で時間、煮込み時間の計測に。</li>
+        <li><strong>勉強・仕事</strong> — ポモドーロ・テクニック（25分集中＋5分休憩）の実践に。</li>
+        <li><strong>スポーツ</strong> — トレーニングのインターバル計測やラップタイム記録に。</li>
+        <li><strong>プレゼン練習</strong> — 発表時間の管理と練習に。</li>
+        <li><strong>ゲーム</strong> — ボードゲームやクイズの持ち時間管理に。</li>
+      </ul>
+
+      <h3>特徴</h3>
+      <ul>
+        <li><strong>完全無料</strong> — 登録不要、制限なし。何度でも使えます。</li>
+        <li><strong>インストール不要</strong> — ブラウザだけで動作。スマートフォンでもPCでも利用可能。</li>
+        <li><strong>オフライン対応</strong> — 一度読み込めばネットワーク接続なしでも動作します。</li>
+        <li><strong>プライバシー安全</strong> — すべての処理はブラウザ内で完結します。</li>
+      </ul>
+    </div>
+  </main>
+
+  <footer class="footer">
+    <p>&copy; 2026 <a href="../../index.html">ToolBox</a>. All rights reserved.</p>
+  </footer>
+
+  <script>
+    /* ============================================
+       TABS
+    ============================================ */
+    document.querySelectorAll('.tab').forEach(function(tab) {
+      tab.addEventListener('click', function() {
+        document.querySelectorAll('.tab').forEach(function(t) { t.classList.remove('active'); });
+        document.querySelectorAll('.tab-content').forEach(function(c) { c.classList.remove('active'); });
+        tab.classList.add('active');
+        document.getElementById('tab-' + tab.dataset.tab).classList.add('active');
+      });
+    });
+
+    /* ============================================
+       STOPWATCH
+    ============================================ */
+    var swRunning = false;
+    var swStartTime = 0;
+    var swElapsed = 0;
+    var swInterval = null;
+    var swLaps = [];
+    var swLastLapTime = 0;
+
+    var swDisplay = document.getElementById('sw-display');
+    var swStartBtn = document.getElementById('sw-start');
+    var swLapBtn = document.getElementById('sw-lap');
+    var swResetBtn = document.getElementById('sw-reset');
+    var lapListEl = document.getElementById('lap-list');
+
+    function formatSwTime(ms) {
+      var cs = Math.floor((ms % 1000) / 10);
+      var totalSec = Math.floor(ms / 1000);
+      var s = totalSec % 60;
+      var m = Math.floor(totalSec / 60) % 60;
+      var h = Math.floor(totalSec / 3600);
+      return pad2(h) + ':' + pad2(m) + ':' + pad2(s) + '.' + pad2(cs);
+    }
+
+    function pad2(n) {
+      return n < 10 ? '0' + n : '' + n;
+    }
+
+    function updateSwDisplay() {
+      var now = Date.now();
+      var total = swElapsed + (now - swStartTime);
+      swDisplay.textContent = formatSwTime(total);
+    }
+
+    swStartBtn.addEventListener('click', function() {
+      if (!swRunning) {
+        swRunning = true;
+        swStartTime = Date.now();
+        swInterval = setInterval(updateSwDisplay, 10);
+        swStartBtn.textContent = 'ストップ';
+        swStartBtn.classList.remove('btn-pill--green');
+        swStartBtn.classList.add('btn-pill--red');
+        swLapBtn.disabled = false;
+        swResetBtn.disabled = false;
+      } else {
+        swRunning = false;
+        swElapsed += Date.now() - swStartTime;
+        clearInterval(swInterval);
+        swStartBtn.textContent = 'スタート';
+        swStartBtn.classList.remove('btn-pill--red');
+        swStartBtn.classList.add('btn-pill--green');
+        swLapBtn.disabled = true;
+      }
+    });
+
+    swLapBtn.addEventListener('click', function() {
+      if (!swRunning) return;
+      var total = swElapsed + (Date.now() - swStartTime);
+      var lapTime = total - swLastLapTime;
+      swLastLapTime = total;
+      swLaps.push({ lap: lapTime, total: total });
+      renderLaps();
+    });
+
+    swResetBtn.addEventListener('click', function() {
+      swRunning = false;
+      clearInterval(swInterval);
+      swElapsed = 0;
+      swLastLapTime = 0;
+      swLaps = [];
+      swDisplay.textContent = '00:00:00.00';
+      swStartBtn.textContent = 'スタート';
+      swStartBtn.classList.remove('btn-pill--red');
+      swStartBtn.classList.add('btn-pill--green');
+      swLapBtn.disabled = true;
+      swResetBtn.disabled = true;
+      lapListEl.innerHTML = '';
+    });
+
+    function renderLaps() {
+      if (swLaps.length === 0) { lapListEl.innerHTML = ''; return; }
+
+      var bestIdx = 0, worstIdx = 0;
+      if (swLaps.length > 1) {
+        for (var i = 1; i < swLaps.length; i++) {
+          if (swLaps[i].lap < swLaps[bestIdx].lap) bestIdx = i;
+          if (swLaps[i].lap > swLaps[worstIdx].lap) worstIdx = i;
+        }
+      }
+
+      var html = '<div class="lap-header"><span>#</span><span>ラップタイム</span><span>合計タイム</span></div>';
+      for (var i = swLaps.length - 1; i >= 0; i--) {
+        var cls = '';
+        if (swLaps.length > 1) {
+          if (i === bestIdx) cls = ' best';
+          else if (i === worstIdx) cls = ' worst';
+        }
+        html += '<div class="lap-row' + cls + '"><span>' + (i + 1) + '</span><span>' + formatSwTime(swLaps[i].lap) + '</span><span>' + formatSwTime(swLaps[i].total) + '</span></div>';
+      }
+      lapListEl.innerHTML = html;
+    }
+
+    /* ============================================
+       TIMER
+    ============================================ */
+    var timerRunning = false;
+    var timerInterval = null;
+    var timerTotalMs = 0;
+    var timerRemainingMs = 0;
+    var timerEndTime = 0;
+    var timerDone = false;
+    var alertInterval = null;
+
+    var tHours = document.getElementById('t-hours');
+    var tMinutes = document.getElementById('t-minutes');
+    var tSeconds = document.getElementById('t-seconds');
+    var timerSetup = document.getElementById('timer-setup');
+    var timerDisplayEl = document.getElementById('timer-display');
+    var timerTimeEl = document.getElementById('timer-time');
+    var timerCircle = document.getElementById('timer-circle');
+    var timerStartBtn = document.getElementById('timer-start');
+    var timerPauseBtn = document.getElementById('timer-pause');
+    var timerResetBtn = document.getElementById('timer-reset');
+    var timerCircleWrap = document.getElementById('timer-circle-wrap');
+
+    var circumference = 2 * Math.PI * 108;
+    timerCircle.style.strokeDasharray = circumference;
+    timerCircle.style.strokeDashoffset = '0';
+
+    function formatTimerTime(ms) {
+      if (ms < 0) ms = 0;
+      var totalSec = Math.ceil(ms / 1000);
+      var s = totalSec % 60;
+      var m = Math.floor(totalSec / 60) % 60;
+      var h = Math.floor(totalSec / 3600);
+      return pad2(h) + ':' + pad2(m) + ':' + pad2(s);
+    }
+
+    // Presets
+    document.querySelectorAll('.preset-btn').forEach(function(btn) {
+      btn.addEventListener('click', function() {
+        var totalSec = parseInt(btn.dataset.time);
+        tHours.value = Math.floor(totalSec / 3600);
+        tMinutes.value = Math.floor((totalSec % 3600) / 60);
+        tSeconds.value = totalSec % 60;
+      });
+    });
+
+    // Clamp inputs
+    [tHours, tMinutes, tSeconds].forEach(function(inp) {
+      inp.addEventListener('change', function() {
+        var v = parseInt(inp.value) || 0;
+        var max = parseInt(inp.max);
+        if (v < 0) v = 0;
+        if (v > max) v = max;
+        inp.value = v;
+      });
+    });
+
+    timerStartBtn.addEventListener('click', function() {
+      var h = parseInt(tHours.value) || 0;
+      var m = parseInt(tMinutes.value) || 0;
+      var s = parseInt(tSeconds.value) || 0;
+      var totalMs = (h * 3600 + m * 60 + s) * 1000;
+      if (totalMs <= 0) return;
+
+      timerTotalMs = totalMs;
+      timerRemainingMs = totalMs;
+      timerDone = false;
+      startTimer();
+      timerSetup.classList.add('hidden');
+      timerDisplayEl.classList.remove('hidden');
+      timerDisplayEl.classList.remove('timer-done');
+    });
+
+    function startTimer() {
+      timerRunning = true;
+      timerEndTime = Date.now() + timerRemainingMs;
+      timerInterval = setInterval(updateTimer, 50);
+      timerPauseBtn.textContent = '一時停止';
+      timerPauseBtn.classList.remove('btn-pill--green');
+      timerPauseBtn.classList.add('btn-pill--accent');
+    }
+
+    function updateTimer() {
+      var now = Date.now();
+      timerRemainingMs = timerEndTime - now;
+
+      if (timerRemainingMs <= 0) {
+        timerRemainingMs = 0;
+        clearInterval(timerInterval);
+        timerRunning = false;
+        timerDone = true;
+        timerTimeEl.textContent = '00:00:00';
+        timerCircle.style.strokeDashoffset = circumference;
+        timerDisplayEl.classList.add('timer-done');
+        timerPauseBtn.textContent = '停止';
+        timerPauseBtn.classList.remove('btn-pill--accent');
+        timerPauseBtn.classList.add('btn-pill--red');
+        playAlarm();
+        return;
+      }
+
+      timerTimeEl.textContent = formatTimerTime(timerRemainingMs);
+      var progress = 1 - (timerRemainingMs / timerTotalMs);
+      timerCircle.style.strokeDashoffset = circumference * progress;
+    }
+
+    timerPauseBtn.addEventListener('click', function() {
+      if (timerDone) {
+        stopAlarm();
+        resetTimer();
+        return;
+      }
+      if (timerRunning) {
+        timerRunning = false;
+        clearInterval(timerInterval);
+        timerRemainingMs = timerEndTime - Date.now();
+        timerPauseBtn.textContent = '再開';
+        timerPauseBtn.classList.remove('btn-pill--accent');
+        timerPauseBtn.classList.add('btn-pill--green');
+      } else {
+        startTimer();
+      }
+    });
+
+    timerResetBtn.addEventListener('click', function() {
+      stopAlarm();
+      resetTimer();
+    });
+
+    function resetTimer() {
+      clearInterval(timerInterval);
+      timerRunning = false;
+      timerDone = false;
+      timerRemainingMs = 0;
+      timerDisplayEl.classList.add('hidden');
+      timerDisplayEl.classList.remove('timer-done');
+      timerSetup.classList.remove('hidden');
+      timerCircle.style.strokeDashoffset = '0';
+      timerTimeEl.textContent = '00:00:00';
+      timerPauseBtn.textContent = '一時停止';
+      timerPauseBtn.classList.remove('btn-pill--green', 'btn-pill--red');
+      timerPauseBtn.classList.add('btn-pill--accent');
+    }
+
+    /* ============================================
+       AUDIO ALARM (Web Audio API)
+    ============================================ */
+    var audioCtx = null;
+    var alarmOscillators = [];
+
+    function playAlarm() {
+      if (!audioCtx) {
+        audioCtx = new (window.AudioContext || window.webkitAudioContext)();
+      }
+      stopAlarm();
+
+      function beepCycle() {
+        if (!timerDone) return;
+        var osc = audioCtx.createOscillator();
+        var gain = audioCtx.createGain();
+        osc.type = 'sine';
+        osc.frequency.setValueAtTime(880, audioCtx.currentTime);
+        gain.gain.setValueAtTime(0.3, audioCtx.currentTime);
+        gain.gain.exponentialRampToValueAtTime(0.001, audioCtx.currentTime + 0.3);
+        osc.connect(gain);
+        gain.connect(audioCtx.destination);
+        osc.start(audioCtx.currentTime);
+        osc.stop(audioCtx.currentTime + 0.3);
+        alarmOscillators.push(osc);
+      }
+
+      beepCycle();
+      alertInterval = setInterval(function() {
+        if (!timerDone) { stopAlarm(); return; }
+        beepCycle();
+      }, 500);
+    }
+
+    function stopAlarm() {
+      timerDone = false;
+      if (alertInterval) { clearInterval(alertInterval); alertInterval = null; }
+      alarmOscillators.forEach(function(o) { try { o.stop(); } catch(e) {} });
+      alarmOscillators = [];
+    }
+  </script>
+</body>
+</html>
