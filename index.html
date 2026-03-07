@@ -13,7 +13,7 @@
   <meta name="twitter:card" content="summary_large_image">
   <link rel="canonical" href="https://muryo-tool.com/">
   <title>ToolBox｜画像圧縮・QRコード・文字数カウントなど無料オンラインツール集</title>
-  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.googleapis.com" fetchpriority="high">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Noto+Sans+JP:wght@400;500;600;700&display=swap" rel="stylesheet">
   <style>
@@ -130,7 +130,8 @@
     }
     @media (max-width:768px) {
       .container { padding:0 20px; }
-      .nav__links { display:none; }
+      .nav__links .nav__link { display:none; }
+      .nav__dropdown-menu { right:auto; left:-100px; min-width:280px; }
       .hero__inner { padding:48px 0 40px; }
       .hero__title { font-size:1.7rem; }
       .hero__sub { font-size:0.88rem; margin-bottom:28px; }
