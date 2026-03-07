@@ -178,9 +178,9 @@
     .nav__dropdown-toggle { font-size:0.8rem; font-weight:500; color:var(--gray-700); cursor:pointer; display:flex; align-items:center; gap:4px; transition:color 0.2s; }
     .nav__dropdown-toggle:hover { color:var(--black); }
     .nav__dropdown-toggle svg { width:12px; height:12px; transition:transform 0.2s; }
-    .nav__dropdown:hover .nav__dropdown-toggle svg { transform:rotate(180deg); }
+    .nav__dropdown:hover .nav__dropdown-toggle svg, .nav__dropdown.is-open .nav__dropdown-toggle svg { transform:rotate(180deg); }
     .nav__dropdown-menu { position:absolute; top:100%; right:0; min-width:300px; background:var(--white); border:1px solid var(--gray-200); border-radius:12px; box-shadow:0 8px 32px rgba(0,0,0,0.1); padding:8px; opacity:0; visibility:hidden; transform:translateY(8px); transition:all 0.2s var(--ease); z-index:200; }
-    .nav__dropdown:hover .nav__dropdown-menu { opacity:1; visibility:visible; transform:translateY(0); }
+    .nav__dropdown:hover .nav__dropdown-menu, .nav__dropdown.is-open .nav__dropdown-menu { opacity:1; visibility:visible; transform:translateY(0); }
     .nav__dropdown-item { display:flex; align-items:center; gap:10px; padding:10px 12px; border-radius:8px; font-size:0.82rem; font-weight:500; color:var(--gray-900); transition:background 0.15s; }
     .nav__dropdown-item:hover { background:var(--gray-100); }
     .nav__dropdown-item span.icon { width:28px; height:28px; border-radius:7px; display:flex; align-items:center; justify-content:center; font-size:14px; flex-shrink:0; }
@@ -607,6 +607,19 @@
         entries.forEach(e => { if (e.isIntersecting) { e.target.classList.add('is-visible'); observer.unobserve(e.target); } });
       }, { threshold: 0.1, rootMargin: '0px 0px -20px 0px' });
       reveals.forEach(el => observer.observe(el));
+
+      // Dropdown click toggle (for touch devices and accessibility)
+      const ddToggle = document.querySelector('.nav__dropdown-toggle');
+      const ddParent = document.querySelector('.nav__dropdown');
+      if (ddToggle) {
+        ddToggle.addEventListener('click', (e) => {
+          e.stopPropagation();
+          ddParent.classList.toggle('is-open');
+        });
+        document.addEventListener('click', (e) => {
+          if (!ddParent.contains(e.target)) ddParent.classList.remove('is-open');
+        });
+      }
 
       // Mobile menu
       const mobileMenu = document.getElementById('mobile-menu');
