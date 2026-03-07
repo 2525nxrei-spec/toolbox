@@ -1,0 +1,266 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="【無料】半角全角変換ツール。英数字・カタカナ・記号をワンクリックで全角⇔半角に変換。リアルタイム変換対応。データ送信なし。">
+  <meta name="keywords" content="半角全角変換, 全角半角変換, カタカナ変換, 英数字変換, テキスト変換, 無料ツール">
+  <title>半角全角変換｜英数字・カタカナを無料で一括変換【オンライン】</title>
+  <link rel="canonical" href="https://muryo-tool.com/tools/hankaku-zenkaku/">
+  <meta property="og:title" content="半角全角変換｜英数字・カタカナを無料で一括変換【オンライン】">
+  <meta property="og:description" content="【無料】半角全角変換ツール。英数字・カタカナ・記号をワンクリックで全角⇔半角に変換。リアルタイム変換対応。データ送信なし。">
+  <meta property="og:type" content="website">
+  <meta property="og:url" content="https://muryo-tool.com/tools/hankaku-zenkaku/">
+  <meta property="og:image" content="https://muryo-tool.com/ogp.png">
+  <meta name="twitter:card" content="summary_large_image">
+  <link rel="preconnect" href="https://fonts.googleapis.com" fetchpriority="high">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Noto+Sans+JP:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <style>
+    *,*::before,*::after{margin:0;padding:0;box-sizing:border-box}
+    :root{--black:#1d1d1f;--gray-700:#636366;--gray-500:#8e8e93;--gray-300:#d1d1d6;--gray-200:#e5e5ea;--gray-100:#f2f2f7;--white:#fff;--accent:#0071e3;--font:"Inter","Noto Sans JP",-apple-system,sans-serif}
+    html{font-size:16px;-webkit-font-smoothing:antialiased}
+    body{font-family:var(--font);color:var(--black);background:var(--gray-100);line-height:1.7;min-height:100vh}
+    a{color:inherit;text-decoration:none}
+    .nav{background:rgba(255,255,255,0.85);backdrop-filter:saturate(180%) blur(20px);border-bottom:1px solid rgba(0,0,0,0.05);position:sticky;top:0;z-index:100}
+    .nav__inner{display:flex;align-items:center;justify-content:space-between;height:52px;max-width:1100px;margin:0 auto;padding:0 24px}
+    .nav__logo{font-size:1.2rem;font-weight:800;letter-spacing:-0.04em}.nav__logo span{color:var(--accent)}
+    .nav__back{font-size:0.82rem;font-weight:500;color:var(--accent)}
+    .tool-page{max-width:900px;margin:0 auto;padding:32px 24px 80px}
+    .tool-header{text-align:center;margin-bottom:32px}
+    .tool-header__icon{display:flex;align-items:center;justify-content:center;margin-bottom:12px;color:var(--accent)}
+    .tool-header__title{font-size:clamp(1.5rem,3vw,2rem);font-weight:800;letter-spacing:-0.03em;margin-bottom:8px}
+    .tool-header__desc{font-size:0.92rem;color:var(--gray-700);max-width:520px;margin:0 auto}
+    .panel{background:var(--white);border-radius:20px;padding:28px;box-shadow:0 2px 12px rgba(0,0,0,0.04);margin-bottom:20px}
+    .direction-btns{display:flex;gap:8px;margin-bottom:16px;flex-wrap:wrap}
+    .dir-btn{font-family:var(--font);font-size:0.82rem;font-weight:600;padding:10px 20px;border-radius:980px;border:1.5px solid var(--gray-300);background:none;cursor:pointer;transition:all 0.2s}
+    .dir-btn.is-active{background:var(--black);color:var(--white);border-color:var(--black)}
+    .options{display:flex;gap:16px;margin-bottom:16px;flex-wrap:wrap}
+    .options label{font-size:0.82rem;font-weight:500;display:flex;align-items:center;gap:6px;cursor:pointer}
+    .options input[type="checkbox"]{accent-color:var(--accent);width:16px;height:16px}
+    .text-area{display:grid;grid-template-columns:1fr 1fr;gap:16px}
+    .text-area textarea{width:100%;min-height:240px;font-family:var(--font);font-size:0.92rem;padding:16px;border:1.5px solid var(--gray-300);border-radius:14px;outline:none;resize:vertical;line-height:1.8;transition:border-color 0.2s}
+    .text-area textarea:focus{border-color:var(--accent)}
+    .text-label{font-size:0.78rem;font-weight:600;color:var(--gray-700);margin-bottom:6px;display:flex;justify-content:space-between}
+    .text-label .count{font-weight:400;color:var(--gray-500)}
+    .action-btns{display:flex;gap:8px;margin-top:12px;flex-wrap:wrap}
+    .btn{font-family:var(--font);font-size:0.82rem;font-weight:600;padding:10px 20px;border-radius:980px;border:none;cursor:pointer;transition:all 0.2s}
+    .btn-primary{background:var(--accent);color:var(--white)}.btn-primary:hover{background:#0077ed}
+    .btn-outline{background:none;color:var(--black);border:1.5px solid var(--gray-300)}.btn-outline:hover{border-color:var(--black)}
+    .btn-success{background:#34c759;color:var(--white)}
+    .seo-section{margin-top:48px;background:var(--white);border-radius:20px;padding:40px;box-shadow:0 2px 12px rgba(0,0,0,0.04)}
+    .seo-section h2{font-size:1.3rem;font-weight:700;margin-bottom:16px}
+    .seo-section h3{font-size:1.05rem;font-weight:600;margin:28px 0 10px}
+    .seo-section p{font-size:0.92rem;color:var(--gray-700);line-height:1.85;margin-bottom:14px}
+    .seo-section ul{padding-left:20px;margin-bottom:14px;list-style:disc}
+    .seo-section li{font-size:0.9rem;color:var(--gray-700);line-height:1.8;margin-bottom:4px}
+    .seo-section table{width:100%;border-collapse:collapse;margin:16px 0;font-size:0.85rem}
+    .seo-section th,.seo-section td{border:1px solid var(--gray-200);padding:10px 12px;text-align:left}
+    .seo-section th{background:var(--gray-100);font-weight:600}
+    .footer{text-align:center;padding:40px 24px;font-size:0.75rem;color:var(--gray-500)}.footer a{color:var(--accent)}
+    @media(max-width:640px){
+      .tool-page{padding:20px 16px 60px}
+      .text-area{grid-template-columns:1fr}
+      .seo-section{padding:24px 20px}
+    }
+  </style>
+<script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-1964975138803092" crossorigin="anonymous"></script>
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "WebApplication",
+  "name": "半角全角変換 - 無料オンラインツール | ToolBox",
+  "url": "https://muryo-tool.com/tools/hankaku-zenkaku/",
+  "description": "英数字・カタカナ・記号をワンクリックで全角⇔半角に一括変換。リアルタイム変換対応。データ送信なし。",
+  "applicationCategory": "UtilitiesApplication",
+  "operatingSystem": "Web",
+  "offers": {"@type": "Offer", "price": "0", "priceCurrency": "JPY"},
+  "inLanguage": "ja",
+  "isPartOf": {"@type": "WebSite", "name": "ToolBox", "url": "https://muryo-tool.com/"}
+}
+</script>
+</head>
+<body>
+  <nav class="nav"><div class="nav__inner"><a href="../../index.html" class="nav__logo">Tool<span>Box</span></a><a href="../../index.html" class="nav__back">&larr; ツール一覧</a></div></nav>
+
+  <main class="tool-page">
+    <div class="tool-header">
+      <div class="tool-header__icon"><svg width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M17 2h4v4"/><path d="M21 2l-7 7"/><path d="M7 22H3v-4"/><path d="M3 22l7-7"/></svg></div>
+      <h1 class="tool-header__title">半角全角変換</h1>
+      <p class="tool-header__desc">英数字・カタカナ・記号を全角⇔半角にワンクリックで一括変換。リアルタイム対応。</p>
+    </div>
+
+    <div class="panel">
+      <div class="direction-btns">
+        <button class="dir-btn is-active" data-dir="toHalf">全角 → 半角</button>
+        <button class="dir-btn" data-dir="toFull">半角 → 全角</button>
+      </div>
+      <div class="options">
+        <label><input type="checkbox" id="opt-alnum" checked> 英数字</label>
+        <label><input type="checkbox" id="opt-katakana" checked> カタカナ</label>
+        <label><input type="checkbox" id="opt-symbol" checked> 記号</label>
+        <label><input type="checkbox" id="opt-space" checked> スペース</label>
+      </div>
+      <div class="text-area">
+        <div>
+          <div class="text-label"><span>入力</span><span class="count" id="input-count">0文字</span></div>
+          <textarea id="input-text" placeholder="変換したいテキストを入力..."></textarea>
+        </div>
+        <div>
+          <div class="text-label"><span>出力</span><span class="count" id="output-count">0文字</span></div>
+          <textarea id="output-text" readonly placeholder="変換結果がここに表示されます"></textarea>
+        </div>
+      </div>
+      <div class="action-btns">
+        <button class="btn btn-primary" id="btn-copy">コピー</button>
+        <button class="btn btn-outline" id="btn-clear">クリア</button>
+        <button class="btn btn-outline" id="btn-swap">入出力を入れ替え</button>
+      </div>
+    </div>
+
+    <div class="seo-section">
+      <h2>半角全角変換ツールの使い方</h2>
+      <p>テキストを入力欄に貼り付けるだけで、リアルタイムに全角⇔半角の変換が行われます。変換対象（英数字・カタカナ・記号・スペース）はチェックボックスで個別に選択できます。</p>
+
+      <h3>半角と全角の違い</h3>
+      <table>
+        <tr><th>種類</th><th>全角</th><th>半角</th></tr>
+        <tr><td>英字</td><td>Ａ Ｂ Ｃ</td><td>A B C</td></tr>
+        <tr><td>数字</td><td>０ １ ２</td><td>0 1 2</td></tr>
+        <tr><td>カタカナ</td><td>ア イ ウ</td><td>ｱ ｲ ｳ</td></tr>
+        <tr><td>記号</td><td>！ ＠ ＃</td><td>! @ #</td></tr>
+      </table>
+
+      <h3>活用シーン</h3>
+      <ul>
+        <li><strong>データ入力の統一</strong> — 住所録やデータベースの全角/半角を統一</li>
+        <li><strong>プログラミング</strong> — 全角スペースや全角英数字の混入を防止</li>
+        <li><strong>文書作成</strong> — ビジネス文書での表記統一</li>
+        <li><strong>ECサイト運営</strong> — 商品データのCSV一括変換</li>
+        <li><strong>SEOライティング</strong> — メタタグやURLの半角統一</li>
+      </ul>
+    </div>
+
+    <div class="tool-page" style="padding:0">
+      <div class="seo-section" style="margin-top:20px">
+        <h2>関連ツール</h2>
+        <ul style="list-style:none;padding:0;display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:12px">
+          <li><a href="../text-counter/index.html" style="display:block;padding:16px;background:var(--gray-100);border-radius:12px;font-weight:600;font-size:0.9rem">文字数カウント</a></li>
+          <li><a href="../warikan/index.html" style="display:block;padding:16px;background:var(--gray-100);border-radius:12px;font-weight:600;font-size:0.9rem">割り勘計算</a></li>
+          <li><a href="../password-generator/index.html" style="display:block;padding:16px;background:var(--gray-100);border-radius:12px;font-weight:600;font-size:0.9rem">パスワード生成</a></li>
+          <li><a href="../unit-converter/index.html" style="display:block;padding:16px;background:var(--gray-100);border-radius:12px;font-weight:600;font-size:0.9rem">単位変換</a></li>
+        </ul>
+      </div>
+    </div>
+  </main>
+  <footer class="footer"><p>&copy; 2026 <a href="../../index.html">ToolBox</a></p></footer>
+
+  <script>
+  (function(){
+    let direction = 'toHalf';
+    const input = document.getElementById('input-text');
+    const output = document.getElementById('output-text');
+    const inputCount = document.getElementById('input-count');
+    const outputCount = document.getElementById('output-count');
+
+    // Direction buttons
+    document.querySelectorAll('.dir-btn').forEach(btn => {
+      btn.addEventListener('click', () => {
+        document.querySelectorAll('.dir-btn').forEach(b => b.classList.remove('is-active'));
+        btn.classList.add('is-active');
+        direction = btn.dataset.dir;
+        convert();
+      });
+    });
+
+    // Katakana mapping tables
+    const zenToHanKana = {'ガ':'ｶﾞ','ギ':'ｷﾞ','グ':'ｸﾞ','ゲ':'ｹﾞ','ゴ':'ｺﾞ','ザ':'ｻﾞ','ジ':'ｼﾞ','ズ':'ｽﾞ','ゼ':'ｾﾞ','ゾ':'ｿﾞ','ダ':'ﾀﾞ','ヂ':'ﾁﾞ','ヅ':'ﾂﾞ','デ':'ﾃﾞ','ド':'ﾄﾞ','バ':'ﾊﾞ','ビ':'ﾋﾞ','ブ':'ﾌﾞ','ベ':'ﾍﾞ','ボ':'ﾎﾞ','パ':'ﾊﾟ','ピ':'ﾋﾟ','プ':'ﾌﾟ','ペ':'ﾍﾟ','ポ':'ﾎﾟ','ヴ':'ｳﾞ','ア':'ｱ','イ':'ｲ','ウ':'ｳ','エ':'ｴ','オ':'ｵ','カ':'ｶ','キ':'ｷ','ク':'ｸ','ケ':'ｹ','コ':'ｺ','サ':'ｻ','シ':'ｼ','ス':'ｽ','セ':'ｾ','ソ':'ｿ','タ':'ﾀ','チ':'ﾁ','ツ':'ﾂ','テ':'ﾃ','ト':'ﾄ','ナ':'ﾅ','ニ':'ﾆ','ヌ':'ﾇ','ネ':'ﾈ','ノ':'ﾉ','ハ':'ﾊ','ヒ':'ﾋ','フ':'ﾌ','ヘ':'ﾍ','ホ':'ﾎ','マ':'ﾏ','ミ':'ﾐ','ム':'ﾑ','メ':'ﾒ','モ':'ﾓ','ヤ':'ﾔ','ユ':'ﾕ','ヨ':'ﾖ','ラ':'ﾗ','リ':'ﾘ','ル':'ﾙ','レ':'ﾚ','ロ':'ﾛ','ワ':'ﾜ','ヲ':'ｦ','ン':'ﾝ','ァ':'ｧ','ィ':'ｨ','ゥ':'ｩ','ェ':'ｪ','ォ':'ｫ','ッ':'ｯ','ャ':'ｬ','ュ':'ｭ','ョ':'ｮ','ー':'ｰ','。':'｡','「':'｢','」':'｣','、':'､','・':'･'};
+    const hanToZenKana = {};
+    for (const [z, h] of Object.entries(zenToHanKana)) hanToZenKana[h] = z;
+
+    function toHalfWidth(str, opts) {
+      let result = '';
+      for (let i = 0; i < str.length; i++) {
+        const ch = str[i];
+        const code = ch.charCodeAt(0);
+        if (opts.alnum && code >= 0xFF01 && code <= 0xFF5E) {
+          result += String.fromCharCode(code - 0xFEE0);
+        } else if (opts.katakana && zenToHanKana[ch]) {
+          result += zenToHanKana[ch];
+        } else if (opts.space && ch === '\u3000') {
+          result += ' ';
+        } else {
+          result += ch;
+        }
+      }
+      return result;
+    }
+
+    function toFullWidth(str, opts) {
+      let result = '';
+      for (let i = 0; i < str.length; i++) {
+        const ch = str[i];
+        const code = ch.charCodeAt(0);
+        // Check for half-width katakana with dakuten/handakuten
+        if (opts.katakana && i + 1 < str.length) {
+          const pair = ch + str[i + 1];
+          if (hanToZenKana[pair]) {
+            result += hanToZenKana[pair];
+            i++;
+            continue;
+          }
+        }
+        if (opts.katakana && hanToZenKana[ch]) {
+          result += hanToZenKana[ch];
+        } else if (opts.alnum && code >= 0x21 && code <= 0x7E) {
+          if (opts.symbol || (code >= 0x30 && code <= 0x39) || (code >= 0x41 && code <= 0x5A) || (code >= 0x61 && code <= 0x7A)) {
+            result += String.fromCharCode(code + 0xFEE0);
+          } else {
+            result += ch;
+          }
+        } else if (opts.space && ch === ' ') {
+          result += '\u3000';
+        } else {
+          result += ch;
+        }
+      }
+      return result;
+    }
+
+    function convert() {
+      const text = input.value;
+      const opts = {
+        alnum: document.getElementById('opt-alnum').checked,
+        katakana: document.getElementById('opt-katakana').checked,
+        symbol: document.getElementById('opt-symbol').checked,
+        space: document.getElementById('opt-space').checked
+      };
+      output.value = direction === 'toHalf' ? toHalfWidth(text, opts) : toFullWidth(text, opts);
+      inputCount.textContent = text.length + '文字';
+      outputCount.textContent = output.value.length + '文字';
+    }
+
+    input.addEventListener('input', convert);
+    document.querySelectorAll('.options input').forEach(cb => cb.addEventListener('change', convert));
+
+    document.getElementById('btn-copy').addEventListener('click', function() {
+      navigator.clipboard.writeText(output.value).then(() => {
+        this.textContent = 'コピーしました';
+        this.classList.replace('btn-primary', 'btn-success');
+        setTimeout(() => { this.textContent = 'コピー'; this.classList.replace('btn-success', 'btn-primary'); }, 1500);
+      });
+    });
+
+    document.getElementById('btn-clear').addEventListener('click', () => {
+      input.value = ''; output.value = '';
+      inputCount.textContent = '0文字'; outputCount.textContent = '0文字';
+    });
+
+    document.getElementById('btn-swap').addEventListener('click', () => {
+      input.value = output.value;
+      convert();
+    });
+  })();
+  </script>
+</body>
+</html>

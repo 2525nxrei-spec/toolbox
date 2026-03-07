@@ -5,12 +5,13 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <meta name="description" content="【無料】QRコード作成ツール。URL、テキスト、WiFi情報からQRコードを瞬時に生成。色・サイズのカスタマイズ可能。PNG・SVGでダウンロード。">
   <meta name="keywords" content="QRコード作成, QRコード生成, QRコード無料, QRコードメーカー, QRコード色付き">
-  <title>QRコード作成 — 無料オンラインツール | ToolBox</title>
+  <title>QRコード作成｜無料でQRコードを生成・カスタマイズ【オンライン】</title>
   <link rel="canonical" href="https://muryo-tool.com/tools/qr-generator/">
-  <meta property="og:title" content="QRコード作成 — 無料オンラインツール | ToolBox">
+  <meta property="og:title" content="QRコード作成｜無料でQRコードを生成・カスタマイズ【オンライン】">
   <meta property="og:description" content="【無料】QRコード作成ツール。URL、テキスト、WiFi情報からQRコードを瞬時に生成。色・サイズのカスタマイズ可能。PNG・SVGでダウンロード。">
   <meta property="og:type" content="website">
   <meta property="og:url" content="https://muryo-tool.com/tools/qr-generator/">
+  <meta property="og:image" content="https://muryo-tool.com/ogp.png">
   <meta name="twitter:card" content="summary_large_image">
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Noto+Sans+JP:wght@400;500;600;700&display=swap" rel="stylesheet">
   <style>
@@ -181,11 +182,24 @@
     </div>
   </main>
 
+  <div class="tool-page" style="padding-top:0">
+    <div class="seo-section" style="margin-top:0">
+      <h2>関連ツール</h2>
+      <ul style="list-style:none;padding:0;display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:12px">
+        <li><a href="../image-compressor/index.html" style="display:block;padding:16px;background:var(--gray-100);border-radius:12px;font-weight:600;font-size:0.9rem">画像圧縮</a></li>
+        <li><a href="../pdf-converter/index.html" style="display:block;padding:16px;background:var(--gray-100);border-radius:12px;font-weight:600;font-size:0.9rem">画像→PDF変換</a></li>
+        <li><a href="../password-generator/index.html" style="display:block;padding:16px;background:var(--gray-100);border-radius:12px;font-weight:600;font-size:0.9rem">パスワード生成</a></li>
+        <li><a href="../text-counter/index.html" style="display:block;padding:16px;background:var(--gray-100);border-radius:12px;font-weight:600;font-size:0.9rem">文字数カウント</a></li>
+      </ul>
+    </div>
+  </div>
   <footer class="footer"><p>&copy; 2026 <a href="../../index.html">ToolBox</a></p></footer>
 
+  <script src="https://cdn.jsdelivr.net/npm/qrcode-generator@1.4.4/qrcode.min.js"></script>
   <script>
-    // Tab switching
     let currentType = 'url';
+    let lastQR = null;
+
     document.querySelectorAll('.tab').forEach(tab => {
       tab.addEventListener('click', () => {
         document.querySelectorAll('.tab').forEach(t => t.classList.remove('is-active'));
@@ -215,8 +229,6 @@
       }
     }
 
-    // Simple QR Code generator using Canvas
-    // This is a basic implementation. For production, use a library like qrcode.js
     function generateQR() {
       const data = getQRData();
       if (!data) return;
@@ -225,39 +237,45 @@
       const color = document.getElementById('qr-color').value;
       const bg = document.getElementById('qr-bg').value;
 
-      // Use the QR code API for simplicity (switches to client-side in production)
-      const preview = document.getElementById('qr-preview');
-      const canvas = document.createElement('canvas');
-      canvas.id = 'qr-canvas';
-      canvas.width = size;
-      canvas.height = size;
+      try {
+        const qr = qrcode(0, 'M');
+        qr.addData(data);
+        qr.make();
+        lastQR = qr;
 
-      // Generate QR matrix
-      const matrix = generateQRMatrix(data);
-      const ctx = canvas.getContext('2d');
-      const cellSize = size / matrix.length;
+        const moduleCount = qr.getModuleCount();
+        const canvas = document.createElement('canvas');
+        canvas.id = 'qr-canvas';
+        canvas.width = size;
+        canvas.height = size;
+        const ctx = canvas.getContext('2d');
+        const cellSize = size / moduleCount;
 
-      ctx.fillStyle = bg;
-      ctx.fillRect(0, 0, size, size);
+        ctx.fillStyle = bg;
+        ctx.fillRect(0, 0, size, size);
+        ctx.fillStyle = color;
 
-      ctx.fillStyle = color;
-      for (let y = 0; y < matrix.length; y++) {
-        for (let x = 0; x < matrix[y].length; x++) {
-          if (matrix[y][x]) {
-            ctx.fillRect(x * cellSize, y * cellSize, cellSize, cellSize);
+        for (let row = 0; row < moduleCount; row++) {
+          for (let col = 0; col < moduleCount; col++) {
+            if (qr.isDark(row, col)) {
+              ctx.fillRect(col * cellSize, row * cellSize, cellSize + 0.5, cellSize + 0.5);
+            }
           }
         }
-      }
 
-      preview.innerHTML = '';
-      preview.appendChild(canvas);
-      document.getElementById('dl-png').disabled = false;
-      document.getElementById('dl-svg').disabled = false;
+        const preview = document.getElementById('qr-preview');
+        preview.innerHTML = '';
+        preview.appendChild(canvas);
+        document.getElementById('dl-png').disabled = false;
+        document.getElementById('dl-svg').disabled = false;
+      } catch (e) {
+        document.getElementById('qr-preview').innerHTML = '<span class="preview-panel__placeholder">データが長すぎるか、無効な入力です</span>';
+      }
     }
 
     function downloadQR(format) {
       const canvas = document.getElementById('qr-canvas');
-      if (!canvas) return;
+      if (!canvas || !lastQR) return;
 
       if (format === 'png') {
         const link = document.createElement('a');
@@ -266,18 +284,17 @@
         link.click();
       } else if (format === 'svg') {
         const size = canvas.width;
-        const data = getQRData();
-        const matrix = generateQRMatrix(data);
-        const cellSize = size / matrix.length;
+        const moduleCount = lastQR.getModuleCount();
+        const cellSize = size / moduleCount;
         const color = document.getElementById('qr-color').value;
         const bg = document.getElementById('qr-bg').value;
 
-        let svg = `<svg xmlns="http://www.w3.org/2000/svg" width="${size}" height="${size}">`;
+        let svg = `<svg xmlns="http://www.w3.org/2000/svg" width="${size}" height="${size}" viewBox="0 0 ${size} ${size}">`;
         svg += `<rect width="${size}" height="${size}" fill="${bg}"/>`;
-        for (let y = 0; y < matrix.length; y++) {
-          for (let x = 0; x < matrix[y].length; x++) {
-            if (matrix[y][x]) {
-              svg += `<rect x="${x*cellSize}" y="${y*cellSize}" width="${cellSize}" height="${cellSize}" fill="${color}"/>`;
+        for (let row = 0; row < moduleCount; row++) {
+          for (let col = 0; col < moduleCount; col++) {
+            if (lastQR.isDark(row, col)) {
+              svg += `<rect x="${col*cellSize}" y="${row*cellSize}" width="${cellSize}" height="${cellSize}" fill="${color}"/>`;
             }
           }
         }
@@ -288,72 +305,10 @@
         link.download = 'qrcode.svg';
         link.href = URL.createObjectURL(blob);
         link.click();
+        URL.revokeObjectURL(link.href);
       }
     }
 
-    // Minimal QR code matrix generator (Version 1-4 support)
-    // For full spec compliance, use a proper library in production
-    function generateQRMatrix(data) {
-      // This simplified version creates a visual QR-like pattern
-      // In production, replace with qrcode-generator library
-      const size = 25;
-      const matrix = Array.from({length: size}, () => Array(size).fill(false));
-
-      // Finder patterns (top-left, top-right, bottom-left)
-      function drawFinder(ox, oy) {
-        for (let y = 0; y < 7; y++) for (let x = 0; x < 7; x++) {
-          matrix[oy+y][ox+x] = (y === 0 || y === 6 || x === 0 || x === 6 || (y >= 2 && y <= 4 && x >= 2 && x <= 4));
-        }
-      }
-      drawFinder(0, 0);
-      drawFinder(size-7, 0);
-      drawFinder(0, size-7);
-
-      // Timing patterns
-      for (let i = 8; i < size-8; i++) {
-        matrix[6][i] = i % 2 === 0;
-        matrix[i][6] = i % 2 === 0;
-      }
-
-      // Data encoding (simplified - creates pattern from data hash)
-      let hash = 0;
-      for (let i = 0; i < data.length; i++) {
-        hash = ((hash << 5) - hash + data.charCodeAt(i)) | 0;
-      }
-
-      // Fill data area with pattern based on input
-      const rng = mulberry32(Math.abs(hash));
-      for (let y = 0; y < size; y++) {
-        for (let x = 0; x < size; x++) {
-          if (matrix[y][x]) continue;
-          // Skip finder pattern areas and timing
-          if ((x < 8 && y < 8) || (x >= size-8 && y < 8) || (x < 8 && y >= size-8)) continue;
-          if (x === 6 || y === 6) continue;
-          // Separator areas
-          if ((x === 7 && y < 8) || (y === 7 && x < 8)) continue;
-          if ((x === size-8 && y < 8) || (y === 7 && x >= size-8)) continue;
-          if ((x === 7 && y >= size-8) || (y === size-8 && x < 8)) continue;
-
-          // Generate deterministic pattern from data
-          const bit = rng() > 0.5;
-          const mask = (x + y) % 2 === 0;
-          matrix[y][x] = bit !== mask;
-        }
-      }
-
-      return matrix;
-    }
-
-    function mulberry32(a) {
-      return function() {
-        let t = a += 0x6D2B79F5;
-        t = Math.imul(t ^ t >>> 15, t | 1);
-        t ^= t + Math.imul(t ^ t >>> 7, t | 61);
-        return ((t ^ t >>> 14) >>> 0) / 4294967296;
-      }
-    }
-
-    // Auto-generate on load
     generateQR();
   </script>
 </body>

@@ -78,52 +78,52 @@
 <div class="invoice-title">請 求 書</div>
 <div class="invoice-header">
 <div class="invoice-to">
-<div class="company">○○○○株式会社　御中</div>
+<div class="company" contenteditable="true">○○○○株式会社　御中</div>
 <p>下記の通りご請求申し上げます。</p>
 </div>
 <div class="invoice-from">
-<p>請求番号：INV-2025-001</p>
-<p>請求日：令和　年　月　日</p>
-<p>お支払期限：令和　年　月　日</p>
-<p style="margin-top:8px">○○○○株式会社</p>
-<p>〒000-0000</p>
-<p>東京都○○区○○1-2-3</p>
-<p>TEL：03-0000-0000</p>
-<p>登録番号：T0000000000000</p>
+<p>請求番号：<span contenteditable="true">INV-2025-001</span></p>
+<p>請求日：<span contenteditable="true">令和　年　月　日</span></p>
+<p>お支払期限：<span contenteditable="true">令和　年　月　日</span></p>
+<p style="margin-top:8px" contenteditable="true">○○○○株式会社</p>
+<p contenteditable="true">〒000-0000</p>
+<p contenteditable="true">東京都○○区○○1-2-3</p>
+<p contenteditable="true">TEL：03-0000-0000</p>
+<p contenteditable="true">登録番号：T0000000000000</p>
 </div>
 </div>
 
 <div class="total-area">
-<div class="total-box">ご請求金額　　　　　　　円（税込）</div>
+<div class="total-box">ご請求金額　<span id="grand-total">0</span>円（税込）</div>
 </div>
 
-<table class="invoice-table">
+<table class="invoice-table" id="invoice-items">
 <thead>
 <tr><th style="width:40%">品目・内容</th><th style="width:10%">数量</th><th style="width:10%">単位</th><th style="width:15%">単価</th><th style="width:10%">税率</th><th style="width:15%">金額</th></tr>
 </thead>
 <tbody>
-<tr><td></td><td class="num"></td><td class="num"></td><td class="num"></td><td class="num">10%</td><td class="num"></td></tr>
-<tr><td></td><td class="num"></td><td class="num"></td><td class="num"></td><td class="num">10%</td><td class="num"></td></tr>
-<tr><td></td><td class="num"></td><td class="num"></td><td class="num"></td><td class="num">10%</td><td class="num"></td></tr>
-<tr><td></td><td class="num"></td><td class="num"></td><td class="num"></td><td class="num"></td><td class="num"></td></tr>
-<tr><td></td><td class="num"></td><td class="num"></td><td class="num"></td><td class="num"></td><td class="num"></td></tr>
+<tr><td contenteditable="true"></td><td class="num" contenteditable="true" data-field="qty"></td><td class="num" contenteditable="true"></td><td class="num" contenteditable="true" data-field="price"></td><td class="num"><select class="tax-select" style="border:none;font-size:inherit;font-family:inherit;background:transparent;text-align:right;width:100%"><option value="10">10%</option><option value="8">8%</option><option value="0">0%</option></select></td><td class="num" data-field="amount"></td></tr>
+<tr><td contenteditable="true"></td><td class="num" contenteditable="true" data-field="qty"></td><td class="num" contenteditable="true"></td><td class="num" contenteditable="true" data-field="price"></td><td class="num"><select class="tax-select" style="border:none;font-size:inherit;font-family:inherit;background:transparent;text-align:right;width:100%"><option value="10">10%</option><option value="8">8%</option><option value="0">0%</option></select></td><td class="num" data-field="amount"></td></tr>
+<tr><td contenteditable="true"></td><td class="num" contenteditable="true" data-field="qty"></td><td class="num" contenteditable="true"></td><td class="num" contenteditable="true" data-field="price"></td><td class="num"><select class="tax-select" style="border:none;font-size:inherit;font-family:inherit;background:transparent;text-align:right;width:100%"><option value="10">10%</option><option value="8">8%</option><option value="0">0%</option></select></td><td class="num" data-field="amount"></td></tr>
+<tr><td contenteditable="true"></td><td class="num" contenteditable="true" data-field="qty"></td><td class="num" contenteditable="true"></td><td class="num" contenteditable="true" data-field="price"></td><td class="num"><select class="tax-select" style="border:none;font-size:inherit;font-family:inherit;background:transparent;text-align:right;width:100%"><option value="10">10%</option><option value="8">8%</option><option value="0">0%</option></select></td><td class="num" data-field="amount"></td></tr>
+<tr><td contenteditable="true"></td><td class="num" contenteditable="true" data-field="qty"></td><td class="num" contenteditable="true"></td><td class="num" contenteditable="true" data-field="price"></td><td class="num"><select class="tax-select" style="border:none;font-size:inherit;font-family:inherit;background:transparent;text-align:right;width:100%"><option value="10">10%</option><option value="8">8%</option><option value="0">0%</option></select></td><td class="num" data-field="amount"></td></tr>
 </tbody>
 <tfoot>
-<tr><td colspan="5" style="text-align:right">小計</td><td class="num"></td></tr>
-<tr><td colspan="5" style="text-align:right">消費税（10%対象）</td><td class="num"></td></tr>
-<tr><td colspan="5" style="text-align:right">消費税（8%対象）</td><td class="num"></td></tr>
-<tr><td colspan="5" style="text-align:right;font-size:14px"><strong>合計金額</strong></td><td class="num" style="font-size:14px"></td></tr>
+<tr><td colspan="5" style="text-align:right">小計</td><td class="num" id="subtotal">0</td></tr>
+<tr><td colspan="5" style="text-align:right">消費税（10%対象）</td><td class="num" id="tax10">0</td></tr>
+<tr><td colspan="5" style="text-align:right">消費税（8%対象）</td><td class="num" id="tax8">0</td></tr>
+<tr><td colspan="5" style="text-align:right;font-size:14px"><strong>合計金額</strong></td><td class="num" id="total" style="font-size:14px">0</td></tr>
 </tfoot>
 </table>
 
 <div class="payment-info">
 <h4>お振込先</h4>
-<p>○○銀行　○○支店　普通　0000000</p>
-<p>口座名義：カ）○○○○</p>
+<p contenteditable="true">○○銀行　○○支店　普通　0000000</p>
+<p contenteditable="true">口座名義：カ）○○○○</p>
 <p style="margin-top:4px">※振込手数料はお客様のご負担でお願いいたします。</p>
 </div>
 
-<p style="font-size:11px;margin-top:16px;color:#666">備考：</p>
+<p style="font-size:11px;margin-top:16px;color:#666">備考：<span contenteditable="true"></span></p>
 </div>
 </div>
 </div>
@@ -186,5 +186,46 @@
 </div>
 </div>
 <footer class="footer"><div>&copy; 2025 テンプレBOX. All rights reserved.</div><div style="margin-top:8px"><a href="../../pages/privacy.html">プライバシーポリシー</a><a href="../../pages/terms.html">利用規約</a><a href="../../pages/contact.html">お問い合わせ</a></div></footer>
+<script>
+(function(){
+  const table = document.getElementById('invoice-items');
+  function parseNum(s){ return parseInt((s||'').replace(/[^0-9]/g,''),10)||0; }
+  function fmt(n){ return n.toLocaleString('ja-JP'); }
+  function calc(){
+    const rows = table.querySelectorAll('tbody tr');
+    let subtotal=0, tax10base=0, tax8base=0;
+    rows.forEach(row=>{
+      const qty = parseNum(row.querySelector('[data-field="qty"]')?.textContent);
+      const price = parseNum(row.querySelector('[data-field="price"]')?.textContent);
+      const amount = qty * price;
+      const amountCell = row.querySelector('[data-field="amount"]');
+      const taxSel = row.querySelector('.tax-select');
+      const taxRate = parseInt(taxSel?.value||'10');
+      if(amount>0) amountCell.textContent = fmt(amount);
+      else amountCell.textContent = '';
+      subtotal += amount;
+      if(taxRate===10) tax10base += amount;
+      else if(taxRate===8) tax8base += amount;
+    });
+    const tax10 = Math.floor(tax10base * 0.1);
+    const tax8 = Math.floor(tax8base * 0.08);
+    const total = subtotal + tax10 + tax8;
+    document.getElementById('subtotal').textContent = subtotal?fmt(subtotal):'0';
+    document.getElementById('tax10').textContent = tax10?fmt(tax10):'0';
+    document.getElementById('tax8').textContent = tax8?fmt(tax8):'0';
+    document.getElementById('total').textContent = total?fmt(total):'0';
+    document.getElementById('grand-total').textContent = total?fmt(total):'0';
+  }
+  table.addEventListener('input', calc);
+  table.addEventListener('change', calc);
+  document.querySelectorAll('.tax-select').forEach(s=>s.addEventListener('change',calc));
+  // Highlight editable fields
+  document.querySelectorAll('[contenteditable="true"]').forEach(el=>{
+    el.style.outline='none';
+    el.addEventListener('focus',()=>{ el.style.background='#fffbe6'; });
+    el.addEventListener('blur',()=>{ el.style.background=''; calc(); });
+  });
+})();
+</script>
 </body>
 </html>
