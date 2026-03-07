@@ -108,7 +108,7 @@
 
     /* ── Footer ── */
     .footer { background:var(--black); color:var(--white); }
-    .footer__top { display:grid; grid-template-columns:1.2fr 1fr 0.6fr; gap:48px; padding:52px 0 40px; border-bottom:1px solid rgba(255,255,255,0.08); }
+    .footer__top { display:grid; grid-template-columns:1.2fr 1.2fr 0.8fr 0.8fr; gap:36px; padding:52px 0 40px; border-bottom:1px solid rgba(255,255,255,0.08); }
     .footer__brand-name { font-size:1.1rem; font-weight:800; margin-bottom:10px; }
     .footer__brand-name span { color:var(--accent); }
     .footer__brand-desc { font-size:0.78rem; color:rgba(255,255,255,0.4); line-height:1.75; max-width:240px; }
@@ -189,6 +189,21 @@
     .nav__dropdown-item .dd-text { display:flex; flex-direction:column; }
     .nav__dropdown-item .dd-name { font-size:0.82rem; font-weight:600; }
     .nav__dropdown-item .dd-desc { font-size:0.68rem; font-weight:400; color:var(--gray-500); margin-top:1px; }
+
+    /* Mobile menu */
+    .nav__hamburger { display:none; background:none; border:none; cursor:pointer; padding:4px; color:var(--black); }
+    .nav__hamburger svg { width:24px; height:24px; }
+    .mobile-menu { position:fixed; inset:0; z-index:300; background:rgba(0,0,0,0.4); opacity:0; visibility:hidden; transition:all 0.3s; }
+    .mobile-menu.is-open { opacity:1; visibility:visible; }
+    .mobile-menu__panel { position:absolute; top:0; right:0; width:min(320px,85vw); height:100%; background:var(--white); padding:20px 24px; overflow-y:auto; transform:translateX(100%); transition:transform 0.3s var(--ease); }
+    .mobile-menu.is-open .mobile-menu__panel { transform:translateX(0); }
+    .mobile-menu__close { background:none; border:none; cursor:pointer; color:var(--black); padding:4px; float:right; }
+    .mobile-menu__close svg { width:24px; height:24px; }
+    .mobile-menu__section { margin-top:24px; clear:both; }
+    .mobile-menu__title { font-size:0.7rem; font-weight:600; text-transform:uppercase; letter-spacing:0.1em; color:var(--gray-500); margin-bottom:12px; }
+    .mobile-menu__link { display:flex; align-items:center; gap:10px; padding:12px 0; border-bottom:1px solid var(--gray-100); font-size:0.9rem; font-weight:500; color:var(--black); text-decoration:none; }
+    .mobile-menu__link .icon { width:28px; height:28px; border-radius:7px; display:flex; align-items:center; justify-content:center; font-size:14px; flex-shrink:0; }
+    @media(max-width:768px){ .nav__hamburger{display:block;} }
 </style>
 <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-1964975138803092"
      crossorigin="anonymous"></script>
@@ -243,8 +258,36 @@
           </div>
         </div>
       </div>
+      <button class="nav__hamburger" id="menu-open" aria-label="メニューを開く">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M3 12h18"/><path d="M3 6h18"/><path d="M3 18h18"/></svg>
+      </button>
     </div>
   </nav>
+
+  <!-- Mobile Menu -->
+  <div class="mobile-menu" id="mobile-menu">
+    <div class="mobile-menu__panel">
+      <button class="mobile-menu__close" id="menu-close" aria-label="メニューを閉じる">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M18 6 6 18"/><path d="m6 6 12 12"/></svg>
+      </button>
+      <div class="mobile-menu__section">
+        <div class="mobile-menu__title">ページ内</div>
+        <a href="#popular" class="mobile-menu__link">人気ツール</a>
+        <a href="#all" class="mobile-menu__link">すべてのツール</a>
+        <a href="#faq" class="mobile-menu__link">よくある質問</a>
+      </div>
+      <div class="mobile-menu__section">
+        <div class="mobile-menu__title">サービス一覧</div>
+        <a href="/index.html" class="mobile-menu__link"><span class="icon" style="background:#dbeafe">🔧</span>ツールボックス</a>
+        <a href="/calc/index.html" class="mobile-menu__link"><span class="icon" style="background:#dcfce7">🧮</span>オンライン電卓</a>
+        <a href="/bunrei/index.html" class="mobile-menu__link"><span class="icon" style="background:#fef3c7">📝</span>文例メーカー</a>
+        <a href="/template/index.html" class="mobile-menu__link"><span class="icon" style="background:#ede9fe">📄</span>テンプレBOX</a>
+        <a href="/check/index.html" class="mobile-menu__link"><span class="icon" style="background:#ffedd5">✅</span>チェックノート</a>
+        <a href="/icon/index.html" class="mobile-menu__link"><span class="icon" style="background:#fce7f3">🎨</span>アイコンJP</a>
+        <a href="/keiyaku/index.html" class="mobile-menu__link"><span class="icon" style="background:#e0e7ff">📋</span>契約書メーカー</a>
+      </div>
+    </div>
+  </div>
 
   <!-- Hero -->
   <section class="hero">
@@ -564,6 +607,13 @@
         entries.forEach(e => { if (e.isIntersecting) { e.target.classList.add('is-visible'); observer.unobserve(e.target); } });
       }, { threshold: 0.1, rootMargin: '0px 0px -20px 0px' });
       reveals.forEach(el => observer.observe(el));
+
+      // Mobile menu
+      const mobileMenu = document.getElementById('mobile-menu');
+      document.getElementById('menu-open').addEventListener('click', () => mobileMenu.classList.add('is-open'));
+      document.getElementById('menu-close').addEventListener('click', () => mobileMenu.classList.remove('is-open'));
+      mobileMenu.addEventListener('click', (e) => { if (e.target === mobileMenu) mobileMenu.classList.remove('is-open'); });
+      mobileMenu.querySelectorAll('a').forEach(a => a.addEventListener('click', () => mobileMenu.classList.remove('is-open')));
 
       const search = document.getElementById('tool-search');
       const cards = document.querySelectorAll('#all-tools .tool-card');
