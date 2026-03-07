@@ -171,6 +171,8 @@
     /* ── Scroll reveal ── */
     .reveal { opacity:0; transform:translateY(16px); transition:opacity 0.5s var(--ease), transform 0.5s var(--ease); }
     .reveal.is-visible { opacity:1; transform:translateY(0); }
+    /* Fallback: if JS fails or observer doesn't fire, show content after 2s */
+    @media (prefers-reduced-motion: reduce) { .reveal { opacity:1; transform:none; } }
     .reveal-d1 { transition-delay:0.06s; }
     .reveal-d2 { transition-delay:0.12s; }
     .reveal-d3 { transition-delay:0.18s; }
@@ -502,7 +504,7 @@
 
   <!-- Ad placement: between tools and FAQ -->
   <div class="container" style="margin:0 auto;max-width:1080px;padding:0 24px">
-    <ins class="adsbygoogle" style="display:block;min-height:90px" data-ad-client="ca-pub-1964975138803092" data-ad-slot="auto" data-ad-format="auto" data-full-width-responsive="true"></ins>
+    <ins class="adsbygoogle" style="display:block;min-height:100px" data-ad-client="ca-pub-1964975138803092" data-ad-slot="auto" data-ad-format="auto" data-full-width-responsive="true"></ins>
     <script>(adsbygoogle = window.adsbygoogle || []).push({});</script>
   </div>
 
@@ -604,10 +606,17 @@
   <script>
     document.addEventListener('DOMContentLoaded', () => {
       const reveals = document.querySelectorAll('.reveal');
-      const observer = new IntersectionObserver(entries => {
-        entries.forEach(e => { if (e.isIntersecting) { e.target.classList.add('is-visible'); observer.unobserve(e.target); } });
-      }, { threshold: 0.1, rootMargin: '0px 0px -20px 0px' });
-      reveals.forEach(el => observer.observe(el));
+      if ('IntersectionObserver' in window) {
+        const observer = new IntersectionObserver(entries => {
+          entries.forEach(e => { if (e.isIntersecting) { e.target.classList.add('is-visible'); observer.unobserve(e.target); } });
+        }, { threshold: 0.05, rootMargin: '0px 0px 50px 0px' });
+        reveals.forEach(el => observer.observe(el));
+        // Fallback: force show all after 3 seconds in case observer fails
+        setTimeout(() => { reveals.forEach(el => el.classList.add('is-visible')); }, 3000);
+      } else {
+        // No IntersectionObserver support: show everything immediately
+        reveals.forEach(el => el.classList.add('is-visible'));
+      }
 
       // Dropdown click toggle (for touch devices and accessibility)
       const ddToggle = document.querySelector('.nav__dropdown-toggle');
