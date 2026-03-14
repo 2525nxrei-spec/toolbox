@@ -70,24 +70,29 @@
     .hero__search input:focus { border-color:var(--accent); box-shadow:0 0 0 4px rgba(0,113,227,0.08); background:var(--white); }
     .hero__search-icon { position:absolute; left:16px; top:50%; transform:translateY(-50%); color:var(--gray-500); display:flex; }
 
-    /* ── ROI Simulator ── */
-    .roi { background:var(--white); border-radius:20px; padding:36px 40px; margin-top:-20px; position:relative; z-index:2; box-shadow:0 4px 24px rgba(0,0,0,0.06); }
-    .roi__title { font-size:1.1rem; font-weight:800; text-align:center; margin-bottom:8px; letter-spacing:-0.02em; }
-    .roi__subtitle { font-size:0.8rem; color:var(--gray-500); text-align:center; margin-bottom:24px; }
-    .roi__form { display:flex; gap:16px; align-items:flex-end; flex-wrap:wrap; justify-content:center; }
-    .roi__field { display:flex; flex-direction:column; gap:6px; }
-    .roi__field label { font-size:0.75rem; font-weight:600; color:var(--gray-700); }
-    .roi__field input, .roi__field select { font-family:var(--font); font-size:0.92rem; padding:10px 14px; border:1.5px solid var(--gray-200); border-radius:10px; outline:none; background:var(--gray-50); width:160px; }
-    .roi__field input:focus, .roi__field select:focus { border-color:var(--accent); }
-    .roi__btn { background:var(--accent); color:var(--white); border:none; font-family:var(--font); font-size:0.88rem; font-weight:600; padding:11px 24px; border-radius:10px; cursor:pointer; transition:background 0.2s; }
-    .roi__btn:hover { background:#005bb5; }
-    .roi__result { display:none; margin-top:24px; text-align:center; padding:24px; background:linear-gradient(135deg, #e8f2fc 0%, #dcfce7 100%); border-radius:14px; }
-    .roi__result.is-visible { display:block; }
-    .roi__result-amount { font-size:2.2rem; font-weight:800; color:var(--accent); letter-spacing:-0.03em; }
-    .roi__result-label { font-size:0.82rem; color:var(--gray-700); margin-top:4px; }
-    .roi__result-detail { font-size:0.78rem; color:var(--gray-500); margin-top:8px; line-height:1.7; }
-    .roi__result-bar { margin-top:16px; background:var(--gray-200); border-radius:8px; height:12px; overflow:hidden; }
-    .roi__result-bar-fill { height:100%; background:linear-gradient(90deg, var(--accent), var(--green)); border-radius:8px; transition:width 0.8s var(--ease); }
+    /* ── Loss Comparison ── */
+    .loss-compare { background:var(--white); border-radius:20px; padding:36px 40px; margin-top:-20px; position:relative; z-index:2; box-shadow:0 4px 24px rgba(0,0,0,0.06); }
+    .loss-compare__title { font-size:1.1rem; font-weight:800; text-align:center; margin-bottom:6px; letter-spacing:-0.02em; }
+    .loss-compare__subtitle { font-size:0.8rem; color:var(--gray-500); text-align:center; margin-bottom:28px; }
+    .loss-compare__grid { display:grid; grid-template-columns:1fr auto 1fr; gap:0; align-items:stretch; }
+    .loss-compare__col { padding:24px; border-radius:14px; }
+    .loss-compare__col--without { background:#fef2f2; border:1.5px solid #fecaca; }
+    .loss-compare__col--with { background:#f0fdf4; border:1.5px solid #bbf7d0; }
+    .loss-compare__col-label { font-size:0.72rem; font-weight:700; text-transform:uppercase; letter-spacing:0.08em; margin-bottom:12px; }
+    .loss-compare__col--without .loss-compare__col-label { color:#dc2626; }
+    .loss-compare__col--with .loss-compare__col-label { color:#16a34a; }
+    .loss-compare__item { display:flex; align-items:flex-start; gap:8px; font-size:0.82rem; line-height:1.6; margin-bottom:10px; color:var(--gray-700); }
+    .loss-compare__item svg { width:16px; height:16px; flex-shrink:0; margin-top:3px; }
+    .loss-compare__col--without .loss-compare__item svg { color:#dc2626; }
+    .loss-compare__col--with .loss-compare__item svg { color:#16a34a; }
+    .loss-compare__col-total { margin-top:16px; padding-top:12px; border-top:1px solid rgba(0,0,0,0.08); font-size:1.3rem; font-weight:800; text-align:center; }
+    .loss-compare__col--without .loss-compare__col-total { color:#dc2626; }
+    .loss-compare__col--with .loss-compare__col-total { color:#16a34a; }
+    .loss-compare__arrow { display:flex; align-items:center; justify-content:center; padding:0 12px; color:var(--gray-300); }
+    .loss-compare__arrow svg { width:32px; height:32px; }
+    .loss-compare__bottom { text-align:center; margin-top:20px; padding:16px; background:linear-gradient(135deg, #e8f2fc 0%, #dcfce7 100%); border-radius:12px; }
+    .loss-compare__bottom-amount { font-size:1.6rem; font-weight:800; color:var(--accent); }
+    .loss-compare__bottom-label { font-size:0.78rem; color:var(--gray-700); margin-top:2px; }
 
     /* ── 3-Step Guide ── */
     .steps { padding:56px 0 40px; }
@@ -231,9 +236,9 @@
       .footer__col-links { gap:2px 24px; }
       .footer__col-links a { font-size:0.78rem; }
       .footer__bottom { flex-direction:column; gap:10px; align-items:flex-start; padding:16px 0 20px; }
-      .roi { margin:0 20px; padding:28px 20px; margin-top:-20px; }
-      .roi__form { flex-direction:column; align-items:stretch; }
-      .roi__field input, .roi__field select { width:100%; }
+      .loss-compare { margin:0 20px; padding:28px 16px; margin-top:-20px; }
+      .loss-compare__grid { grid-template-columns:1fr; gap:12px; }
+      .loss-compare__arrow { transform:rotate(90deg); padding:4px 0; }
       .steps__grid { grid-template-columns:1fr; gap:12px; }
     }
     @media (max-width:420px) {
@@ -243,7 +248,7 @@
       .tools-grid { grid-template-columns:1fr; max-width:380px; margin:0 auto; }
       .features__grid { grid-template-columns:1fr 1fr; gap:20px; }
       .cta__card { padding:32px 20px; }
-      .roi { margin:0 16px; }
+      .loss-compare { margin:0 16px; }
     }
 
     /* ── Scroll reveal ── */
@@ -354,7 +359,7 @@
         <div class="mobile-menu__title">ページ内</div>
         <a href="#popular" class="mobile-menu__link">人気ツール</a>
         <a href="#all" class="mobile-menu__link">全ツール</a>
-        <a href="#roi-simulator" class="mobile-menu__link">削減額シミュレーター</a>
+        <a href="#loss-comparison" class="mobile-menu__link">損失比較</a>
         <a href="#faq" class="mobile-menu__link">よくある質問</a>
       </div>
       <div class="mobile-menu__section">
@@ -383,37 +388,37 @@
     </div>
   </section>
 
-  <!-- ROI Simulator — 信条① 成果の金額換算 -->
-  <div class="container" id="roi-simulator">
-    <div class="roi reveal">
-      <div class="roi__title">あなたの「時間コスト」を可視化する</div>
-      <div class="roi__subtitle">ToolBoxを使うと、毎月いくら分の時間を取り戻せるか計算してみましょう</div>
-      <div class="roi__form">
-        <div class="roi__field">
-          <label for="roi-hourly">あなたの時給（円）</label>
-          <input type="number" id="roi-hourly" value="3000" min="500" step="100">
+  <!-- Loss Comparison — 使わなかった場合の損失を可視化 -->
+  <div class="container" id="loss-comparison">
+    <div class="loss-compare reveal">
+      <div class="loss-compare__title">ToolBoxを使わないと、こんな損失が発生します</div>
+      <div class="loss-compare__subtitle">個人事業主の月間業務で実際に起こりうるコスト比較</div>
+      <div class="loss-compare__grid">
+        <div class="loss-compare__col loss-compare__col--without">
+          <div class="loss-compare__col-label">ToolBoxなしの場合</div>
+          <div class="loss-compare__item"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M18 6 6 18"/><path d="m6 6 12 12"/></svg><span>請求書作成に毎回15分 → 月20件で<strong>5時間</strong>のロス</span></div>
+          <div class="loss-compare__item"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M18 6 6 18"/><path d="m6 6 12 12"/></svg><span>画像圧縮に有料ソフト → <strong>月額1,500円</strong>の固定費</span></div>
+          <div class="loss-compare__item"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M18 6 6 18"/><path d="m6 6 12 12"/></svg><span>経費記録の後回し → 確定申告直前に<strong>丸2日</strong>消費</span></div>
+          <div class="loss-compare__item"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M18 6 6 18"/><path d="m6 6 12 12"/></svg><span>作業時間を未記録 → 請求漏れで<strong>月1〜2万円</strong>の機会損失</span></div>
+          <div class="loss-compare__item"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M18 6 6 18"/><path d="m6 6 12 12"/></svg><span>インボイス制度の記載不備 → <strong>差し戻し・信用低下</strong></span></div>
+          <div class="loss-compare__col-total">年間 -¥180,000 以上の損失リスク</div>
         </div>
-        <div class="roi__field">
-          <label for="roi-tasks">月間のツール利用回数</label>
-          <input type="number" id="roi-tasks" value="30" min="1" step="1">
+        <div class="loss-compare__arrow">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="m9 18 6-6-6-6"/></svg>
         </div>
-        <div class="roi__field">
-          <label for="roi-saved">1回あたりの短縮時間</label>
-          <select id="roi-saved">
-            <option value="5" selected>5分</option>
-            <option value="10">10分</option>
-            <option value="15">15分</option>
-            <option value="20">20分</option>
-            <option value="30">30分</option>
-          </select>
+        <div class="loss-compare__col loss-compare__col--with">
+          <div class="loss-compare__col-label">ToolBoxを使った場合</div>
+          <div class="loss-compare__item"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="m5 12 5 5L20 7"/></svg><span>請求書をフォーム入力で<strong>3分</strong>で作成（法令準拠）</span></div>
+          <div class="loss-compare__item"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="m5 12 5 5L20 7"/></svg><span>画像圧縮が<strong>無料・無制限</strong>。有料ソフト不要</span></div>
+          <div class="loss-compare__item"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="m5 12 5 5L20 7"/></svg><span>経費メモで日々記録 → 確定申告の準備が<strong>1/10</strong>に</span></div>
+          <div class="loss-compare__item"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="m5 12 5 5L20 7"/></svg><span>作業ログで時間を可視化 → <strong>請求漏れゼロ</strong></span></div>
+          <div class="loss-compare__item"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="m5 12 5 5L20 7"/></svg><span>インボイス制度・所得税法に<strong>準拠した書類</strong>を自動生成</span></div>
+          <div class="loss-compare__col-total">年間 ¥0 で業務効率UP</div>
         </div>
-        <button class="roi__btn" id="roi-calc-btn">計算する</button>
       </div>
-      <div class="roi__result" id="roi-result">
-        <div class="roi__result-amount" id="roi-amount">¥0</div>
-        <div class="roi__result-label">月間の削減コスト（時給換算）</div>
-        <div class="roi__result-detail" id="roi-detail"></div>
-        <div class="roi__result-bar"><div class="roi__result-bar-fill" id="roi-bar" style="width:0%"></div></div>
+      <div class="loss-compare__bottom">
+        <div class="loss-compare__bottom-amount">年間18万円以上の損失を回避</div>
+        <div class="loss-compare__bottom-label">すべて無料・登録不要・ブラウザ完結</div>
       </div>
     </div>
   </div>
@@ -887,39 +892,6 @@
           const title = card.querySelector('.tool-card__title').textContent.toLowerCase();
           card.style.display = (name.includes(q) || title.includes(q) || need.includes(q)) ? '' : 'none';
         });
-      });
-
-      // ── ROI Simulator — 信条① 成果の金額換算 ──
-      const roiBtn = document.getElementById('roi-calc-btn');
-      const roiResult = document.getElementById('roi-result');
-      roiBtn.addEventListener('click', () => {
-        const hourly = parseInt(document.getElementById('roi-hourly').value) || 3000;
-        const tasks = parseInt(document.getElementById('roi-tasks').value) || 30;
-        const saved = parseInt(document.getElementById('roi-saved').value) || 5;
-        const monthlySavedMin = tasks * saved;
-        const monthlySavedYen = Math.round(hourly * (monthlySavedMin / 60));
-        const yearlySavedYen = monthlySavedYen * 12;
-        const roiPercent = Math.min(Math.round((yearlySavedYen / 1) * 100), 100); // normalize to 100%
-
-        document.getElementById('roi-amount').textContent = '¥' + monthlySavedYen.toLocaleString();
-        document.getElementById('roi-detail').innerHTML =
-          '月間 ' + monthlySavedMin + '分（' + (monthlySavedMin / 60).toFixed(1) + '時間）の短縮<br>' +
-          '年間換算: <strong>¥' + yearlySavedYen.toLocaleString() + '</strong> 相当の時間価値';
-        document.getElementById('roi-bar').style.width = Math.min(Math.round(monthlySavedYen / 100), 100) + '%';
-        roiResult.classList.add('is-visible');
-
-        // GA4 event: ROI simulator used
-        if (typeof gtag === 'function') {
-          gtag('event', 'roi_simulation', {
-            event_category: 'engagement',
-            event_label: 'roi_calculator',
-            hourly_rate: hourly,
-            monthly_tasks: tasks,
-            saved_minutes: saved,
-            monthly_saving_yen: monthlySavedYen,
-            yearly_saving_yen: yearlySavedYen
-          });
-        }
       });
 
       // ── Mobile Quick Finder ──
