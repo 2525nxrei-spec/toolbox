@@ -59,7 +59,7 @@
 
     /* ── Hero ── */
     .hero { background:var(--white); border-bottom:1px solid var(--gray-200); }
-    .hero__inner { text-align:center; padding:72px 24px 56px; max-width:680px; margin:0 auto; }
+    .hero__inner { text-align:center; padding:48px 24px 36px; max-width:680px; margin:0 auto; }
     .hero__label { display:inline-block; font-size:0.7rem; font-weight:700; letter-spacing:0.06em; color:var(--green); background:var(--green-light); padding:5px 14px; border-radius:980px; margin-bottom:24px; }
     .hero__title { font-size:clamp(1.8rem, 4.5vw, 3rem); font-weight:800; letter-spacing:-0.04em; line-height:1.2; margin-bottom:16px; }
     .hero__title em { font-style:normal; color:var(--accent); }
@@ -388,73 +388,10 @@
     </div>
   </section>
 
-  <!-- Loss Comparison — 使わなかった場合の損失を可視化 -->
-  <div class="container" id="loss-comparison">
-    <div class="loss-compare reveal">
-      <div class="loss-compare__title">ToolBoxを使わないと、こんな損失が発生します</div>
-      <div class="loss-compare__subtitle">個人事業主の月間業務で実際に起こりうるコスト比較</div>
-      <div class="loss-compare__grid">
-        <div class="loss-compare__col loss-compare__col--without">
-          <div class="loss-compare__col-label">ToolBoxなしの場合</div>
-          <div class="loss-compare__item"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M18 6 6 18"/><path d="m6 6 12 12"/></svg><span>請求書作成に毎回15分 → 月20件で<strong>5時間</strong>のロス</span></div>
-          <div class="loss-compare__item"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M18 6 6 18"/><path d="m6 6 12 12"/></svg><span>画像圧縮に有料ソフト → <strong>月額1,500円</strong>の固定費</span></div>
-          <div class="loss-compare__item"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M18 6 6 18"/><path d="m6 6 12 12"/></svg><span>経費記録の後回し → 確定申告直前に<strong>丸2日</strong>消費</span></div>
-          <div class="loss-compare__item"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M18 6 6 18"/><path d="m6 6 12 12"/></svg><span>作業時間を未記録 → 請求漏れで<strong>月1〜2万円</strong>の機会損失</span></div>
-          <div class="loss-compare__item"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M18 6 6 18"/><path d="m6 6 12 12"/></svg><span>インボイス制度の記載不備 → <strong>差し戻し・信用低下</strong></span></div>
-          <div class="loss-compare__col-total">年間 -¥180,000 以上の損失リスク</div>
-        </div>
-        <div class="loss-compare__arrow">
-          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="m9 18 6-6-6-6"/></svg>
-        </div>
-        <div class="loss-compare__col loss-compare__col--with">
-          <div class="loss-compare__col-label">ToolBoxを使った場合</div>
-          <div class="loss-compare__item"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="m5 12 5 5L20 7"/></svg><span>請求書をフォーム入力で<strong>3分</strong>で作成（法令準拠）</span></div>
-          <div class="loss-compare__item"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="m5 12 5 5L20 7"/></svg><span>画像圧縮が<strong>無料・無制限</strong>。有料ソフト不要</span></div>
-          <div class="loss-compare__item"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="m5 12 5 5L20 7"/></svg><span>経費メモで日々記録 → 確定申告の準備が<strong>1/10</strong>に</span></div>
-          <div class="loss-compare__item"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="m5 12 5 5L20 7"/></svg><span>作業ログで時間を可視化 → <strong>請求漏れゼロ</strong></span></div>
-          <div class="loss-compare__item"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="m5 12 5 5L20 7"/></svg><span>インボイス制度・所得税法に<strong>準拠した書類</strong>を自動生成</span></div>
-          <div class="loss-compare__col-total">年間 ¥0 で業務効率UP</div>
-        </div>
-      </div>
-      <div class="loss-compare__bottom">
-        <div class="loss-compare__bottom-amount">年間18万円以上の損失を回避</div>
-        <div class="loss-compare__bottom-label">すべて無料・登録不要・ブラウザ完結</div>
-      </div>
-    </div>
-  </div>
-
-  <!-- 3-Step Guide — 信条② リスクの最小化 -->
-  <div class="container">
-    <div class="steps">
-      <div class="section__header reveal" style="justify-content:center">
-        <h2 class="section__title">3ステップで業務を効率化</h2>
-      </div>
-      <div class="steps__grid">
-        <div class="step-card reveal">
-          <div class="step-card__num">1</div>
-          <div class="step-card__title">ツールを選ぶ</div>
-          <div class="step-card__desc">下の一覧から、今必要なツールをタップ。アカウント登録は不要です。</div>
-          <span class="step-card__arrow"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="m9 18 6-6-6-6"/></svg></span>
-        </div>
-        <div class="step-card reveal reveal-d1">
-          <div class="step-card__num">2</div>
-          <div class="step-card__title">ブラウザで処理</div>
-          <div class="step-card__desc">ファイルを選択 or テキストを入力するだけ。データは端末内で処理され、外部に送信されません。</div>
-          <span class="step-card__arrow"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="m9 18 6-6-6-6"/></svg></span>
-        </div>
-        <div class="step-card reveal reveal-d2">
-          <div class="step-card__num">3</div>
-          <div class="step-card__title">即ダウンロード</div>
-          <div class="step-card__desc">処理結果をワンクリックで保存。次のクライアントワークにすぐ活用できます。</div>
-        </div>
-      </div>
-    </div>
-  </div>
-
-  <!-- Trust Bar — 信条② リスク最小化 -->
-  <div class="trust">
+  <!-- Trust Strip — Hero直下の安心訴求 -->
+  <div class="trust" style="padding:16px 0">
     <div class="container">
-      <div class="trust__inner reveal">
+      <div class="trust__inner">
         <div class="trust__item">
           <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10Z"/><path d="m9 12 2 2 4-4"/></svg>
           データ送信なし
@@ -465,98 +402,18 @@
         </div>
         <div class="trust__item">
           <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M13 2 3 14h9l-1 8 10-12h-9l1-8Z"/></svg>
-          即時利用可能
+          即時利用
         </div>
         <div class="trust__item">
           <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="5" y="2" width="14" height="20" rx="2"/><path d="M12 18h.01"/></svg>
-          スマホ完全対応
+          スマホ対応
         </div>
       </div>
     </div>
   </div>
 
-  <!-- Popular Tools — 信条①③ 金額換算 + ターゲット訴求コピー -->
-  <section id="popular" class="section">
-    <div class="container">
-      <div class="section__header reveal">
-        <h2 class="section__title">個人事業主に選ばれるツール</h2>
-        <span class="section__badge">TOP 3</span>
-      </div>
-      <div class="tools-grid" id="popular-tools">
-
-        <a href="tools/text-counter/" class="tool-card reveal">
-          <div class="tool-card__top">
-            <div class="tool-card__icon tool-card__icon--blue"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8Z"/><path d="M14 2v6h6"/><path d="M16 13H8"/><path d="M16 17H8"/><path d="M10 9H8"/></svg></div>
-            <div>
-              <div class="tool-card__title">文字数カウント</div>
-              <div class="tool-card__tags"><span class="tool-card__tag">テキスト</span><span class="tool-card__tag tool-card__tag--pop">人気</span></div>
-            </div>
-          </div>
-          <div class="tool-card__desc">SEO記事・提案書の文字数を即座に確認。納品前のチェックにかかる時間を1回3分短縮。</div>
-          <span class="tool-card__roi">月12回利用で約1,800円/月の時短</span>
-          <span class="tool-card__link">今すぐ使う →</span>
-        </a>
-
-        <a href="tools/invoice-generator/" class="tool-card reveal reveal-d1">
-          <div class="tool-card__top">
-            <div class="tool-card__icon tool-card__icon--orange"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M4 2v20l2-1 2 1 2-1 2 1 2-1 2 1 2-1 2 1V2l-2 1-2-1-2 1-2-1-2 1-2-1-2 1Z"/><path d="M8 10h8"/><path d="M8 14h4"/></svg></div>
-            <div>
-              <div class="tool-card__title">請求書作成</div>
-              <div class="tool-card__tags"><span class="tool-card__tag">ビジネス</span><span class="tool-card__tag tool-card__tag--pop">人気</span></div>
-            </div>
-          </div>
-          <div class="tool-card__desc">クライアントへの請求書・見積書をフォーム入力で即作成。有料ソフト不要で印刷・PDF保存に対応。</div>
-          <span class="tool-card__roi">月20件作成で約4,000円/月の時短</span>
-          <span class="tool-card__link">今すぐ使う →</span>
-        </a>
-
-        <a href="tools/image-compressor/" class="tool-card reveal reveal-d2">
-          <div class="tool-card__top">
-            <div class="tool-card__icon tool-card__icon--green"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="9" cy="9" r="2"/><path d="m21 15-3.1-3.1a2 2 0 0 0-2.8 0L6 21"/></svg></div>
-            <div>
-              <div class="tool-card__title">画像圧縮</div>
-              <div class="tool-card__tags"><span class="tool-card__tag">画像</span><span class="tool-card__tag tool-card__tag--pop">人気</span></div>
-            </div>
-          </div>
-          <div class="tool-card__desc">ブログ・LP用の画像を最大80%軽量化。表示速度改善でクライアントサイトのSEO評価を底上げ。</div>
-          <span class="tool-card__roi">月30枚処理で約2,500円/月の時短</span>
-          <span class="tool-card__link">今すぐ使う →</span>
-        </a>
-
-      </div>
-    </div>
-  </section>
-
-  <!-- Features — 信条② リスク最小化（安心訴求） -->
-  <div class="container">
-    <div class="features reveal">
-      <div class="features__grid">
-        <div>
-          <div class="features__item-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10Z"/><path d="m9 12 2 2 4-4"/></svg></div>
-          <div class="features__item-title">クライアント情報も安全</div>
-          <div class="features__item-desc">請求書の顧客情報もブラウザ内完結。外部サーバーへの送信は一切ありません。</div>
-        </div>
-        <div>
-          <div class="features__item-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M13 2 3 14h9l-1 8 10-12h-9l1-8Z"/></svg></div>
-          <div class="features__item-title">待ち時間ゼロ</div>
-          <div class="features__item-desc">クラウド処理ではないため、回線速度に依存しない高速処理を実現。</div>
-        </div>
-        <div>
-          <div class="features__item-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><path d="M8 12h8"/><path d="m12 8 0 8"/></svg></div>
-          <div class="features__item-title">有料ソフト代を削減</div>
-          <div class="features__item-desc">月額課金のツールを使わなくても、同等の機能をブラウザで。経費削減に直結。</div>
-        </div>
-        <div>
-          <div class="features__item-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><rect x="5" y="2" width="14" height="20" rx="2"/><path d="M12 18h.01"/></svg></div>
-          <div class="features__item-title">外出先でも即対応</div>
-          <div class="features__item-desc">スマホ対応なので、移動中や商談前の急な修正にも対応可能。</div>
-        </div>
-      </div>
-    </div>
-  </div>
-
-  <!-- All Tools — 信条①③ 金額訴求 + ターゲットコピー -->
-  <section id="all" class="section">
+  <!-- All Tools — Hero直下に配置（最短でツールに到達） -->
+  <section id="all" class="section" style="padding-top:24px">
     <div class="container">
       <div class="section__header reveal">
         <h2 class="section__title">業務効率化ツール一覧</h2>
@@ -716,6 +573,97 @@
       </div>
     </div>
   </section>
+
+  <!-- Loss Comparison — ツール下に移動 -->
+  <div class="container" id="loss-comparison">
+    <div class="loss-compare reveal">
+      <div class="loss-compare__title">ToolBoxを使わないと、こんな損失が発生します</div>
+      <div class="loss-compare__subtitle">個人事業主の月間業務で実際に起こりうるコスト比較</div>
+      <div class="loss-compare__grid">
+        <div class="loss-compare__col loss-compare__col--without">
+          <div class="loss-compare__col-label">ToolBoxなしの場合</div>
+          <div class="loss-compare__item"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M18 6 6 18"/><path d="m6 6 12 12"/></svg><span>請求書作成に毎回15分 → 月20件で<strong>5時間</strong>のロス</span></div>
+          <div class="loss-compare__item"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M18 6 6 18"/><path d="m6 6 12 12"/></svg><span>画像圧縮に有料ソフト → <strong>月額1,500円</strong>の固定費</span></div>
+          <div class="loss-compare__item"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M18 6 6 18"/><path d="m6 6 12 12"/></svg><span>経費記録の後回し → 確定申告直前に<strong>丸2日</strong>消費</span></div>
+          <div class="loss-compare__item"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M18 6 6 18"/><path d="m6 6 12 12"/></svg><span>作業時間を未記録 → 請求漏れで<strong>月1〜2万円</strong>の機会損失</span></div>
+          <div class="loss-compare__item"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M18 6 6 18"/><path d="m6 6 12 12"/></svg><span>インボイス制度の記載不備 → <strong>差し戻し・信用低下</strong></span></div>
+          <div class="loss-compare__col-total">年間 -¥180,000 以上の損失リスク</div>
+        </div>
+        <div class="loss-compare__arrow">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="m9 18 6-6-6-6"/></svg>
+        </div>
+        <div class="loss-compare__col loss-compare__col--with">
+          <div class="loss-compare__col-label">ToolBoxを使った場合</div>
+          <div class="loss-compare__item"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="m5 12 5 5L20 7"/></svg><span>請求書をフォーム入力で<strong>3分</strong>で作成（法令準拠）</span></div>
+          <div class="loss-compare__item"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="m5 12 5 5L20 7"/></svg><span>画像圧縮が<strong>無料・無制限</strong>。有料ソフト不要</span></div>
+          <div class="loss-compare__item"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="m5 12 5 5L20 7"/></svg><span>経費メモで日々記録 → 確定申告の準備が<strong>1/10</strong>に</span></div>
+          <div class="loss-compare__item"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="m5 12 5 5L20 7"/></svg><span>作業ログで時間を可視化 → <strong>請求漏れゼロ</strong></span></div>
+          <div class="loss-compare__item"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="m5 12 5 5L20 7"/></svg><span>インボイス制度・所得税法に<strong>準拠した書類</strong>を自動生成</span></div>
+          <div class="loss-compare__col-total">年間 ¥0 で業務効率UP</div>
+        </div>
+      </div>
+      <div class="loss-compare__bottom">
+        <div class="loss-compare__bottom-amount">年間18万円以上の損失を回避</div>
+        <div class="loss-compare__bottom-label">すべて無料・登録不要・ブラウザ完結</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- 3-Step Guide -->
+  <div class="container">
+    <div class="steps">
+      <div class="section__header reveal" style="justify-content:center">
+        <h2 class="section__title">3ステップで業務を効率化</h2>
+      </div>
+      <div class="steps__grid">
+        <div class="step-card reveal">
+          <div class="step-card__num">1</div>
+          <div class="step-card__title">ツールを選ぶ</div>
+          <div class="step-card__desc">上の一覧から、今必要なツールをタップ。アカウント登録は不要です。</div>
+          <span class="step-card__arrow"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="m9 18 6-6-6-6"/></svg></span>
+        </div>
+        <div class="step-card reveal reveal-d1">
+          <div class="step-card__num">2</div>
+          <div class="step-card__title">ブラウザで処理</div>
+          <div class="step-card__desc">ファイルを選択 or テキストを入力するだけ。データは端末内で処理され、外部に送信されません。</div>
+          <span class="step-card__arrow"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="m9 18 6-6-6-6"/></svg></span>
+        </div>
+        <div class="step-card reveal reveal-d2">
+          <div class="step-card__num">3</div>
+          <div class="step-card__title">即ダウンロード</div>
+          <div class="step-card__desc">処理結果をワンクリックで保存。次のクライアントワークにすぐ活用できます。</div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Features -->
+  <div class="container">
+    <div class="features reveal">
+      <div class="features__grid">
+        <div>
+          <div class="features__item-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10Z"/><path d="m9 12 2 2 4-4"/></svg></div>
+          <div class="features__item-title">クライアント情報も安全</div>
+          <div class="features__item-desc">請求書の顧客情報もブラウザ内完結。外部サーバーへの送信は一切ありません。</div>
+        </div>
+        <div>
+          <div class="features__item-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M13 2 3 14h9l-1 8 10-12h-9l1-8Z"/></svg></div>
+          <div class="features__item-title">待ち時間ゼロ</div>
+          <div class="features__item-desc">クラウド処理ではないため、回線速度に依存しない高速処理を実現。</div>
+        </div>
+        <div>
+          <div class="features__item-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><path d="M8 12h8"/><path d="m12 8 0 8"/></svg></div>
+          <div class="features__item-title">有料ソフト代を削減</div>
+          <div class="features__item-desc">月額課金のツールを使わなくても、同等の機能をブラウザで。経費削減に直結。</div>
+        </div>
+        <div>
+          <div class="features__item-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><rect x="5" y="2" width="14" height="20" rx="2"/><path d="M12 18h.01"/></svg></div>
+          <div class="features__item-title">外出先でも即対応</div>
+          <div class="features__item-desc">スマホ対応なので、移動中や商談前の急な修正にも対応可能。</div>
+        </div>
+      </div>
+    </div>
+  </div>
 
   <!-- Ad placement -->
   <div class="container" style="margin:0 auto;max-width:1080px;padding:0 24px">
