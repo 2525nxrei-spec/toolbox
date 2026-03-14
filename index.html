@@ -14,7 +14,7 @@
   <meta name="description" content="ToolBox — 個人事業主・フリーランス専用の業務ツール集。請求書・納品書・領収書作成、源泉徴収税計算、経費管理、売上管理、営業メール生成、作業ログ。法令準拠・ブラウザ完結・データ送信なし。">
   <meta name="keywords" content="個人事業主 ツール, フリーランス 請求書, 源泉徴収 計算, 納品書 作成, 領収書 作成, 経費管理, 売上管理, 営業メール, 確定申告 準備, インボイス制度">
   <meta property="og:title" content="ToolBox｜個人事業主・フリーランスの事務作業をゼロに近づける無料ツール集">
-  <meta property="og:description" content="請求書・納品書・領収書作成、源泉徴収計算、経費管理、売上管理。フリーランスの「お金まわり」を完結する8つの専用ツール。">
+  <meta property="og:description" content="請求書・納品書・領収書作成、源泉徴収計算、経費管理、売上管理など12の専用ツール。個人事業主・フリーランスの「お金まわり」をブラウザ完結。法令準拠・登録不要。">
   <meta property="og:type" content="website">
   <meta property="og:url" content="https://muryo-tool.com/">
   <meta property="og:image" content="https://muryo-tool.com/ogp.png">
@@ -135,6 +135,8 @@
     .tool-card__tags { display:flex; gap:6px; flex-wrap:wrap; }
     .tool-card__tag { font-size:0.62rem; font-weight:600; background:var(--gray-100); color:var(--gray-500); padding:2px 8px; border-radius:980px; }
     .tool-card__tag--pop { background:#dbeafe; color:#2563eb; }
+    .tool-card__legal { display:inline-flex; align-items:center; gap:4px; font-size:0.62rem; font-weight:600; color:#16a34a; background:#dcfce7; padding:3px 10px; border-radius:980px; margin-top:4px; }
+    .tool-card__legal svg { width:12px; height:12px; flex-shrink:0; }
 
     /* ── Features ── */
     .features { background:var(--white); border-radius:20px; padding:44px 40px; margin-bottom:8px; }
@@ -375,7 +377,7 @@
       <p class="hero__sub reveal reveal-d1">請求書・見積書・納品書・領収書の作成、源泉徴収・消費税・手取り計算、経費・売上管理。<br><strong>フリーランスの「お金まわり」を完結する12の専用ツール</strong>を、<br>ブラウザだけで。データ送信なし・登録不要。</p>
       <div class="hero__search reveal reveal-d2">
         <span class="hero__search-icon"><svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.3-4.3"/></svg></span>
-        <input type="text" id="tool-search" placeholder="何をしたいですか？（例：画像を軽くしたい）">
+        <input type="text" id="tool-search" placeholder="お悩みを入力（例：売上を上げたい、確定申告が不安）">
       </div>
     </div>
   </section>
@@ -419,6 +421,7 @@
             <div class="tool-card__title">請求書作成</div>
           </div>
           <div class="tool-card__desc">インボイス制度準拠の請求書をフォーム入力で作成。有料会計ソフト不要。</div>
+          <span class="tool-card__legal"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10Z"/><path d="m9 12 2 2 4-4"/></svg>消費税法第57条の4 準拠</span>
           <span class="tool-card__roi">1回12分の短縮</span>
           <span class="tool-card__link">使う →</span>
         </a>
@@ -429,6 +432,7 @@
             <div class="tool-card__title">納品書作成</div>
           </div>
           <div class="tool-card__desc">クライアントへの納品書をフォーム入力で即作成。検収トラブル・支払い遅延を防止。</div>
+          <span class="tool-card__legal"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10Z"/><path d="m9 12 2 2 4-4"/></svg>民法準拠</span>
           <span class="tool-card__roi">1回10分の短縮</span>
           <span class="tool-card__link">使う →</span>
         </a>
@@ -439,6 +443,7 @@
             <div class="tool-card__title">領収書作成</div>
           </div>
           <div class="tool-card__desc">印紙税の自動判定付き。民法・印紙税法に準拠した領収書をワンクリック発行。</div>
+          <span class="tool-card__legal"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10Z"/><path d="m9 12 2 2 4-4"/></svg>民法第486条・印紙税法 準拠</span>
           <span class="tool-card__roi">1回8分の短縮</span>
           <span class="tool-card__link">使う →</span>
         </a>
@@ -450,6 +455,7 @@
             <div class="tool-card__title">源泉徴収税計算</div>
           </div>
           <div class="tool-card__desc">報酬額から源泉徴収税・手取り額を即計算。逆算にも対応。所得税法第204条準拠。</div>
+          <span class="tool-card__legal"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10Z"/><path d="m9 12 2 2 4-4"/></svg>所得税法第204条 準拠</span>
           <span class="tool-card__roi">1回5分の短縮</span>
           <span class="tool-card__link">使う →</span>
         </a>
@@ -460,6 +466,7 @@
             <div class="tool-card__title">経費メモ</div>
           </div>
           <div class="tool-card__desc">日々の経費をブラウザで記録。カテゴリ別集計・CSV出力で確定申告準備を効率化。</div>
+          <span class="tool-card__legal"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10Z"/><path d="m9 12 2 2 4-4"/></svg>所得税法第148条 準拠</span>
           <span class="tool-card__roi">月間¥3,000相当の時短</span>
           <span class="tool-card__link">使う →</span>
         </a>
@@ -470,6 +477,7 @@
             <div class="tool-card__title">売上管理</div>
           </div>
           <div class="tool-card__desc">クライアント別の売上・入金ステータスを一元管理。未入金アラートで請求漏れを防止。</div>
+          <span class="tool-card__legal"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10Z"/><path d="m9 12 2 2 4-4"/></svg>所得税法第148条/第232条 準拠</span>
           <span class="tool-card__roi">月間¥5,000相当の効果</span>
           <span class="tool-card__link">使う →</span>
         </a>
@@ -511,6 +519,7 @@
             <div class="tool-card__title">消費税シミュレーター</div>
           </div>
           <div class="tool-card__desc">一般課税・簡易課税・2割特例を比較。最もお得な方式を即判定。2割特例終了前に必見。</div>
+          <span class="tool-card__legal"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10Z"/><path d="m9 12 2 2 4-4"/></svg>消費税法第37条 準拠</span>
           <span class="tool-card__roi">年間数十万円の差が出る</span>
           <span class="tool-card__link">使う →</span>
         </a>
@@ -522,6 +531,7 @@
             <div class="tool-card__title">営業メール生成</div>
           </div>
           <div class="tool-card__desc">新規営業・お礼・フォローアップメールをテンプレートから即生成。成約率を高める文面に。</div>
+          <span class="tool-card__legal"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10Z"/><path d="m9 12 2 2 4-4"/></svg>特定電子メール法 準拠</span>
           <span class="tool-card__roi">1通10分の短縮</span>
           <span class="tool-card__link">使う →</span>
         </a>
@@ -549,7 +559,7 @@
         <div class="loss-compare__col loss-compare__col--without">
           <div class="loss-compare__col-label">ToolBoxなしの場合</div>
           <div class="loss-compare__item"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M18 6 6 18"/><path d="m6 6 12 12"/></svg><span>請求書作成に毎回15分 → 月20件で<strong>5時間</strong>のロス</span></div>
-          <div class="loss-compare__item"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M18 6 6 18"/><path d="m6 6 12 12"/></svg><span>画像圧縮に有料ソフト → <strong>月額1,500円</strong>の固定費</span></div>
+          <div class="loss-compare__item"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M18 6 6 18"/><path d="m6 6 12 12"/></svg><span>源泉徴収を手計算 → <strong>計算ミス</strong>で還付漏れ・過大納税</span></div>
           <div class="loss-compare__item"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M18 6 6 18"/><path d="m6 6 12 12"/></svg><span>経費記録の後回し → 確定申告直前に<strong>丸2日</strong>消費</span></div>
           <div class="loss-compare__item"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M18 6 6 18"/><path d="m6 6 12 12"/></svg><span>作業時間を未記録 → 請求漏れで<strong>月1〜2万円</strong>の機会損失</span></div>
           <div class="loss-compare__item"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M18 6 6 18"/><path d="m6 6 12 12"/></svg><span>インボイス制度の記載不備 → <strong>差し戻し・信用低下</strong></span></div>
@@ -561,7 +571,7 @@
         <div class="loss-compare__col loss-compare__col--with">
           <div class="loss-compare__col-label">ToolBoxを使った場合</div>
           <div class="loss-compare__item"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="m5 12 5 5L20 7"/></svg><span>請求書をフォーム入力で<strong>3分</strong>で作成（法令準拠）</span></div>
-          <div class="loss-compare__item"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="m5 12 5 5L20 7"/></svg><span>画像圧縮が<strong>無料・無制限</strong>。有料ソフト不要</span></div>
+          <div class="loss-compare__item"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="m5 12 5 5L20 7"/></svg><span>源泉徴収税を<strong>自動計算</strong>。逆算にも対応で計算ミスゼロ</span></div>
           <div class="loss-compare__item"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="m5 12 5 5L20 7"/></svg><span>経費メモで日々記録 → 確定申告の準備が<strong>1/10</strong>に</span></div>
           <div class="loss-compare__item"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="m5 12 5 5L20 7"/></svg><span>作業ログで時間を可視化 → <strong>請求漏れゼロ</strong></span></div>
           <div class="loss-compare__item"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="m5 12 5 5L20 7"/></svg><span>インボイス制度・所得税法に<strong>準拠した書類</strong>を自動生成</span></div>
@@ -650,7 +660,7 @@
         </details>
         <details style="background:var(--white);border:1px solid var(--gray-200);border-radius:14px;margin-bottom:10px;overflow:hidden">
           <summary style="font-size:0.92rem;font-weight:600;padding:18px 24px;cursor:pointer;list-style:none">クライアントの機密データは安全ですか？</summary>
-          <p style="font-size:0.88rem;color:var(--gray-700);line-height:1.8;padding:0 24px 18px">はい。請求書の顧客情報や画像データを含め、すべての処理はブラウザ内のJavaScriptで完結します。データが外部サーバーに送信されることは一切ありません。安心してクライアントワークにご利用ください。</p>
+          <p style="font-size:0.88rem;color:var(--gray-700);line-height:1.8;padding:0 24px 18px">はい。請求書の顧客情報・経費データ・売上データを含め、すべての処理はブラウザ内のJavaScriptで完結します。データが外部サーバーに送信されることは一切ありません。安心してクライアントワークにご利用ください。</p>
         </details>
         <details style="background:var(--white);border:1px solid var(--gray-200);border-radius:14px;margin-bottom:10px;overflow:hidden">
           <summary style="font-size:0.92rem;font-weight:600;padding:18px 24px;cursor:pointer;list-style:none">個人事業主・フリーランスに特化しているのですか？</summary>
@@ -746,7 +756,7 @@
         <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M18 6 6 18"/><path d="m6 6 12 12"/></svg>
       </button>
     </div>
-    <input type="text" class="quick-finder-panel__search" id="quick-finder-search" placeholder="何がしたいですか？（例：画像を軽くしたい）">
+    <input type="text" class="quick-finder-panel__search" id="quick-finder-search" placeholder="お悩みを入力（例：確定申告が不安、単価を上げたい）">
     <div class="quick-finder-panel__tags" id="quick-finder-tags">
       <button class="quick-finder-panel__tag is-active" data-filter="all">すべて</button>
       <button class="quick-finder-panel__tag" data-filter="書類作成">書類作成</button>
@@ -788,34 +798,147 @@
       mobileMenu.addEventListener('click', (e) => { if (e.target === mobileMenu) mobileMenu.classList.remove('is-open'); });
       mobileMenu.querySelectorAll('a').forEach(a => a.addEventListener('click', () => mobileMenu.classList.remove('is-open')));
 
-      // ── Search (Hero + Quick Finder dual search) ──
+      // ── Intelligent Search System ──
+      const toolsData = [
+        { name: '請求書作成', desc: 'インボイス制度準拠の請求書を即作成', saving: '1回12分短縮', href: 'tools/invoice-generator/', icon: '📄', bg: '#ffedd5', category: '書類作成', need: '請求書を作りたい 見積書 インボイス',
+          hooks: '請求 お金もらえない 入金されない クライアントに送る 報酬 支払い 振込 freee高い 会計ソフト不要 インボイス番号 適格請求書 消費税 月末 締め日 未払い' },
+        { name: '納品書作成', desc: '納品書をフォーム入力で即発行', saving: '1回10分短縮', href: 'tools/delivery-note/', icon: '📋', bg: '#dbeafe', category: '書類作成', need: '納品書を作りたい 納品確認',
+          hooks: '納品 仕事が終わった 完了報告 検収 成果物 提出 クライアントに渡す 受領 確認書 トラブル防止' },
+        { name: '領収書作成', desc: '印紙税自動判定付きの領収書発行', saving: '1回8分短縮', href: 'tools/receipt-generator/', icon: '🧾', bg: '#dcfce7', category: '書類作成', need: '領収書を作りたい 領収書を発行したい',
+          hooks: '領収 お金を受け取った 現金 印紙 収入印紙 受取 もらった証明 支払い証明 経費精算' },
+        { name: '工数見積書作成', desc: 'タスク×工数×単価で積み上げ見積もり', saving: '1回15分短縮', href: 'tools/estimate-generator/', icon: '📝', bg: '#e2e8f0', category: '書類作成', need: '見積書を作りたい 工数で見積もり プロジェクト',
+          hooks: '見積 いくらで受ける 案件の値段 提案 コンペ 新規案件 価格 値段 料金 何日かかる 工数 プロジェクト費用 受注 営業 提案書' },
+        { name: '源泉徴収税計算', desc: '報酬額⇔手取り額を即計算・逆算', saving: '1回5分短縮', href: 'tools/withholding-tax/', icon: '🏛️', bg: '#fee2e2', category: 'お金の管理', need: '源泉徴収を計算したい 手取り 税金',
+          hooks: '源泉 天引き 10.21% 引かれた 手取りいくら 報酬から引かれる 税金引かれすぎ 確定申告で戻る 還付 所得税' },
+        { name: '経費メモ', desc: '日々の経費を記録・CSV出力', saving: '月¥3,000短縮', href: 'tools/expense-memo/', icon: '💰', bg: '#ccfbf1', category: 'お金の管理', need: '経費を記録したい 確定申告 帳簿',
+          hooks: '経費 レシート 領収書整理 確定申告 めんどくさい 帳簿つけてない 節税 控除 交通費 通信費 家賃按分 仕事で使った 勘定科目 青色申告' },
+        { name: '売上管理', desc: 'クライアント別売上・入金を一元管理', saving: '月¥5,000効果', href: 'tools/revenue-tracker/', icon: '📊', bg: '#e0e7ff', category: 'お金の管理', need: '売上を管理したい 入金確認 収支',
+          hooks: '売上 収入 入金 振り込まれてない 未払い 請求漏れ お金の流れ いくら稼いだ 月商 年商 クライアント別 取引先 利益 儲け' },
+        { name: '手取りシミュレーター', desc: '所得税・住民税・国保・年金を一括計算', saving: '確定申告前の必須', href: 'tools/take-home-pay/', icon: '💹', bg: '#fce7f3', category: '税金・シミュレーション', need: '手取りを知りたい 税金 年収から計算',
+          hooks: '手取り 税金いくら 所得税 住民税 国保 国民健康保険 年金 いくら残る 生活できる 年収と手取りの差 引かれすぎ 扶養 青色申告の効果 節税効果' },
+        { name: '単価・料金逆算', desc: '目標手取りから適正単価を逆算', saving: '単価設定ミス防止', href: 'tools/rate-calculator/', icon: '🎯', bg: '#ffedd5', category: '税金・シミュレーション', need: '単価を決めたい 時給 適正料金',
+          hooks: '単価 時給 日給 いくらで受ける 安すぎ 値段設定 料金表 値上げ 相場 適正価格 フリーランスなりたて 独立 会社員との比較 稼働率 月収目標' },
+        { name: '消費税シミュレーター', desc: '一般/簡易/2割特例を比較して最適判定', saving: '年間数十万の差', href: 'tools/consumption-tax/', icon: '🧮', bg: '#ccfbf1', category: '税金・シミュレーション', need: '消費税 簡易課税 一般課税 インボイス',
+          hooks: '消費税 インボイス 簡易課税 2割特例 どっちが得 課税事業者 免税 1000万 届出 納税額 消費税高い 払いすぎ みなし仕入率' },
+        { name: '営業メール生成', desc: '営業・お礼メールをテンプレで即作成', saving: '1通10分短縮', href: 'tools/sales-email/', icon: '📧', bg: '#ede9fe', category: '営業・業務', need: '営業メールを書きたい お礼メール',
+          hooks: '営業 メール 仕事がない 案件ない 集客 新規開拓 お礼 フォローアップ 返信 文章が書けない テンプレート 挨拶 アポ 提案 断られた後' },
+        { name: '作業ログ', desc: '作業時間を記録・時給換算で売上可視化', saving: '月¥5,000効果', href: 'tools/work-log/', icon: '⏱️', bg: '#fef3c7', category: '営業・業務', need: '作業時間を記録 タイムトラッキング',
+          hooks: '作業時間 何時間働いた 時給換算 効率悪い 働きすぎ 記録 ログ 請求漏れ 時間管理 生産性 ダラダラ プロジェクト管理 締め切り' },
+      ];
+
+      // 悩み→ツールの類義語マッピング（抽象ワード対応）
+      const synonymMap = {
+        '売上': ['売上管理','請求書作成','単価・料金逆算','営業メール生成'],
+        '稼ぎたい': ['単価・料金逆算','売上管理','営業メール生成'],
+        '不安': ['手取りシミュレーター','売上管理','消費税シミュレーター'],
+        'お金': ['手取りシミュレーター','源泉徴収税計算','経費メモ','売上管理'],
+        '節税': ['手取りシミュレーター','経費メモ','消費税シミュレーター'],
+        '確定申告': ['経費メモ','手取りシミュレーター','売上管理','消費税シミュレーター'],
+        '税金': ['手取りシミュレーター','源泉徴収税計算','消費税シミュレーター'],
+        '独立': ['手取りシミュレーター','単価・料金逆算','請求書作成'],
+        'フリーランス': ['単価・料金逆算','手取りシミュレーター','請求書作成','源泉徴収税計算'],
+        '開業': ['手取りシミュレーター','単価・料金逆算','経費メモ'],
+        '仕事ない': ['営業メール生成','単価・料金逆算','工数見積書作成'],
+        '案件': ['営業メール生成','工数見積書作成','単価・料金逆算'],
+        '書類': ['請求書作成','納品書作成','領収書作成','工数見積書作成'],
+        '何からすればいい': ['手取りシミュレーター','単価・料金逆算','請求書作成'],
+        '始め方': ['手取りシミュレーター','単価・料金逆算','経費メモ'],
+        'わからない': ['手取りシミュレーター','消費税シミュレーター','源泉徴収税計算'],
+        '面倒': ['請求書作成','経費メモ','営業メール生成'],
+        'めんどくさい': ['請求書作成','経費メモ','営業メール生成','納品書作成'],
+        '時間がない': ['作業ログ','営業メール生成','請求書作成'],
+        '忙しい': ['作業ログ','請求書作成','経費メモ'],
+        '値上げ': ['単価・料金逆算','工数見積書作成'],
+        '赤字': ['単価・料金逆算','手取りシミュレーター','売上管理'],
+        '未払い': ['売上管理','請求書作成','納品書作成'],
+        '入金': ['売上管理','請求書作成'],
+        'クライアント': ['請求書作成','納品書作成','営業メール生成','工数見積書作成'],
+      };
+
+      // サジェストメッセージ
+      const suggestMap = {
+        '売上': '売上を伸ばしたいなら、まず現状把握から',
+        '不安': 'お金の不安を数字で解消しましょう',
+        'お金': 'お金まわりを整理するツールがあります',
+        '税金': '税金の計算、ツールに任せましょう',
+        '確定申告': '確定申告の準備、今から始められます',
+        '仕事ない': '案件獲得の第一歩は営業メールから',
+        '何からすればいい': 'まずは手取りと適正単価の把握がおすすめです',
+        '面倒': '面倒な事務作業を自動化しましょう',
+        '時間がない': '時間を可視化して、ムダを発見しましょう',
+        '独立': '独立準備に必要なツールを揃えました',
+        '節税': '控除の活用で手取りが変わります',
+      };
+
+      // スコアリング検索
+      function scoreSearch(query) {
+        const q = query.toLowerCase();
+        const tokens = q.split(/[\s　]+/).filter(Boolean);
+        const scored = toolsData.map(tool => {
+          let score = 0;
+          const fields = (tool.name + ' ' + tool.desc + ' ' + tool.need + ' ' + (tool.hooks||'')).toLowerCase();
+          // 完全一致（名前）→ 最高スコア
+          tokens.forEach(tok => {
+            if (tool.name.toLowerCase().includes(tok)) score += 10;
+            if (tool.need.toLowerCase().includes(tok)) score += 5;
+            if (tool.desc.toLowerCase().includes(tok)) score += 3;
+            if ((tool.hooks||'').toLowerCase().includes(tok)) score += 2;
+          });
+          // 類義語マッピングボーナス
+          tokens.forEach(tok => {
+            Object.keys(synonymMap).forEach(key => {
+              if (tok.includes(key) || key.includes(tok)) {
+                if (synonymMap[key].includes(tool.name)) score += 7;
+              }
+            });
+          });
+          return { ...tool, score };
+        });
+        return scored.filter(t => t.score > 0).sort((a,b) => b.score - a.score);
+      }
+
+      // サジェスト判定
+      function getSuggest(query) {
+        const q = query.toLowerCase();
+        for (const [key, msg] of Object.entries(suggestMap)) {
+          if (q.includes(key)) return msg;
+        }
+        return null;
+      }
+
+      // おすすめフォールバック（検索結果0件時）
+      const recommended = ['手取りシミュレーター','請求書作成','単価・料金逆算'];
+
+      // Hero search
       const search = document.getElementById('tool-search');
       const cards = document.querySelectorAll('#all-tools .tool-card');
+      const heroSuggestEl = document.createElement('div');
+      heroSuggestEl.className = 'hero__suggest';
+      heroSuggestEl.style.cssText = 'font-size:0.82rem;color:var(--accent);margin-top:10px;min-height:1.4em;transition:opacity 0.2s;text-align:center;';
+      search.parentElement.after(heroSuggestEl);
+
       search.addEventListener('input', () => {
-        const q = search.value.toLowerCase();
+        const q = search.value.trim();
+        if (!q) { cards.forEach(c => c.style.display = ''); heroSuggestEl.textContent = ''; return; }
+        const results = scoreSearch(q);
+        const matchNames = new Set(results.map(r => r.name));
         cards.forEach(card => {
-          const name = (card.dataset.name || '').toLowerCase();
-          const need = (card.dataset.need || '').toLowerCase();
-          const title = card.querySelector('.tool-card__title').textContent.toLowerCase();
-          card.style.display = (name.includes(q) || title.includes(q) || need.includes(q)) ? '' : 'none';
+          const title = card.querySelector('.tool-card__title').textContent;
+          card.style.display = matchNames.has(title) ? '' : 'none';
         });
+        // サジェスト表示
+        const suggest = getSuggest(q);
+        heroSuggestEl.textContent = suggest ? '💡 ' + suggest : (results.length === 0 ? '💡 まずは「手取りシミュレーター」で現状把握がおすすめです' : '');
+        // 0件フォールバック
+        if (results.length === 0) {
+          cards.forEach(card => {
+            const title = card.querySelector('.tool-card__title').textContent;
+            card.style.display = recommended.includes(title) ? '' : 'none';
+          });
+        }
       });
 
-      // ── Mobile Quick Finder ──
-      const toolsData = [
-        { name: '請求書作成', desc: 'インボイス制度準拠の請求書を即作成', saving: '1回12分短縮', href: 'tools/invoice-generator/', icon: '📄', bg: '#ffedd5', category: '書類作成', need: '請求書を作りたい 見積書 インボイス' },
-        { name: '納品書作成', desc: '納品書をフォーム入力で即発行', saving: '1回10分短縮', href: 'tools/delivery-note/', icon: '📋', bg: '#dbeafe', category: '書類作成', need: '納品書を作りたい 納品確認' },
-        { name: '領収書作成', desc: '印紙税自動判定付きの領収書発行', saving: '1回8分短縮', href: 'tools/receipt-generator/', icon: '🧾', bg: '#dcfce7', category: '書類作成', need: '領収書を作りたい 領収書を発行したい' },
-        { name: '工数見積書作成', desc: 'タスク×工数×単価で積み上げ見積もり', saving: '1回15分短縮', href: 'tools/estimate-generator/', icon: '📝', bg: '#e2e8f0', category: '書類作成', need: '見積書を作りたい 工数で見積もり プロジェクト' },
-        { name: '源泉徴収税計算', desc: '報酬額⇔手取り額を即計算・逆算', saving: '1回5分短縮', href: 'tools/withholding-tax/', icon: '🏛️', bg: '#fee2e2', category: 'お金の管理', need: '源泉徴収を計算したい 手取り 税金' },
-        { name: '経費メモ', desc: '日々の経費を記録・CSV出力', saving: '月¥3,000短縮', href: 'tools/expense-memo/', icon: '💰', bg: '#ccfbf1', category: 'お金の管理', need: '経費を記録したい 確定申告 帳簿' },
-        { name: '売上管理', desc: 'クライアント別売上・入金を一元管理', saving: '月¥5,000効果', href: 'tools/revenue-tracker/', icon: '📊', bg: '#e0e7ff', category: 'お金の管理', need: '売上を管理したい 入金確認 収支' },
-        { name: '手取りシミュレーター', desc: '所得税・住民税・国保・年金を一括計算', saving: '確定申告前の必須', href: 'tools/take-home-pay/', icon: '💹', bg: '#fce7f3', category: '税金・シミュレーション', need: '手取りを知りたい 税金 年収から計算' },
-        { name: '単価・料金逆算', desc: '目標手取りから適正単価を逆算', saving: '単価設定ミス防止', href: 'tools/rate-calculator/', icon: '🎯', bg: '#ffedd5', category: '税金・シミュレーション', need: '単価を決めたい 時給 適正料金' },
-        { name: '消費税シミュレーター', desc: '一般/簡易/2割特例を比較して最適判定', saving: '年間数十万の差', href: 'tools/consumption-tax/', icon: '🧮', bg: '#ccfbf1', category: '税金・シミュレーション', need: '消費税 簡易課税 一般課税 インボイス' },
-        { name: '営業メール生成', desc: '営業・お礼メールをテンプレで即作成', saving: '1通10分短縮', href: 'tools/sales-email/', icon: '📧', bg: '#ede9fe', category: '営業・業務', need: '営業メールを書きたい お礼メール' },
-        { name: '作業ログ', desc: '作業時間を記録・時給換算で売上可視化', saving: '月¥5,000効果', href: 'tools/work-log/', icon: '⏱️', bg: '#fef3c7', category: '営業・業務', need: '作業時間を記録 タイムトラッキング' },
-      ];
+      // ── Mobile Quick Finder (with scoring) ──
 
       const qfFab = document.getElementById('quick-finder-fab');
       const qfOverlay = document.getElementById('quick-finder-overlay');
@@ -828,11 +951,22 @@
       function renderQFList(filter, query) {
         let items = toolsData;
         if (filter && filter !== 'all') items = items.filter(t => t.category === filter);
-        if (query) {
-          const q = query.toLowerCase();
-          items = items.filter(t => t.name.toLowerCase().includes(q) || t.need.toLowerCase().includes(q) || t.desc.toLowerCase().includes(q));
+        if (query && query.trim()) {
+          items = scoreSearch(query.trim());
+          if (filter && filter !== 'all') items = items.filter(t => t.category === filter);
         }
-        qfList.innerHTML = items.map(t =>
+        // サジェスト表示
+        let suggestHtml = '';
+        if (query && query.trim()) {
+          const suggest = getSuggest(query.trim());
+          if (suggest) suggestHtml = '<div style="padding:10px 4px;font-size:0.82rem;color:var(--accent)">💡 ' + suggest + '</div>';
+        }
+        // 0件フォールバック
+        if (items.length === 0) {
+          items = toolsData.filter(t => recommended.includes(t.name));
+          suggestHtml = '<div style="padding:10px 4px;font-size:0.82rem;color:var(--accent)">💡 まずはこちらのツールがおすすめです</div>';
+        }
+        qfList.innerHTML = suggestHtml + items.map(t =>
           '<a href="' + t.href + '" class="quick-finder-panel__item">' +
             '<div class="quick-finder-panel__item-icon" style="background:' + t.bg + '">' + t.icon + '</div>' +
             '<div class="quick-finder-panel__item-text">' +
@@ -892,6 +1026,56 @@
         }
       });
     });
+  </script>
+
+  <!-- Structured Data -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "WebSite",
+    "name": "ToolBox",
+    "url": "https://muryo-tool.com/",
+    "description": "個人事業主・フリーランス専用の業務効率化ツール集。請求書・納品書・領収書作成、源泉徴収計算、経費管理、売上管理など12の無料ツール。",
+    "potentialAction": {
+      "@type": "SearchAction",
+      "target": "https://muryo-tool.com/#all?q={search_term_string}",
+      "query-input": "required name=search_term_string"
+    }
+  }
+  </script>
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "ItemList",
+    "name": "個人事業主向け業務ツール一覧",
+    "numberOfItems": 12,
+    "itemListElement": [
+      {"@type":"ListItem","position":1,"name":"請求書作成","url":"https://muryo-tool.com/tools/invoice-generator/"},
+      {"@type":"ListItem","position":2,"name":"納品書作成","url":"https://muryo-tool.com/tools/delivery-note/"},
+      {"@type":"ListItem","position":3,"name":"領収書作成","url":"https://muryo-tool.com/tools/receipt-generator/"},
+      {"@type":"ListItem","position":4,"name":"工数見積書作成","url":"https://muryo-tool.com/tools/estimate-generator/"},
+      {"@type":"ListItem","position":5,"name":"源泉徴収税計算","url":"https://muryo-tool.com/tools/withholding-tax/"},
+      {"@type":"ListItem","position":6,"name":"経費メモ","url":"https://muryo-tool.com/tools/expense-memo/"},
+      {"@type":"ListItem","position":7,"name":"売上管理","url":"https://muryo-tool.com/tools/revenue-tracker/"},
+      {"@type":"ListItem","position":8,"name":"手取りシミュレーター","url":"https://muryo-tool.com/tools/take-home-pay/"},
+      {"@type":"ListItem","position":9,"name":"単価・料金逆算","url":"https://muryo-tool.com/tools/rate-calculator/"},
+      {"@type":"ListItem","position":10,"name":"消費税シミュレーター","url":"https://muryo-tool.com/tools/consumption-tax/"},
+      {"@type":"ListItem","position":11,"name":"営業メール生成","url":"https://muryo-tool.com/tools/sales-email/"},
+      {"@type":"ListItem","position":12,"name":"作業ログ","url":"https://muryo-tool.com/tools/work-log/"}
+    ]
+  }
+  </script>
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "FAQPage",
+    "mainEntity": [
+      {"@type":"Question","name":"ToolBoxは本当に無料ですか？","acceptedAnswer":{"@type":"Answer","text":"はい、ToolBoxのすべてのツールは完全無料で利用できます。アカウント登録も不要です。有料プランへの誘導も一切ありません。"}},
+      {"@type":"Question","name":"クライアントの機密データは安全ですか？","acceptedAnswer":{"@type":"Answer","text":"はい。請求書の顧客情報を含め、すべての処理はブラウザ内のJavaScriptで完結します。データが外部サーバーに送信されることは一切ありません。"}},
+      {"@type":"Question","name":"個人事業主・フリーランスに特化しているのですか？","acceptedAnswer":{"@type":"Answer","text":"はい。請求書・納品書・領収書の作成、源泉徴収税計算、経費管理、売上管理など、個人事業主の「お金まわり」に特化した12のツールを揃えています。インボイス制度・所得税法・印紙税法に準拠。"}},
+      {"@type":"Question","name":"どれくらいの作業時間を短縮できますか？","acceptedAnswer":{"@type":"Answer","text":"月間約20件の請求書作成で月4,000円相当の時短、源泉徴収の計算ミス防止、入金管理による請求漏れ防止を含め、年間18万円以上の損失リスクを回避できます。"}}
+    ]
+  }
   </script>
 </body>
 </html>
