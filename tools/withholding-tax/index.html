@@ -1,0 +1,501 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8">
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-Q5PXT07YCP"></script>
+  <script>window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments);}gtag('js',new Date());gtag('config','G-Q5PXT07YCP');</script>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="【無料】個人事業主・フリーランス向け源泉徴収税額計算ツール。報酬額を入力するだけで源泉徴収税額・手取り額を自動計算。100万円超の税率にも対応。手取り額からの逆算も可能。">
+  <meta name="keywords" content="源泉徴収 計算, 源泉徴収税額, フリーランス 源泉徴収, 個人事業主 源泉徴収, 手取り 計算, 報酬 源泉徴収">
+  <title>源泉徴収税計算｜報酬額から税額・手取り額を自動計算【無料】</title>
+  <link rel="canonical" href="https://muryo-tool.com/tools/withholding-tax/">
+  <meta property="og:title" content="源泉徴収税計算｜報酬額から税額・手取り額を自動計算【無料】">
+  <meta property="og:description" content="【無料】個人事業主・フリーランス向け源泉徴収税額計算ツール。報酬額を入力するだけで源泉徴収税額・手取り額を自動計算。100万円超の税率にも対応。">
+  <meta property="og:type" content="website">
+  <meta property="og:url" content="https://muryo-tool.com/tools/withholding-tax/">
+  <meta property="og:image" content="https://muryo-tool.com/ogp.png">
+  <meta name="twitter:card" content="summary_large_image">
+  <link rel="preconnect" href="https://fonts.googleapis.com" fetchpriority="high">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Noto+Sans+JP:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <style>
+    *,*::before,*::after{margin:0;padding:0;box-sizing:border-box}
+    :root{--black:#1d1d1f;--gray-700:#636366;--gray-500:#8e8e93;--gray-300:#d1d1d6;--gray-200:#e5e5ea;--gray-100:#f2f2f7;--white:#fff;--accent:#0071e3;--green:#16a34a;--font:"Inter","Noto Sans JP",-apple-system,sans-serif}
+    html{font-size:16px;-webkit-font-smoothing:antialiased}body{font-family:var(--font);color:var(--black);background:var(--gray-100);line-height:1.7;min-height:100vh}a{color:inherit;text-decoration:none}
+    .nav{background:rgba(255,255,255,0.85);backdrop-filter:saturate(180%) blur(20px);border-bottom:1px solid rgba(0,0,0,0.05);position:sticky;top:0;z-index:100}.nav__inner{display:flex;align-items:center;justify-content:space-between;height:52px;max-width:1100px;margin:0 auto;padding:0 24px}.nav__logo{font-size:1.2rem;font-weight:800;letter-spacing:-0.04em}.nav__logo span{color:var(--accent)}.nav__back{font-size:0.82rem;font-weight:500;color:var(--accent)}
+    .tool-page{max-width:1100px;margin:0 auto;padding:32px 24px 80px}
+    .tool-header{text-align:center;margin-bottom:20px}.tool-header__icon{display:flex;align-items:center;justify-content:center;margin-bottom:12px;color:var(--accent)}.tool-header__title{font-size:clamp(1.5rem,3vw,2rem);font-weight:800;letter-spacing:-0.03em;margin-bottom:8px}.tool-header__desc{font-size:0.92rem;color:var(--gray-700);max-width:520px;margin:0 auto}
+
+    .calc-container{display:grid;grid-template-columns:1fr 1fr;gap:28px;align-items:start}
+
+    .form-panel{background:var(--white);border-radius:20px;padding:28px;box-shadow:0 2px 12px rgba(0,0,0,0.04)}
+    .form-panel__section{margin-bottom:24px;padding-bottom:24px;border-bottom:1px solid var(--gray-200)}
+    .form-panel__section:last-child{border-bottom:none;margin-bottom:0;padding-bottom:0}
+    .form-panel__title{font-size:0.78rem;font-weight:600;color:var(--gray-500);text-transform:uppercase;letter-spacing:0.08em;margin-bottom:14px}
+    .field{margin-bottom:12px}
+    .field label{display:block;font-size:0.75rem;font-weight:600;color:var(--gray-700);margin-bottom:4px}
+    .field input,.field select{width:100%;font-family:var(--font);font-size:0.88rem;padding:10px 12px;border:1.5px solid var(--gray-300);border-radius:10px;outline:none;transition:border-color 0.2s}
+    .field input:focus{border-color:var(--accent)}
+    .field-row{display:grid;grid-template-columns:1fr 1fr;gap:10px}
+    .field-hint{font-size:0.72rem;color:var(--gray-500);margin-top:4px}
+
+    .toggle-group{display:flex;border-radius:10px;overflow:hidden;border:1.5px solid var(--gray-300);margin-bottom:12px}
+    .toggle-btn{flex:1;font-family:var(--font);font-size:0.82rem;font-weight:600;padding:10px 16px;border:none;background:var(--white);color:var(--gray-700);cursor:pointer;transition:all 0.2s;text-align:center}
+    .toggle-btn.active{background:var(--accent);color:var(--white)}
+
+    .mode-toggle{display:flex;border-radius:10px;overflow:hidden;border:1.5px solid var(--gray-300);margin-bottom:16px}
+    .mode-btn{flex:1;font-family:var(--font);font-size:0.82rem;font-weight:600;padding:10px 16px;border:none;background:var(--white);color:var(--gray-700);cursor:pointer;transition:all 0.2s;text-align:center}
+    .mode-btn.active{background:var(--accent);color:var(--white)}
+
+    .actions-bar{display:flex;gap:10px;margin-top:20px}
+    .action-btn{font-family:var(--font);font-size:0.85rem;font-weight:600;padding:12px 28px;border-radius:980px;border:none;cursor:pointer;flex:1;transition:all 0.2s}
+    .action-btn--primary{background:var(--accent);color:var(--white)}.action-btn--primary:hover{background:#0077ed}
+    .action-btn--outline{background:var(--white);color:var(--black);border:1.5px solid var(--gray-300)}.action-btn--outline:hover{border-color:var(--black)}
+    .action-btn--green{background:var(--green);color:var(--white)}.action-btn--green:hover{background:#15803d}
+
+    .result-panel{background:var(--white);border-radius:20px;box-shadow:0 4px 20px rgba(0,0,0,0.08);padding:32px;position:sticky;top:70px}
+    .result-panel__title{font-size:0.78rem;font-weight:600;color:var(--gray-500);text-transform:uppercase;letter-spacing:0.08em;margin-bottom:20px}
+    .result-row{display:flex;justify-content:space-between;align-items:center;padding:14px 0;border-bottom:1px solid var(--gray-200)}
+    .result-row:last-child{border-bottom:none}
+    .result-label{font-size:0.88rem;color:var(--gray-700)}
+    .result-value{font-size:1rem;font-weight:700;text-align:right}
+    .result-row--total{border-top:2px solid var(--black);border-bottom:none;margin-top:8px;padding-top:18px}
+    .result-row--total .result-label{font-weight:700;color:var(--black)}
+    .result-row--total .result-value{font-size:1.3rem;font-weight:800;color:var(--accent)}
+    .result-row--tax .result-value{color:#dc2626}
+    .result-rate{font-size:0.72rem;color:var(--gray-500);margin-top:2px}
+    .result-breakdown{font-size:0.75rem;color:var(--gray-500);margin-top:4px;line-height:1.6}
+
+    .copy-toast{position:fixed;bottom:24px;left:50%;transform:translateX(-50%) translateY(100px);background:var(--black);color:var(--white);padding:12px 24px;border-radius:980px;font-size:0.85rem;font-weight:600;transition:transform 0.3s ease;z-index:200}
+    .copy-toast.show{transform:translateX(-50%) translateY(0)}
+
+    .history-section{margin-top:24px;padding-top:20px;border-top:1px solid var(--gray-200)}
+    .history-title{font-size:0.78rem;font-weight:600;color:var(--gray-500);text-transform:uppercase;letter-spacing:0.08em;margin-bottom:12px;display:flex;justify-content:space-between;align-items:center}
+    .history-clear{font-size:0.72rem;color:var(--accent);cursor:pointer;background:none;border:none;font-family:var(--font);font-weight:600}
+    .history-clear:hover{text-decoration:underline}
+    .history-list{display:flex;flex-direction:column;gap:8px}
+    .history-item{display:flex;justify-content:space-between;align-items:center;padding:10px 12px;background:var(--gray-100);border-radius:10px;font-size:0.8rem;cursor:pointer;transition:background 0.2s}
+    .history-item:hover{background:var(--gray-200)}
+    .history-item__amount{font-weight:600}
+    .history-item__tax{color:#dc2626;font-weight:600}
+    .history-item__date{color:var(--gray-500);font-size:0.7rem}
+    .history-empty{font-size:0.8rem;color:var(--gray-500);text-align:center;padding:12px}
+
+    .seo-section{margin-top:48px;background:var(--white);border-radius:20px;padding:40px;box-shadow:0 2px 12px rgba(0,0,0,0.04)}.seo-section h2{font-size:1.3rem;font-weight:700;margin-bottom:16px}.seo-section h3{font-size:1.05rem;font-weight:600;margin:28px 0 10px}.seo-section p{font-size:0.92rem;color:var(--gray-700);line-height:1.85;margin-bottom:14px}.seo-section ul{padding-left:20px;margin-bottom:14px;list-style:disc}.seo-section li{font-size:0.9rem;color:var(--gray-700);line-height:1.8;margin-bottom:4px}
+    .footer{text-align:center;padding:40px 24px;font-size:0.75rem;color:var(--gray-500)}.footer a{color:var(--accent)}
+    @media(max-width:1024px){.calc-container{grid-template-columns:1fr}.result-panel{position:static}}
+    @media(max-width:640px){
+      .tool-page{padding:20px 16px 60px}
+      .tool-header__title{font-size:1.3rem}
+      .tool-header__desc{font-size:0.85rem}
+      .form-panel{padding:20px}
+      .result-panel{padding:24px}
+      .seo-section{padding:24px 20px}
+      .seo-section h2{font-size:1.1rem}
+    }
+  </style>
+<script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-1964975138803092"
+     crossorigin="anonymous"></script>
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "WebApplication",
+  "name": "源泉徴収税計算｜報酬額から税額・手取り額を自動計算",
+  "url": "https://muryo-tool.com/tools/withholding-tax/",
+  "description": "【無料】個人事業主・フリーランス向け源泉徴収税額計算ツール。報酬額を入力するだけで源泉徴収税額・手取り額を自動計算。100万円超の税率にも対応。",
+  "applicationCategory": "BusinessApplication",
+  "operatingSystem": "Web",
+  "offers": {"@type": "Offer", "price": "0", "priceCurrency": "JPY"},
+  "inLanguage": "ja",
+  "isPartOf": {"@type": "WebSite", "name": "ToolBox", "url": "https://muryo-tool.com/"}
+}
+</script>
+<script type="application/ld+json">
+{"@context":"https://schema.org","@type":"BreadcrumbList","itemListElement":[
+  {"@type":"ListItem","position":1,"name":"ToolBox","item":"https://muryo-tool.com/"},
+  {"@type":"ListItem","position":2,"name":"源泉徴収税計算","item":"https://muryo-tool.com/tools/withholding-tax/"}
+]}
+</script>
+</head>
+<body>
+  <nav class="nav"><div class="nav__inner"><a href="../../" class="nav__logo">Tool<span>Box</span></a><a href="../../" class="nav__back">&larr; ツール一覧</a></div></nav>
+  <main class="tool-page">
+    <div class="tool-header">
+      <div class="tool-header__icon"><svg width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="3" width="20" height="18" rx="2"/><path d="M2 9h20"/><path d="M9 21V9"/><path d="M13 13h4"/><path d="M13 17h4"/></svg></div>
+      <h1 class="tool-header__title">源泉徴収税計算</h1>
+      <p class="tool-header__desc">報酬額を入力するだけで源泉徴収税額・手取り額を自動計算。個人事業主・フリーランスの確定申告準備に。</p>
+    </div>
+    <div style="background:#fef2f2;border:1.5px solid #fecaca;border-radius:14px;padding:20px 24px;margin-bottom:20px">
+      <div style="font-size:0.78rem;font-weight:700;color:#dc2626;margin-bottom:8px">このツールを使わない場合の損失</div>
+      <div style="display:flex;flex-direction:column;gap:6px">
+        <div style="display:flex;align-items:flex-start;gap:6px;font-size:0.82rem;color:#636366;line-height:1.5"><span style="color:#dc2626;flex-shrink:0">&#10005;</span><span>源泉徴収額の計算ミス &rarr; 確定申告で過不足が発生</span></div>
+        <div style="display:flex;align-items:flex-start;gap:6px;font-size:0.82rem;color:#636366;line-height:1.5"><span style="color:#dc2626;flex-shrink:0">&#10005;</span><span>手取り額の見積もり誤り &rarr; 資金繰りに影響</span></div>
+        <div style="display:flex;align-items:flex-start;gap:6px;font-size:0.82rem;color:#636366;line-height:1.5"><span style="color:#dc2626;flex-shrink:0">&#10005;</span><span>税率の適用ミス &rarr; 税務署からの指摘リスク</span></div>
+      </div>
+      <div style="margin-top:12px;padding-top:12px;border-top:1px solid #fecaca;font-size:0.82rem;color:#16a34a;font-weight:700">
+        ToolBoxなら &rarr; 所得税法第204条に基づく正確な税率で自動計算。復興特別所得税込み。
+      </div>
+    </div>
+    <div style="margin:12px 0"><ins class="adsbygoogle" style="display:block;min-height:90px" data-ad-client="ca-pub-1964975138803092" data-ad-slot="auto" data-ad-format="auto" data-full-width-responsive="true"></ins><script>(adsbygoogle = window.adsbygoogle || []).push({});</script></div>
+    <div class="calc-container">
+      <div class="form-panel">
+        <div class="form-panel__section">
+          <div class="form-panel__title">計算モード</div>
+          <div class="mode-toggle">
+            <button class="mode-btn active" id="mode-forward" onclick="setMode('forward')">報酬額 &rarr; 手取り額</button>
+            <button class="mode-btn" id="mode-reverse" onclick="setMode('reverse')">手取り額 &rarr; 報酬額</button>
+          </div>
+        </div>
+
+        <div class="form-panel__section">
+          <div class="form-panel__title" id="input-section-title">報酬額の入力</div>
+          <div class="field">
+            <label id="tax-toggle-label">税込 / 税抜の選択</label>
+            <div class="toggle-group" id="tax-toggle-group">
+              <button class="toggle-btn active" id="tax-exclusive" onclick="setTaxMode('exclusive')">税抜（税別）</button>
+              <button class="toggle-btn" id="tax-inclusive" onclick="setTaxMode('inclusive')">税込（税込）</button>
+            </div>
+          </div>
+          <div class="field">
+            <label id="amount-label">報酬額（税抜）</label>
+            <input type="text" id="amount" inputmode="numeric" placeholder="例: 500,000" oninput="onAmountInput(this)">
+            <div class="field-hint" id="amount-hint">源泉徴収の対象となる報酬額を入力してください</div>
+          </div>
+          <div class="field" id="tax-rate-field">
+            <label>消費税率</label>
+            <select id="tax-rate" onchange="calculate()">
+              <option value="0.10">10%</option>
+              <option value="0.08">8%（軽減税率）</option>
+              <option value="0">消費税なし</option>
+            </select>
+          </div>
+        </div>
+
+        <div class="actions-bar">
+          <button class="action-btn action-btn--primary" onclick="calculate()">計算する</button>
+          <button class="action-btn action-btn--outline" onclick="clearForm()">クリア</button>
+        </div>
+      </div>
+
+      <div class="result-panel" id="result-panel">
+        <div class="result-panel__title">計算結果</div>
+        <div id="result-content">
+          <div style="text-align:center;padding:40px 0;color:var(--gray-500);font-size:0.88rem">
+            左側のフォームに報酬額を入力して<br>「計算する」をクリックしてください
+          </div>
+        </div>
+
+        <div class="history-section">
+          <div class="history-title">
+            <span>計算履歴</span>
+            <button class="history-clear" onclick="clearHistory()">すべて削除</button>
+          </div>
+          <div class="history-list" id="history-list">
+            <div class="history-empty">履歴はまだありません</div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div style="margin:20px 0"><ins class="adsbygoogle" style="display:block;min-height:100px" data-ad-client="ca-pub-1964975138803092" data-ad-slot="auto" data-ad-format="auto" data-full-width-responsive="true"></ins><script>(adsbygoogle = window.adsbygoogle || []).push({});</script></div>
+
+    <div class="seo-section">
+      <h2>源泉徴収税の計算方法と法的根拠</h2>
+      <h3>所得税法第204条（源泉徴収義務）</h3>
+      <p>個人に対して報酬・料金等を支払う場合、支払者には所得税法第204条に基づき源泉徴収義務が生じます。フリーランス・個人事業主が受け取る報酬のうち、以下のものが源泉徴収の対象となります。</p>
+      <ul>
+        <li><strong>原稿料・講演料</strong> &mdash; ライター、著者、講師への報酬</li>
+        <li><strong>デザイン料</strong> &mdash; グラフィックデザイン、Webデザイン等</li>
+        <li><strong>弁護士・税理士・社労士等の報酬</strong> &mdash; 士業への支払い</li>
+        <li><strong>プロスポーツ選手・芸能人への報酬</strong></li>
+        <li><strong>外交員・集金人への報酬</strong></li>
+      </ul>
+
+      <h3>源泉徴収税率（復興特別所得税込み）</h3>
+      <p>源泉徴収税額は、支払金額に応じて以下の税率が適用されます。復興特別所得税（基準所得税額の2.1%）が加算されるため、実効税率は以下の通りです。</p>
+      <ul>
+        <li><strong>100万円以下の部分</strong>: 10.21%（所得税10% + 復興特別所得税0.21%）</li>
+        <li><strong>100万円超の部分</strong>: 20.42%（所得税20% + 復興特別所得税0.42%）</li>
+      </ul>
+      <p>例えば、報酬額が150万円の場合:<br>100万円 &times; 10.21% + 50万円 &times; 20.42% = 102,100円 + 102,100円 = 204,200円</p>
+
+      <h3>復興特別所得税について</h3>
+      <p>東日本大震災からの復興財源を確保するため、2013年1月1日から2037年12月31日までの間、基準所得税額に対して2.1%の復興特別所得税が課されます。源泉徴収税額にもこの復興特別所得税が含まれています。</p>
+
+      <h2>個人事業主・フリーランスの活用シーン</h2>
+      <h3>1. 請求書作成時の手取り額シミュレーション</h3>
+      <p>クライアントへの請求書を作成する際、源泉徴収後の手取り額を事前に把握できます。報酬額50万円の案件なら、源泉徴収税額51,050円が差し引かれ、手取りは448,950円。資金計画を正確に立てられます。</p>
+
+      <h3>2. 確定申告時の源泉徴収税額の確認</h3>
+      <p>年間の各取引で源泉徴収された税額を計算し、確定申告書に記載する源泉徴収税額の合計を事前に確認できます。支払調書との照合にも活用できます。</p>
+
+      <h3>3. 見積もり・報酬交渉時の逆算</h3>
+      <p>「手取りで〇〇万円ほしい」という場合に、逆算機能で必要な報酬額を算出。クライアントへの見積もり金額を正確に設定できます。</p>
+
+      <h3>4. 100万円超の高額報酬の税額確認</h3>
+      <p>報酬額が100万円を超えると超過分に20.42%の税率が適用されます。大型案件や年間契約の場合、税額が大きく変わるため事前確認が重要です。</p>
+
+      <p style="font-size:0.82rem;color:#dc2626;font-weight:600;margin-top:12px">※ 本ツールは源泉徴収税額の目安を計算するものです。個別の税務判断については税理士にご相談ください。法的効力を保証するものではありません。</p>
+    </div>
+  </main>
+  <div style="max-width:1100px;margin:0 auto;padding:0 24px 0">
+    <div class="seo-section" style="margin-top:0">
+      <h2>関連ツール</h2>
+      <ul style="list-style:none;padding:0;display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:12px">
+        <li><a href="../invoice-generator/" style="display:block;padding:16px;background:var(--gray-100);border-radius:12px;font-weight:600;font-size:0.9rem">請求書作成</a></li>
+        <li><a href="../pdf-converter/" style="display:block;padding:16px;background:var(--gray-100);border-radius:12px;font-weight:600;font-size:0.9rem">画像→PDF変換</a></li>
+        <li><a href="../text-counter/" style="display:block;padding:16px;background:var(--gray-100);border-radius:12px;font-weight:600;font-size:0.9rem">文字数カウント</a></li>
+        <li><a href="../qr-generator/" style="display:block;padding:16px;background:var(--gray-100);border-radius:12px;font-weight:600;font-size:0.9rem">QRコード作成</a></li>
+      </ul>
+    </div>
+  </div>
+  <footer class="footer"><p>&copy; 2026 <a href="../../">ToolBox</a></p></footer>
+
+  <div class="copy-toast" id="copy-toast">クリップボードにコピーしました</div>
+
+  <script>
+    let calcMode = 'forward'; // 'forward' or 'reverse'
+    let taxMode = 'exclusive'; // 'exclusive' or 'inclusive'
+    let history = [];
+
+    // Load history from localStorage
+    try {
+      const saved = localStorage.getItem('toolbox-withholding-history');
+      if (saved) history = JSON.parse(saved);
+    } catch(e) {}
+    renderHistory();
+
+    function setMode(mode) {
+      calcMode = mode;
+      document.getElementById('mode-forward').classList.toggle('active', mode === 'forward');
+      document.getElementById('mode-reverse').classList.toggle('active', mode === 'reverse');
+
+      if (mode === 'forward') {
+        document.getElementById('input-section-title').textContent = '報酬額の入力';
+        document.getElementById('amount-label').textContent = taxMode === 'exclusive' ? '報酬額（税抜）' : '報酬額（税込）';
+        document.getElementById('amount-hint').textContent = '源泉徴収の対象となる報酬額を入力してください';
+        document.getElementById('tax-toggle-group').style.display = '';
+        document.getElementById('tax-toggle-label').style.display = '';
+        document.getElementById('tax-rate-field').style.display = '';
+      } else {
+        document.getElementById('input-section-title').textContent = '手取り額の入力';
+        document.getElementById('amount-label').textContent = '手取り額';
+        document.getElementById('amount-hint').textContent = '源泉徴収後に受け取りたい金額を入力してください';
+        document.getElementById('tax-toggle-group').style.display = 'none';
+        document.getElementById('tax-toggle-label').style.display = 'none';
+        document.getElementById('tax-rate-field').style.display = 'none';
+      }
+    }
+
+    function setTaxMode(mode) {
+      taxMode = mode;
+      document.getElementById('tax-exclusive').classList.toggle('active', mode === 'exclusive');
+      document.getElementById('tax-inclusive').classList.toggle('active', mode === 'inclusive');
+
+      if (calcMode === 'forward') {
+        document.getElementById('amount-label').textContent = mode === 'exclusive' ? '報酬額（税抜）' : '報酬額（税込）';
+      }
+    }
+
+    function onAmountInput(el) {
+      // Allow only numbers and commas
+      let val = el.value.replace(/[^\d]/g, '');
+      if (val) {
+        val = Number(val).toLocaleString();
+      }
+      el.value = val;
+    }
+
+    function parseAmount(str) {
+      return Number(str.replace(/[^\d]/g, '')) || 0;
+    }
+
+    // Calculate withholding tax on a given pre-tax amount (税抜報酬額)
+    function calcWithholdingTax(pretaxAmount) {
+      if (pretaxAmount <= 0) return 0;
+      if (pretaxAmount <= 1000000) {
+        return Math.floor(pretaxAmount * 0.1021);
+      } else {
+        return Math.floor(1000000 * 0.1021 + (pretaxAmount - 1000000) * 0.2042);
+      }
+    }
+
+    // Reverse: given net (手取り), find pretax amount
+    function reversePretaxFromNet(netAmount) {
+      if (netAmount <= 0) return 0;
+      // Net = pretax - tax
+      // If pretax <= 1,000,000: net = pretax - pretax*0.1021 = pretax * 0.8979
+      // If pretax > 1,000,000: net = pretax - (102100 + (pretax-1000000)*0.2042) = pretax * 0.7958 + 102100 - 204200 + 1000000*0.2042 = pretax*0.7958 + 102100
+      //   Wait, let me redo: net = pretax - [102100 + (pretax-1000000)*0.2042]
+      //   net = pretax - 102100 - 0.2042*pretax + 204200
+      //   net = pretax(1 - 0.2042) + 102100
+      //   net = 0.7958*pretax + 102100
+      //   pretax = (net - 102100) / 0.7958
+
+      // Check if pretax <= 1,000,000
+      // Threshold net = 1000000 * 0.8979 = 897900
+      const threshold = 897900;
+      let pretax;
+      if (netAmount <= threshold) {
+        pretax = Math.ceil(netAmount / 0.8979);
+      } else {
+        pretax = Math.ceil((netAmount - 102100) / 0.7958);
+      }
+      return pretax;
+    }
+
+    function calculate() {
+      const rawAmount = parseAmount(document.getElementById('amount').value);
+      if (rawAmount <= 0) return;
+
+      const taxRate = parseFloat(document.getElementById('tax-rate').value);
+      let pretaxAmount, taxIncAmount, withholdingTax, netAmount, consumptionTax;
+
+      if (calcMode === 'forward') {
+        if (taxMode === 'inclusive' && taxRate > 0) {
+          // Tax-inclusive: extract pre-tax from inclusive amount
+          taxIncAmount = rawAmount;
+          pretaxAmount = Math.round(taxIncAmount / (1 + taxRate));
+          consumptionTax = taxIncAmount - pretaxAmount;
+        } else {
+          pretaxAmount = rawAmount;
+          consumptionTax = Math.floor(pretaxAmount * taxRate);
+          taxIncAmount = pretaxAmount + consumptionTax;
+        }
+        withholdingTax = calcWithholdingTax(pretaxAmount);
+        netAmount = taxIncAmount - withholdingTax;
+      } else {
+        // Reverse mode: netAmount is given, find pretaxAmount
+        netAmount = rawAmount;
+        pretaxAmount = reversePretaxFromNet(netAmount);
+        withholdingTax = calcWithholdingTax(pretaxAmount);
+        // Adjust to match exactly
+        netAmount = pretaxAmount - withholdingTax;
+        consumptionTax = 0;
+        taxIncAmount = pretaxAmount;
+      }
+
+      // Build breakdown text
+      let breakdownHtml = '';
+      if (pretaxAmount > 1000000) {
+        const taxUnder = Math.floor(1000000 * 0.1021);
+        const taxOver = Math.floor((pretaxAmount - 1000000) * 0.2042);
+        breakdownHtml = `
+          <div class="result-breakdown">
+            100万円 &times; 10.21% = &yen;${taxUnder.toLocaleString()}<br>
+            ${(pretaxAmount - 1000000).toLocaleString()}円 &times; 20.42% = &yen;${taxOver.toLocaleString()}
+          </div>`;
+      }
+
+      const resultHtml = `
+        <div class="result-row">
+          <span class="result-label">報酬額（税抜）</span>
+          <span class="result-value">&yen;${pretaxAmount.toLocaleString()}</span>
+        </div>
+        ${consumptionTax > 0 ? `
+        <div class="result-row">
+          <span class="result-label">消費税（${(taxRate * 100).toFixed(0)}%）</span>
+          <span class="result-value">&yen;${consumptionTax.toLocaleString()}</span>
+        </div>
+        <div class="result-row">
+          <span class="result-label">報酬額（税込）</span>
+          <span class="result-value">&yen;${taxIncAmount.toLocaleString()}</span>
+        </div>` : ''}
+        <div class="result-row result-row--tax">
+          <div>
+            <span class="result-label">源泉徴収税額</span>
+            <div class="result-rate">${pretaxAmount <= 1000000 ? '10.21%（復興特別所得税込み）' : '10.21% + 20.42%（100万円超過分）'}</div>
+            ${breakdownHtml}
+          </div>
+          <span class="result-value">&minus;&yen;${withholdingTax.toLocaleString()}</span>
+        </div>
+        <div class="result-row result-row--total">
+          <span class="result-label">手取り額</span>
+          <span class="result-value">&yen;${netAmount.toLocaleString()}</span>
+        </div>
+        <div class="actions-bar" style="margin-top:16px">
+          <button class="action-btn action-btn--green" onclick="copyResult()">結果をコピー</button>
+        </div>
+      `;
+      document.getElementById('result-content').innerHTML = resultHtml;
+
+      // Save to history
+      const entry = {
+        date: new Date().toLocaleString('ja-JP'),
+        pretax: pretaxAmount,
+        tax: withholdingTax,
+        net: netAmount,
+        mode: calcMode
+      };
+      history.unshift(entry);
+      if (history.length > 10) history.pop();
+      localStorage.setItem('toolbox-withholding-history', JSON.stringify(history));
+      renderHistory();
+    }
+
+    function copyResult() {
+      const resultDiv = document.getElementById('result-content');
+      const rows = resultDiv.querySelectorAll('.result-row');
+      let text = '【源泉徴収税 計算結果】\n';
+      rows.forEach(row => {
+        const label = row.querySelector('.result-label');
+        const value = row.querySelector('.result-value');
+        if (label && value) {
+          text += label.textContent + ': ' + value.textContent + '\n';
+        }
+      });
+      text += '\n計算: ToolBox (https://muryo-tool.com/tools/withholding-tax/)';
+      navigator.clipboard.writeText(text).then(() => {
+        showToast();
+      });
+    }
+
+    function showToast() {
+      const toast = document.getElementById('copy-toast');
+      toast.classList.add('show');
+      setTimeout(() => toast.classList.remove('show'), 2000);
+    }
+
+    function clearForm() {
+      document.getElementById('amount').value = '';
+      document.getElementById('result-content').innerHTML = `
+        <div style="text-align:center;padding:40px 0;color:var(--gray-500);font-size:0.88rem">
+          左側のフォームに報酬額を入力して<br>「計算する」をクリックしてください
+        </div>`;
+    }
+
+    function renderHistory() {
+      const list = document.getElementById('history-list');
+      if (history.length === 0) {
+        list.innerHTML = '<div class="history-empty">履歴はまだありません</div>';
+        return;
+      }
+      list.innerHTML = history.map((h, i) => `
+        <div class="history-item" onclick="loadHistory(${i})">
+          <div>
+            <div class="history-item__amount">${h.mode === 'reverse' ? '手取り' : '報酬'} &yen;${h.pretax.toLocaleString()}</div>
+            <div class="history-item__date">${h.date}</div>
+          </div>
+          <div class="history-item__tax">&minus;&yen;${h.tax.toLocaleString()}</div>
+        </div>
+      `).join('');
+    }
+
+    function loadHistory(index) {
+      const h = history[index];
+      if (!h) return;
+      setMode('forward');
+      setTaxMode('exclusive');
+      document.getElementById('tax-rate').value = '0';
+      document.getElementById('amount').value = h.pretax.toLocaleString();
+      calculate();
+    }
+
+    function clearHistory() {
+      history = [];
+      localStorage.removeItem('toolbox-withholding-history');
+      renderHistory();
+    }
+  </script>
+</body>
+</html>

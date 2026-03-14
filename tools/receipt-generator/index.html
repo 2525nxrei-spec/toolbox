@@ -1,0 +1,329 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8">
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-Q5PXT07YCP"></script>
+  <script>window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments);}gtag('js',new Date());gtag('config','G-Q5PXT07YCP');</script>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="【無料】個人事業主・フリーランス向け領収書作成ツール。フォーム入力で領収書を即作成・印刷。収入印紙の要否を自動判定。登録不要・完全無料。">
+  <meta name="keywords" content="領収書 作成, 領収書 テンプレート, 無料 領収書, 個人事業主 領収書, フリーランス 領収書, 収入印紙">
+  <title>領収書作成｜無料で領収書をオンライン作成【印紙税自動判定】</title>
+  <link rel="canonical" href="https://muryo-tool.com/tools/receipt-generator/">
+  <meta property="og:title" content="領収書作成｜無料で領収書をオンライン作成【印紙税自動判定】">
+  <meta property="og:description" content="【無料】個人事業主・フリーランス向け領収書作成ツール。フォーム入力で領収書を即作成・印刷。収入印紙の要否を自動判定。登録不要・完全無料。">
+  <meta property="og:type" content="website">
+  <meta property="og:url" content="https://muryo-tool.com/tools/receipt-generator/">
+  <meta property="og:image" content="https://muryo-tool.com/ogp.png">
+  <meta name="twitter:card" content="summary_large_image">
+  <link rel="preconnect" href="https://fonts.googleapis.com" fetchpriority="high">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Noto+Sans+JP:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <style>
+    *,*::before,*::after{margin:0;padding:0;box-sizing:border-box}
+    :root{--black:#1d1d1f;--gray-700:#636366;--gray-500:#8e8e93;--gray-300:#d1d1d6;--gray-200:#e5e5ea;--gray-100:#f2f2f7;--white:#fff;--accent:#0071e3;--green:#16a34a;--font:"Inter","Noto Sans JP",-apple-system,sans-serif}
+    html{font-size:16px;-webkit-font-smoothing:antialiased}body{font-family:var(--font);color:var(--black);background:var(--gray-100);line-height:1.7;min-height:100vh}a{color:inherit;text-decoration:none}
+    .nav{background:rgba(255,255,255,0.85);backdrop-filter:saturate(180%) blur(20px);border-bottom:1px solid rgba(0,0,0,0.05);position:sticky;top:0;z-index:100}.nav__inner{display:flex;align-items:center;justify-content:space-between;height:52px;max-width:1100px;margin:0 auto;padding:0 24px}.nav__logo{font-size:1.2rem;font-weight:800;letter-spacing:-0.04em}.nav__logo span{color:var(--accent)}.nav__back{font-size:0.82rem;font-weight:500;color:var(--accent)}
+    .tool-page{max-width:1100px;margin:0 auto;padding:32px 24px 80px}
+    .tool-header{text-align:center;margin-bottom:20px}.tool-header__icon{display:flex;align-items:center;justify-content:center;margin-bottom:12px;color:var(--accent)}.tool-header__title{font-size:clamp(1.5rem,3vw,2rem);font-weight:800;letter-spacing:-0.03em;margin-bottom:8px}.tool-header__desc{font-size:0.92rem;color:var(--gray-700);max-width:520px;margin:0 auto}
+
+    .layout{display:grid;grid-template-columns:1fr 1fr;gap:28px;align-items:start}
+
+    .form-panel{background:var(--white);border-radius:20px;padding:28px;box-shadow:0 2px 12px rgba(0,0,0,0.04)}
+    .form-panel__section{margin-bottom:24px;padding-bottom:24px;border-bottom:1px solid var(--gray-200)}
+    .form-panel__section:last-child{border-bottom:none;margin-bottom:0;padding-bottom:0}
+    .form-panel__title{font-size:0.78rem;font-weight:600;color:var(--gray-500);text-transform:uppercase;letter-spacing:0.08em;margin-bottom:14px}
+    .field{margin-bottom:12px}
+    .field label{display:block;font-size:0.75rem;font-weight:600;color:var(--gray-700);margin-bottom:4px}
+    .field input,.field textarea,.field select{width:100%;font-family:var(--font);font-size:0.88rem;padding:10px 12px;border:1.5px solid var(--gray-300);border-radius:10px;outline:none;transition:border-color 0.2s}
+    .field input:focus,.field textarea:focus{border-color:var(--accent)}
+    .field-row{display:grid;grid-template-columns:1fr 1fr;gap:10px}
+
+    .stamp-info{margin-top:12px;padding:14px 16px;border-radius:12px;font-size:0.82rem;font-weight:600;line-height:1.6}
+    .stamp-info--free{background:#f0fdf4;color:#16a34a;border:1px solid #bbf7d0}
+    .stamp-info--required{background:#fef2f2;color:#dc2626;border:1px solid #fecaca}
+
+    .actions-bar{display:flex;gap:10px;margin-top:20px}
+    .action-btn{font-family:var(--font);font-size:0.85rem;font-weight:600;padding:12px 28px;border-radius:980px;border:none;cursor:pointer;flex:1;transition:all 0.2s}
+    .action-btn--primary{background:var(--accent);color:var(--white)}.action-btn--primary:hover{background:#0077ed}
+    .action-btn--outline{background:var(--white);color:var(--black);border:1.5px solid var(--gray-300)}.action-btn--outline:hover{border-color:var(--black)}
+
+    /* Receipt Preview */
+    .receipt-preview{background:var(--white);border-radius:20px;box-shadow:0 4px 20px rgba(0,0,0,0.08);padding:48px;min-height:500px;position:sticky;top:70px}
+    .rcpt-title{text-align:center;font-size:1.8rem;font-weight:800;letter-spacing:0.15em;margin-bottom:8px;padding-bottom:12px;border-bottom:3px double var(--black)}
+    .rcpt-number{text-align:right;font-size:0.78rem;color:var(--gray-500);margin-bottom:24px}
+    .rcpt-to{margin-bottom:28px}.rcpt-to__name{font-size:1.3rem;font-weight:700;padding-bottom:4px;border-bottom:1px solid var(--black);display:inline-block}.rcpt-to__name::after{content:' 様';font-weight:400;font-size:1rem}
+    .rcpt-date{text-align:right;font-size:0.85rem;color:var(--gray-700);margin-bottom:24px}
+    .rcpt-amount{text-align:center;margin:28px 0;padding:20px;border:2px solid var(--black);border-radius:8px}
+    .rcpt-amount__label{font-size:0.72rem;font-weight:600;color:var(--gray-500);text-transform:uppercase;letter-spacing:0.08em;margin-bottom:4px}
+    .rcpt-amount__value{font-size:1.8rem;font-weight:800;letter-spacing:0.02em}
+    .rcpt-amount__value::before{content:'\\A5 ';font-size:1.2rem}
+    .rcpt-proviso{margin:20px 0;font-size:0.88rem;color:var(--gray-700)}.rcpt-proviso strong{color:var(--black);margin-right:8px}
+    .rcpt-stamp{margin:24px 0;padding:14px 16px;border-radius:10px;font-size:0.82rem;font-weight:600;text-align:center}
+    .rcpt-stamp--free{background:#f0fdf4;color:#16a34a;border:1px solid #bbf7d0}
+    .rcpt-stamp--required{background:#fff7ed;color:#c2410c;border:1px solid #fed7aa}
+    .rcpt-from{margin-top:32px;padding-top:20px;border-top:1px solid var(--gray-200);text-align:right;font-size:0.85rem;color:var(--gray-700);line-height:1.8}
+    .rcpt-from strong{display:block;font-size:1rem;color:var(--black)}
+    .rcpt-invoice-num{font-size:0.78rem;color:var(--gray-500);text-align:right;margin-top:4px}
+
+    .seo-section{margin-top:48px;background:var(--white);border-radius:20px;padding:40px;box-shadow:0 2px 12px rgba(0,0,0,0.04)}.seo-section h2{font-size:1.3rem;font-weight:700;margin-bottom:16px}.seo-section h3{font-size:1.05rem;font-weight:600;margin:28px 0 10px}.seo-section p{font-size:0.92rem;color:var(--gray-700);line-height:1.85;margin-bottom:14px}.seo-section ul{padding-left:20px;margin-bottom:14px;list-style:disc}.seo-section li{font-size:0.9rem;color:var(--gray-700);line-height:1.8;margin-bottom:4px}
+    .footer{text-align:center;padding:40px 24px;font-size:0.75rem;color:var(--gray-500)}.footer a{color:var(--accent)}
+    @media(max-width:1024px){.layout{grid-template-columns:1fr}.receipt-preview{position:static}}
+    @media(max-width:640px){
+      .tool-page{padding:20px 16px 60px}
+      .tool-header__title{font-size:1.3rem}
+      .tool-header__desc{font-size:0.85rem}
+      .seo-section{padding:24px 20px}
+      .seo-section h2{font-size:1.1rem}
+      .receipt-preview{padding:28px 20px}
+    }
+    @media print{.nav,.form-panel,.tool-header,.seo-section,.footer,.actions-bar,.ad-slot,.loss-banner{display:none!important}.layout{grid-template-columns:1fr}.receipt-preview{box-shadow:none;padding:24px;border-radius:0}}
+  </style>
+<script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-1964975138803092"
+     crossorigin="anonymous"></script>
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "WebApplication",
+  "name": "領収書作成｜無料で領収書をオンライン作成",
+  "url": "https://muryo-tool.com/tools/receipt-generator/",
+  "description": "【無料】領収書作成ツール。個人事業主・フリーランス向け。フォームに入力するだけで領収書を作成・印刷。収入印紙の要否を自動判定。登録不要。",
+  "applicationCategory": "BusinessApplication",
+  "operatingSystem": "Web",
+  "offers": {"@type": "Offer", "price": "0", "priceCurrency": "JPY"},
+  "inLanguage": "ja",
+  "isPartOf": {"@type": "WebSite", "name": "ToolBox", "url": "https://muryo-tool.com/"}
+}
+</script>
+<script type="application/ld+json">
+{"@context":"https://schema.org","@type":"BreadcrumbList","itemListElement":[
+  {"@type":"ListItem","position":1,"name":"ToolBox","item":"https://muryo-tool.com/"},
+  {"@type":"ListItem","position":2,"name":"領収書作成","item":"https://muryo-tool.com/tools/receipt-generator/"}
+]}
+</script>
+</head>
+<body>
+  <nav class="nav"><div class="nav__inner"><a href="../../" class="nav__logo">Tool<span>Box</span></a><a href="../../" class="nav__back">&larr; ツール一覧</a></div></nav>
+  <main class="tool-page">
+    <div class="tool-header">
+      <div class="tool-header__icon"><svg width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="18" height="18" rx="2"/><path d="M9 12h6"/><path d="M12 9v6"/><path d="M7 7h.01"/></svg></div>
+      <h1 class="tool-header__title">領収書作成</h1>
+      <p class="tool-header__desc">個人事業主・フリーランス向け領収書作成ツール。フォーム入力で即作成・印刷。収入印紙の要否も自動判定。</p>
+    </div>
+    <div class="loss-banner" style="background:#fef2f2;border:1.5px solid #fecaca;border-radius:14px;padding:20px 24px;margin-bottom:20px">
+      <div style="font-size:0.78rem;font-weight:700;color:#dc2626;margin-bottom:8px">このツールを使わない場合の損失</div>
+      <div style="display:flex;flex-direction:column;gap:6px">
+        <div style="display:flex;align-items:flex-start;gap:6px;font-size:0.82rem;color:#636366;line-height:1.5"><span style="color:#dc2626;flex-shrink:0">&#10005;</span><span>領収書の発行漏れ → 取引先の経費処理が滞り信用低下</span></div>
+        <div style="display:flex;align-items:flex-start;gap:6px;font-size:0.82rem;color:#636366;line-height:1.5"><span style="color:#dc2626;flex-shrink:0">&#10005;</span><span>印紙税の貼付忘れ → 過怠税（本来の3倍）のリスク</span></div>
+        <div style="display:flex;align-items:flex-start;gap:6px;font-size:0.82rem;color:#636366;line-height:1.5"><span style="color:#dc2626;flex-shrink:0">&#10005;</span><span>記載不備 → インボイス制度で仕入税額控除が認められない</span></div>
+      </div>
+      <div style="margin-top:12px;padding-top:12px;border-top:1px solid #fecaca;font-size:0.82rem;color:#16a34a;font-weight:700">
+        ToolBoxなら → 無料・印紙税自動判定・インボイス制度対応の領収書を即作成
+      </div>
+    </div>
+    <div class="ad-slot" style="margin:12px 0"><ins class="adsbygoogle" style="display:block;min-height:90px" data-ad-client="ca-pub-1964975138803092" data-ad-slot="auto" data-ad-format="auto" data-full-width-responsive="true"></ins><script>(adsbygoogle = window.adsbygoogle || []).push({});</script></div>
+    <div class="layout">
+      <div class="form-panel">
+        <div class="form-panel__section">
+          <div class="form-panel__title">基本情報</div>
+          <div class="field-row">
+            <div class="field"><label>発行日</label><input type="date" id="rcpt-date" oninput="update()"></div>
+            <div class="field"><label>領収書番号</label><input type="text" id="rcpt-number" oninput="update()"></div>
+          </div>
+        </div>
+
+        <div class="form-panel__section">
+          <div class="form-panel__title">宛名</div>
+          <div class="field"><label>会社名・個人名</label><input type="text" id="to-name" placeholder="株式会社〇〇 / 山田太郎" oninput="update()"></div>
+        </div>
+
+        <div class="form-panel__section">
+          <div class="form-panel__title">金額・但し書き</div>
+          <div class="field"><label>金額（税込）</label><input type="number" id="rcpt-amount" placeholder="50000" min="0" oninput="update()"></div>
+          <div id="stamp-info"></div>
+          <div class="field"><label>但し書き（用途）</label><input type="text" id="rcpt-proviso" placeholder="Webサイト制作費として" oninput="update()"></div>
+        </div>
+
+        <div class="form-panel__section">
+          <div class="form-panel__title">発行者情報</div>
+          <div class="field"><label>名前（氏名・屋号）</label><input type="text" id="from-name" placeholder="あなたの名前 / 屋号" oninput="update()"></div>
+          <div class="field"><label>住所</label><input type="text" id="from-address" placeholder="東京都渋谷区..." oninput="update()"></div>
+          <div class="field"><label>電話番号</label><input type="tel" id="from-tel" placeholder="03-1234-5678" oninput="update()"></div>
+          <div class="field"><label>インボイス登録番号</label><input type="text" id="from-invoice" placeholder="T1234567890123" oninput="update()"></div>
+        </div>
+
+        <div class="actions-bar">
+          <button class="action-btn action-btn--primary" onclick="window.print()">印刷 / PDF保存</button>
+          <button class="action-btn action-btn--outline" onclick="saveIssuerData()">発行者情報を保存</button>
+        </div>
+      </div>
+
+      <div class="receipt-preview" id="preview">
+        <!-- Rendered by JS -->
+      </div>
+    </div>
+
+    <div class="ad-slot" style="margin:20px 0"><ins class="adsbygoogle" style="display:block;min-height:100px" data-ad-client="ca-pub-1964975138803092" data-ad-slot="auto" data-ad-format="auto" data-full-width-responsive="true"></ins><script>(adsbygoogle = window.adsbygoogle || []).push({});</script></div>
+
+    <div class="seo-section">
+      <h2>領収書作成ツールの使い方</h2>
+      <p>左側のフォームに発行日・宛名・金額・但し書きなどを入力すると、右側にリアルタイムで領収書のプレビューが表示されます。完成したら「印刷 / PDF保存」ボタンで印刷・PDF化できます。</p>
+
+      <h3>収入印紙の自動判定</h3>
+      <p>金額を入力すると、印紙税法に基づいて収入印紙の要否と金額を自動判定します。5万円未満は非課税、5万円以上は金額に応じた印紙税額を表示します。</p>
+
+      <h3>領収書の法的要件</h3>
+      <p>民法第486条では、弁済をした者は受取証書（領収書）の交付を請求できると定められています。領収書は取引の証拠書類として重要な役割を果たします。</p>
+      <ul>
+        <li><strong>民法第486条（受取証書の交付請求権）</strong> — 弁済をした者は、弁済を受領した者に対して受取証書の交付を請求できます。</li>
+        <li><strong>印紙税法（収入印紙の貼付義務）</strong> — 売上代金に係る金銭の受取書は、記載金額に応じた印紙税の納付が必要です。</li>
+      </ul>
+      <p>印紙税額の目安:</p>
+      <ul>
+        <li>5万円未満: 非課税</li>
+        <li>5万円以上100万円以下: 200円</li>
+        <li>100万円超200万円以下: 400円</li>
+      </ul>
+
+      <h3>インボイス制度における適格簡易請求書としての要件</h3>
+      <p>適格請求書発行事業者が発行する領収書は、適格簡易請求書（簡易インボイス）として認められます。以下の記載要件を満たす必要があります。</p>
+      <ul>
+        <li>適格請求書発行事業者の氏名・名称および登録番号</li>
+        <li>取引年月日</li>
+        <li>取引の内容（軽減税率対象の場合はその旨）</li>
+        <li>税率ごとに区分した合計額（税込または税抜）</li>
+      </ul>
+      <p style="font-size:0.82rem;color:#dc2626;font-weight:600;margin-top:12px">※ 本ツールは領収書の記載項目を網羅していますが、個別の税務判断については税理士にご相談ください。法的効力を保証するものではありません。</p>
+
+      <h3>個人事業主の領収書活用ケース</h3>
+      <ul>
+        <li><strong>フリーランスのWeb制作・デザイン</strong> — クライアントから制作費を受領した際の領収書発行。源泉徴収後の金額を正確に記載。</li>
+        <li><strong>コンサルティング・講師業</strong> — セミナー講演料やコンサルティング報酬の受領時に発行。但し書きに具体的な業務内容を記載。</li>
+        <li><strong>個人事業の物販・サービス提供</strong> — 商品販売やサービス提供の代金受領時の正式な領収書を即作成。</li>
+        <li><strong>副業・個人間取引</strong> — 副業の報酬や個人間取引の支払い証明として。確定申告の際の証憑書類に活用。</li>
+      </ul>
+    </div>
+  </main>
+  <div style="max-width:1100px;margin:0 auto;padding:0 24px 0">
+    <div class="seo-section" style="margin-top:0">
+      <h2>関連ツール</h2>
+      <ul style="list-style:none;padding:0;display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:12px">
+        <li><a href="../invoice-generator/" style="display:block;padding:16px;background:var(--gray-100);border-radius:12px;font-weight:600;font-size:0.9rem">請求書作成</a></li>
+        <li><a href="../withholding-tax/" style="display:block;padding:16px;background:var(--gray-100);border-radius:12px;font-weight:600;font-size:0.9rem">源泉徴収税計算</a></li>
+        <li><a href="../pdf-converter/" style="display:block;padding:16px;background:var(--gray-100);border-radius:12px;font-weight:600;font-size:0.9rem">画像→PDF変換</a></li>
+        <li><a href="../qr-generator/" style="display:block;padding:16px;background:var(--gray-100);border-radius:12px;font-weight:600;font-size:0.9rem">QRコード作成</a></li>
+      </ul>
+    </div>
+  </div>
+  <footer class="footer"><p>&copy; 2026 <a href="../../">ToolBox</a></p></footer>
+
+  <script>
+    // Set today's date
+    document.getElementById('rcpt-date').value = new Date().toISOString().split('T')[0];
+
+    // Auto-increment receipt number
+    function getNextReceiptNumber() {
+      const saved = localStorage.getItem('toolbox-receipt-number');
+      const num = saved ? parseInt(saved, 10) + 1 : 1;
+      return num;
+    }
+
+    function formatReceiptNumber(n) {
+      return 'R-' + new Date().getFullYear() + '-' + String(n).padStart(4, '0');
+    }
+
+    const currentNum = getNextReceiptNumber();
+    document.getElementById('rcpt-number').value = formatReceiptNumber(currentNum);
+
+    // Stamp duty calculation
+    function getStampDuty(amount) {
+      if (amount < 50000) return { required: false, amount: 0, label: '非課税（5万円未満）' };
+      if (amount <= 1000000) return { required: true, amount: 200, label: '200円（5万円以上100万円以下）' };
+      if (amount <= 2000000) return { required: true, amount: 400, label: '400円（100万円超200万円以下）' };
+      if (amount <= 3000000) return { required: true, amount: 600, label: '600円（200万円超300万円以下）' };
+      if (amount <= 5000000) return { required: true, amount: 1000, label: '1,000円（300万円超500万円以下）' };
+      if (amount <= 10000000) return { required: true, amount: 2000, label: '2,000円（500万円超1,000万円以下）' };
+      return { required: true, amount: 10000, label: '10,000円（1,000万円超）' };
+    }
+
+    function update() {
+      const date = document.getElementById('rcpt-date').value;
+      const number = document.getElementById('rcpt-number').value;
+      const toName = document.getElementById('to-name').value || '（宛名未入力）';
+      const amount = parseInt(document.getElementById('rcpt-amount').value) || 0;
+      const proviso = document.getElementById('rcpt-proviso').value || '';
+      const fromName = document.getElementById('from-name').value || '（発行者名）';
+      const fromAddress = document.getElementById('from-address').value;
+      const fromTel = document.getElementById('from-tel').value;
+      const fromInvoice = document.getElementById('from-invoice').value;
+
+      // Stamp duty info in form
+      const stampInfo = document.getElementById('stamp-info');
+      if (amount > 0) {
+        const duty = getStampDuty(amount);
+        if (duty.required) {
+          stampInfo.innerHTML = '<div class="stamp-info stamp-info--required">収入印紙: ' + duty.label + '</div>';
+        } else {
+          stampInfo.innerHTML = '<div class="stamp-info stamp-info--free">収入印紙: ' + duty.label + '</div>';
+        }
+      } else {
+        stampInfo.innerHTML = '';
+      }
+
+      // Preview
+      const duty = getStampDuty(amount);
+      const preview = document.getElementById('preview');
+      preview.innerHTML =
+        '<div class="rcpt-title">領 収 書</div>' +
+        '<div class="rcpt-number">No. ' + escH(number) + '</div>' +
+        '<div class="rcpt-date">' + formatDate(date) + '</div>' +
+        '<div class="rcpt-to"><div class="rcpt-to__name">' + escH(toName) + '</div></div>' +
+        '<div class="rcpt-amount"><div class="rcpt-amount__label">金額</div><div class="rcpt-amount__value">' + amount.toLocaleString() + '-</div></div>' +
+        (proviso ? '<div class="rcpt-proviso"><strong>但</strong>' + escH(proviso) + '</div>' : '') +
+        '<div style="font-size:0.82rem;color:var(--gray-700);margin:16px 0">上記正に領収いたしました。</div>' +
+        (amount > 0 ? '<div class="rcpt-stamp ' + (duty.required ? 'rcpt-stamp--required' : 'rcpt-stamp--free') + '">' + (duty.required ? '収入印紙 ' + duty.label : '収入印紙不要（' + duty.label + '）') + '</div>' : '') +
+        '<div class="rcpt-from"><strong>' + escH(fromName) + '</strong>' +
+        (fromAddress ? escH(fromAddress) + '<br>' : '') +
+        (fromTel ? 'TEL: ' + escH(fromTel) : '') +
+        '</div>' +
+        (fromInvoice ? '<div class="rcpt-invoice-num">登録番号: ' + escH(fromInvoice) + '</div>' : '');
+    }
+
+    function formatDate(d) {
+      if (!d) return '\u2014';
+      var parts = d.split('-');
+      return parts[0] + '\u5E74' + parseInt(parts[1]) + '\u6708' + parseInt(parts[2]) + '\u65E5';
+    }
+
+    function escH(s) {
+      return s.replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;');
+    }
+
+    function saveIssuerData() {
+      var data = {
+        fromName: document.getElementById('from-name').value,
+        fromAddress: document.getElementById('from-address').value,
+        fromTel: document.getElementById('from-tel').value,
+        fromInvoice: document.getElementById('from-invoice').value,
+        receiptNum: currentNum
+      };
+      localStorage.setItem('toolbox-receipt-issuer', JSON.stringify(data));
+      localStorage.setItem('toolbox-receipt-number', String(currentNum));
+      alert('発行者情報と領収書番号を保存しました。次回アクセス時に自動復元されます。');
+    }
+
+    // Load saved issuer data
+    var savedIssuer = localStorage.getItem('toolbox-receipt-issuer');
+    if (savedIssuer) {
+      try {
+        var d = JSON.parse(savedIssuer);
+        if (d.fromName) document.getElementById('from-name').value = d.fromName;
+        if (d.fromAddress) document.getElementById('from-address').value = d.fromAddress;
+        if (d.fromTel) document.getElementById('from-tel').value = d.fromTel;
+        if (d.fromInvoice) document.getElementById('from-invoice').value = d.fromInvoice;
+      } catch (e) {}
+    }
+
+    update();
+  </script>
+</body>
+</html>

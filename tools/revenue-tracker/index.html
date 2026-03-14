@@ -1,0 +1,577 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8">
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-Q5PXT07YCP"></script>
+  <script>window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments);}gtag('js',new Date());gtag('config','G-Q5PXT07YCP');</script>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="売上・入金をブラウザで管理。月別集計・入金ステータス・クライアント別分析。確定申告の準備に最適な個人事業主・フリーランス向け無料ツール。">
+  <meta name="keywords" content="売上管理, 入金管理, 確定申告, 個人事業主, フリーランス, 売上記録, 請求管理, 収入管理">
+  <title>売上管理｜入金ステータス・月別集計・CSV出力【無料】</title>
+  <link rel="canonical" href="https://muryo-tool.com/tools/revenue-tracker/">
+  <meta property="og:title" content="売上管理｜入金ステータス・月別集計・CSV出力【無料】">
+  <meta property="og:description" content="売上・入金をブラウザで管理。月別集計・入金ステータス・クライアント別分析。確定申告の準備に最適な個人事業主・フリーランス向け無料ツール。">
+  <meta property="og:type" content="website">
+  <meta property="og:url" content="https://muryo-tool.com/tools/revenue-tracker/">
+  <meta property="og:image" content="https://muryo-tool.com/ogp.png">
+  <meta name="twitter:card" content="summary_large_image">
+  <link rel="preconnect" href="https://fonts.googleapis.com" fetchpriority="high">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Noto+Sans+JP:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <style>
+    *,*::before,*::after{margin:0;padding:0;box-sizing:border-box}
+    :root{--black:#1d1d1f;--gray-900:#3a3a3c;--gray-700:#636366;--gray-500:#8e8e93;--gray-300:#d1d1d6;--gray-200:#e5e5ea;--gray-100:#f2f2f7;--white:#fff;--accent:#0071e3;--green:#16a34a;--font:"Inter","Noto Sans JP",-apple-system,sans-serif}
+    html{font-size:16px;-webkit-font-smoothing:antialiased}
+    body{font-family:var(--font);color:var(--black);background:var(--gray-100);line-height:1.7;min-height:100vh}
+    a{color:inherit;text-decoration:none}
+
+    .nav{background:rgba(255,255,255,0.85);backdrop-filter:saturate(180%) blur(20px);border-bottom:1px solid rgba(0,0,0,0.05);position:sticky;top:0;z-index:100}
+    .nav__inner{display:flex;align-items:center;justify-content:space-between;height:52px;max-width:1100px;margin:0 auto;padding:0 24px}
+    .nav__logo{font-size:1.2rem;font-weight:800;letter-spacing:-0.04em}
+    .nav__logo span{color:var(--accent)}
+    .nav__back{font-size:0.82rem;font-weight:500;color:var(--accent);display:flex;align-items:center;gap:4px}
+
+    .tool-page{max-width:900px;margin:0 auto;padding:32px 24px 80px}
+    .tool-header{text-align:center;margin-bottom:20px}
+    .tool-header__icon{display:flex;align-items:center;justify-content:center;margin-bottom:12px;color:var(--accent)}
+    .tool-header__title{font-size:clamp(1.5rem,3vw,2rem);font-weight:800;letter-spacing:-0.03em;margin-bottom:8px}
+    .tool-header__desc{font-size:0.92rem;color:var(--gray-700);max-width:500px;margin:0 auto}
+
+    .tool-main{background:var(--white);border-radius:20px;box-shadow:0 2px 12px rgba(0,0,0,0.04);overflow:hidden;padding:28px}
+
+    .form-group{margin-bottom:16px}
+    .form-group label{display:block;font-size:0.82rem;font-weight:600;color:var(--gray-700);margin-bottom:6px}
+    .form-row{display:grid;grid-template-columns:1fr 1fr;gap:12px}
+    .form-row-3{display:grid;grid-template-columns:1fr 1fr 1fr;gap:12px}
+    input[type="date"],input[type="number"],input[type="text"],select,textarea{width:100%;padding:10px 14px;border:1px solid var(--gray-200);border-radius:10px;font-family:var(--font);font-size:0.92rem;color:var(--black);background:var(--white);outline:none;transition:border 0.2s}
+    input:focus,select:focus,textarea:focus{border-color:var(--accent)}
+    textarea{resize:vertical;min-height:60px}
+
+    .btn{display:inline-flex;align-items:center;justify-content:center;gap:6px;padding:12px 24px;border:none;border-radius:980px;font-family:var(--font);font-size:0.88rem;font-weight:600;cursor:pointer;transition:all 0.2s}
+    .btn--primary{background:var(--accent);color:var(--white)}
+    .btn--primary:hover{background:#005bb5}
+    .btn--secondary{background:var(--gray-100);color:var(--gray-700)}
+    .btn--secondary:hover{background:var(--gray-200)}
+    .btn--danger{background:#fee;color:#d00}
+    .btn--danger:hover{background:#fdd}
+    .btn-group{display:flex;gap:10px;margin-top:16px;flex-wrap:wrap}
+
+    .stats{display:grid;grid-template-columns:repeat(auto-fit,minmax(140px,1fr));gap:12px;margin-top:20px}
+    .stat{background:var(--white);border-radius:16px;padding:20px 24px;text-align:center;box-shadow:0 2px 12px rgba(0,0,0,0.04)}
+    .stat__value{font-size:1.6rem;font-weight:800;letter-spacing:-0.03em;color:var(--black)}
+    .stat__label{font-size:0.72rem;font-weight:600;color:var(--gray-500);text-transform:uppercase;letter-spacing:0.08em;margin-top:2px}
+
+    .detail-card{background:var(--white);border-radius:16px;padding:24px;box-shadow:0 2px 12px rgba(0,0,0,0.04);margin-top:20px}
+    .detail-card__title{font-size:0.78rem;font-weight:600;color:var(--gray-500);text-transform:uppercase;letter-spacing:0.08em;margin-bottom:14px}
+    .detail-row{display:flex;justify-content:space-between;padding:8px 0;border-bottom:1px solid var(--gray-100);font-size:0.88rem}
+    .detail-row:last-child{border-bottom:none}
+    .detail-row__label{color:var(--gray-700)}
+    .detail-row__value{font-weight:600}
+
+    table{width:100%;border-collapse:collapse;margin-top:12px}
+    th,td{padding:10px 14px;text-align:left;border-bottom:1px solid var(--gray-100);font-size:0.88rem}
+    th{font-size:0.75rem;font-weight:600;color:var(--gray-500);text-transform:uppercase;letter-spacing:0.05em}
+    td{color:var(--gray-900)}
+    tr:hover td{background:var(--gray-100)}
+    .table-wrap{overflow-x:auto;margin-top:20px;background:var(--white);border-radius:16px;padding:20px;box-shadow:0 2px 12px rgba(0,0,0,0.04)}
+    .td-actions{white-space:nowrap}
+    .td-actions button{background:none;border:none;color:#d00;cursor:pointer;font-size:0.82rem;font-weight:600;font-family:var(--font)}
+
+    .month-nav{display:flex;align-items:center;justify-content:center;gap:16px;margin-bottom:16px}
+    .month-nav button{background:var(--gray-100);border:none;padding:8px 16px;border-radius:980px;font-family:var(--font);font-size:0.85rem;font-weight:600;cursor:pointer}
+    .month-nav button:hover{background:var(--gray-200)}
+    .month-nav span{font-size:1.1rem;font-weight:700;min-width:140px;text-align:center}
+
+    .filter-bar{display:flex;gap:10px;flex-wrap:wrap;margin-bottom:16px;align-items:flex-end}
+    .filter-bar .form-group{margin-bottom:0;flex:1;min-width:120px}
+    .filter-bar .form-group label{font-size:0.75rem}
+    .filter-bar select,.filter-bar input{padding:8px 12px;font-size:0.85rem}
+
+    .chart-wrap{background:var(--white);border-radius:16px;padding:24px;box-shadow:0 2px 12px rgba(0,0,0,0.04);margin-top:20px}
+    .chart-wrap .detail-card__title{margin-bottom:16px}
+    .bar-chart{display:flex;align-items:flex-end;gap:6px;height:180px;border-bottom:1px solid var(--gray-200);padding-bottom:4px}
+    .bar-col{flex:1;display:flex;flex-direction:column;align-items:center;gap:4px;min-width:0}
+    .bar-col__bar{width:100%;max-width:40px;background:var(--accent);border-radius:6px 6px 0 0;transition:height 0.4s ease;min-height:2px}
+    .bar-col__label{font-size:0.65rem;color:var(--gray-500);white-space:nowrap}
+    .bar-col__amount{font-size:0.6rem;color:var(--gray-700);font-weight:600;white-space:nowrap}
+
+    .tr-overdue td{background:#fef2f2 !important}
+    .status-paid{color:var(--green);font-weight:600}
+    .status-unpaid{color:#dc2626;font-weight:600}
+
+    .seo-section{margin-top:48px;background:var(--white);border-radius:20px;padding:40px;box-shadow:0 2px 12px rgba(0,0,0,0.04)}
+    .seo-section h2{font-size:1.3rem;font-weight:700;margin-bottom:16px;letter-spacing:-0.01em}
+    .seo-section h3{font-size:1.05rem;font-weight:600;margin:28px 0 10px}
+    .seo-section p{font-size:0.92rem;color:var(--gray-700);line-height:1.85;margin-bottom:14px}
+    .seo-section ul{padding-left:20px;margin-bottom:14px}
+    .seo-section li{font-size:0.9rem;color:var(--gray-700);line-height:1.8;margin-bottom:4px}
+
+    .footer{text-align:center;padding:40px 24px;font-size:0.75rem;color:var(--gray-500)}
+    .footer a{color:var(--accent)}
+
+    @media(max-width:640px){
+      .tool-page{padding:20px 16px 60px}
+      .tool-header__title{font-size:1.3rem}
+      .tool-header__desc{font-size:0.85rem}
+      .form-row,.form-row-3{grid-template-columns:1fr}
+      .stats{grid-template-columns:repeat(2,1fr)}
+      .seo-section{padding:24px 20px}
+      .seo-section h2{font-size:1.1rem}
+      .bar-chart{height:140px}
+      .filter-bar{flex-direction:column}
+      .filter-bar .form-group{min-width:100%}
+    }
+  </style>
+<script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-1964975138803092"
+     crossorigin="anonymous"></script>
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "WebApplication",
+  "name": "売上管理｜入金ステータス・月別集計・CSV出力",
+  "url": "https://muryo-tool.com/tools/revenue-tracker/",
+  "description": "売上・入金をブラウザで管理。月別集計・入金ステータス・クライアント別分析。確定申告の準備に最適な個人事業主・フリーランス向け無料ツール。",
+  "applicationCategory": "BusinessApplication",
+  "operatingSystem": "Web",
+  "offers": {"@type": "Offer", "price": "0", "priceCurrency": "JPY"},
+  "inLanguage": "ja",
+  "isPartOf": {"@type": "WebSite", "name": "ToolBox", "url": "https://muryo-tool.com/"}
+}
+</script>
+<script type="application/ld+json">
+{"@context":"https://schema.org","@type":"BreadcrumbList","itemListElement":[
+  {"@type":"ListItem","position":1,"name":"ToolBox","item":"https://muryo-tool.com/"},
+  {"@type":"ListItem","position":2,"name":"売上管理","item":"https://muryo-tool.com/tools/revenue-tracker/"}
+]}
+</script>
+</head>
+<body>
+
+  <nav class="nav">
+    <div class="nav__inner">
+      <a href="../../" class="nav__logo">Tool<span>Box</span></a>
+      <a href="../../" class="nav__back">&larr; ツール一覧</a>
+    </div>
+  </nav>
+
+  <main class="tool-page">
+    <div class="tool-header">
+      <div class="tool-header__icon"><svg width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M12 1v22"/><path d="M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"/></svg></div>
+      <h1 class="tool-header__title">売上管理</h1>
+      <p class="tool-header__desc">売上・入金をブラウザで管理。月別集計・クライアント別分析・CSV出力。確定申告の基礎資料に。データは端末内で保存。</p>
+    </div>
+    <div style="background:#fef2f2;border:1.5px solid #fecaca;border-radius:14px;padding:20px 24px;margin-bottom:20px">
+      <div style="font-size:0.78rem;font-weight:700;color:#dc2626;margin-bottom:8px">このツールを使わない場合の損失</div>
+      <div style="display:flex;flex-direction:column;gap:6px">
+        <div style="display:flex;align-items:flex-start;gap:6px;font-size:0.82rem;color:#636366;line-height:1.5"><span style="color:#dc2626;flex-shrink:0">&#x2715;</span><span>売上の記録漏れ &#x2192; 確定申告で過少申告のリスク</span></div>
+        <div style="display:flex;align-items:flex-start;gap:6px;font-size:0.82rem;color:#636366;line-height:1.5"><span style="color:#dc2626;flex-shrink:0">&#x2715;</span><span>入金管理の不備 &#x2192; 請求漏れで月1〜2万円の機会損失</span></div>
+        <div style="display:flex;align-items:flex-start;gap:6px;font-size:0.82rem;color:#636366;line-height:1.5"><span style="color:#dc2626;flex-shrink:0">&#x2715;</span><span>クライアント別売上の未把握 &#x2192; 値上げ交渉の根拠がない</span></div>
+      </div>
+      <div style="margin-top:12px;padding-top:12px;border-top:1px solid #fecaca;font-size:0.82rem;color:#16a34a;font-weight:700">
+        ToolBoxなら &#x2192; 無料・入金ステータス管理＆月別集計。CSV出力で確定申告ソフトに即取込
+      </div>
+    </div>
+    <div style="margin:12px 0"><ins class="adsbygoogle" style="display:block;min-height:90px" data-ad-client="ca-pub-1964975138803092" data-ad-slot="auto" data-ad-format="auto" data-full-width-responsive="true"></ins><script>(adsbygoogle = window.adsbygoogle || []).push({});</script></div>
+
+    <div class="tool-main">
+      <div class="form-row">
+        <div class="form-group">
+          <label for="rev-date">日付</label>
+          <input type="date" id="rev-date">
+        </div>
+        <div class="form-group">
+          <label for="rev-client">クライアント名</label>
+          <input type="text" id="rev-client" placeholder="例: 株式会社ABC">
+        </div>
+      </div>
+      <div class="form-row">
+        <div class="form-group">
+          <label for="rev-project">案件名</label>
+          <input type="text" id="rev-project" placeholder="例: LP制作">
+        </div>
+        <div class="form-group">
+          <label for="rev-amount">売上額（円）</label>
+          <input type="number" id="rev-amount" placeholder="100000" min="0">
+        </div>
+      </div>
+      <div class="form-row-3">
+        <div class="form-group">
+          <label for="rev-status">入金ステータス</label>
+          <select id="rev-status">
+            <option value="未入金">未入金</option>
+            <option value="入金済">入金済</option>
+          </select>
+        </div>
+        <div class="form-group">
+          <label for="rev-category">カテゴリ</label>
+          <select id="rev-category">
+            <option value="デザイン">デザイン</option>
+            <option value="開発">開発</option>
+            <option value="ライティング">ライティング</option>
+            <option value="コンサル">コンサル</option>
+            <option value="その他">その他</option>
+          </select>
+        </div>
+        <div class="form-group">
+          <label for="rev-due">入金予定日</label>
+          <input type="date" id="rev-due">
+        </div>
+      </div>
+      <div class="btn-group">
+        <button class="btn btn--primary" onclick="addRevenue()">売上を追加</button>
+      </div>
+    </div>
+
+    <div class="month-nav" style="margin-top:24px">
+      <button onclick="changeMonth(-1)">&larr; 前月</button>
+      <span id="current-month"></span>
+      <button onclick="changeMonth(1)">翌月 &rarr;</button>
+    </div>
+
+    <div class="stats" id="summary-stats">
+      <div class="stat"><div class="stat__value" id="total-revenue">&yen;0</div><div class="stat__label">月間売上合計</div></div>
+      <div class="stat"><div class="stat__value" id="total-paid">&yen;0</div><div class="stat__label">入金済</div></div>
+      <div class="stat"><div class="stat__value" id="total-unpaid">&yen;0</div><div class="stat__label">未入金</div></div>
+      <div class="stat"><div class="stat__value" id="total-count">0</div><div class="stat__label">件数</div></div>
+    </div>
+
+    <div class="detail-card" id="category-summary">
+      <div class="detail-card__title">カテゴリ別集計</div>
+      <div id="category-rows"></div>
+    </div>
+
+    <div class="chart-wrap">
+      <div class="detail-card__title">月別売上推移（過去12ヶ月）</div>
+      <div class="bar-chart" id="bar-chart"></div>
+    </div>
+
+    <div class="table-wrap">
+      <div style="display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:8px;margin-bottom:12px">
+        <div class="detail-card__title" style="margin:0">売上一覧</div>
+        <div class="btn-group" style="margin:0">
+          <button class="btn btn--secondary" onclick="exportCSV()">CSV出力</button>
+          <button class="btn btn--danger" onclick="clearAll()">全件削除</button>
+        </div>
+      </div>
+      <div class="filter-bar">
+        <div class="form-group">
+          <label for="filter-month">月</label>
+          <select id="filter-month" onchange="render()">
+            <option value="current">表示中の月</option>
+            <option value="all">全期間</option>
+          </select>
+        </div>
+        <div class="form-group">
+          <label for="filter-client">クライアント</label>
+          <select id="filter-client" onchange="render()">
+            <option value="">すべて</option>
+          </select>
+        </div>
+        <div class="form-group">
+          <label for="filter-category">カテゴリ</label>
+          <select id="filter-category" onchange="render()">
+            <option value="">すべて</option>
+            <option value="デザイン">デザイン</option>
+            <option value="開発">開発</option>
+            <option value="ライティング">ライティング</option>
+            <option value="コンサル">コンサル</option>
+            <option value="その他">その他</option>
+          </select>
+        </div>
+        <div class="form-group">
+          <label for="filter-status">入金ステータス</label>
+          <select id="filter-status" onchange="render()">
+            <option value="">すべて</option>
+            <option value="未入金">未入金</option>
+            <option value="入金済">入金済</option>
+          </select>
+        </div>
+      </div>
+      <table>
+        <thead><tr><th>日付</th><th>クライアント</th><th>案件名</th><th>売上額</th><th>ステータス</th><th>入金予定日</th><th></th></tr></thead>
+        <tbody id="revenue-table"></tbody>
+      </table>
+      <p id="no-data" style="text-align:center;color:var(--gray-500);padding:24px;font-size:0.88rem">売上データはありません</p>
+    </div>
+
+    <div style="margin:20px 0"><ins class="adsbygoogle" style="display:block;min-height:100px" data-ad-client="ca-pub-1964975138803092" data-ad-slot="auto" data-ad-format="auto" data-full-width-responsive="true"></ins><script>(adsbygoogle = window.adsbygoogle || []).push({});</script></div>
+
+    <div class="seo-section">
+      <h2>個人事業主の売上管理のコツ</h2>
+      <p>フリーランス・個人事業主にとって、売上の正確な記録は確定申告の基礎です。このツールを使って、案件ごとの売上と入金状況をリアルタイムで把握しましょう。</p>
+
+      <h3>フリーランスWebデザイナーの売上管理</h3>
+      <p>複数のクライアントからデザイン案件を受注する場合、案件ごとの売上額と入金予定日を管理することが重要です。月末にまとめて請求書を送る方は、入金予定日を設定しておくことで、請求漏れや入金遅延を防げます。カテゴリ別の集計で、デザイン・コーディング・ディレクションなど、どの作業が収益に貢献しているか可視化できます。</p>
+
+      <h3>フリーランスエンジニアの月次管理</h3>
+      <p>準委任契約や請負契約が混在するエンジニアの場合、月額報酬と成果報酬を分けて管理する必要があります。クライアント別の売上推移を確認することで、特定のクライアントへの依存度が分かり、リスク分散の判断材料になります。</p>
+
+      <h3>ライター・コンサルタントの請求管理</h3>
+      <p>記事単価やコンサルティング報酬は案件ごとに異なることが多いため、案件名と金額をセットで記録しておくと、単価交渉の際の根拠になります。未入金アラートを活用すれば、支払い遅延にすぐ気づけます。</p>
+
+      <h3>確定申告に向けた月次チェック</h3>
+      <p>毎月の売上集計を確認し、前年同月と比較することで、事業の成長度合いを把握できます。年間の売上が1,000万円を超えるとインボイス制度や消費税の課税事業者となるため、月次での累計管理が不可欠です。CSV出力機能で、会計ソフトへの取り込みもスムーズに行えます。</p>
+
+      <h3>法令準拠: 帳簿記録の義務</h3>
+      <p>個人事業主は、売上（収入金額）を正確に記録・保存する法的義務があります。売上の記録は確定申告の基礎資料として法的に必要です。</p>
+      <ul>
+        <li><strong>所得税法第148条（青色申告者の帳簿書類）</strong> &mdash; 青色申告者は、仕訳帳・総勘定元帳等の帳簿を備え付け、取引を記録し、7年間保存する義務があります。</li>
+        <li><strong>所得税法第232条（白色申告者の記帳義務）</strong> &mdash; 白色申告者も、収入金額や必要経費に関する事項を記帳し、5年間保存する義務があります。</li>
+        <li><strong>記録すべき項目</strong> &mdash; 取引年月日、相手方（クライアント名）、金額、取引内容（案件名）を記録する必要があります。</li>
+      </ul>
+      <p style="font-size:0.82rem;color:#dc2626;font-weight:600;margin-top:12px">※ 本ツールは売上の記録・整理を補助するものです。正式な帳簿は会計ソフト等をご利用ください。税務上の判断は税理士にご相談ください。</p>
+    </div>
+  </main>
+
+  <div class="tool-page" style="padding-top:0">
+    <div class="seo-section" style="margin-top:0">
+      <h2>関連ツール</h2>
+      <ul style="list-style:none;padding:0;display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:12px">
+        <li><a href="../expense-memo/" style="display:block;padding:16px;background:var(--gray-100);border-radius:12px;font-weight:600;font-size:0.9rem">経費メモ</a></li>
+        <li><a href="../invoice-generator/" style="display:block;padding:16px;background:var(--gray-100);border-radius:12px;font-weight:600;font-size:0.9rem">請求書作成</a></li>
+        <li><a href="../withholding-tax/" style="display:block;padding:16px;background:var(--gray-100);border-radius:12px;font-weight:600;font-size:0.9rem">源泉徴収計算</a></li>
+        <li><a href="../work-log/" style="display:block;padding:16px;background:var(--gray-100);border-radius:12px;font-weight:600;font-size:0.9rem">作業ログ</a></li>
+      </ul>
+    </div>
+  </div>
+
+  <footer class="footer">
+    <p>&copy; 2026 <a href="../../">ToolBox</a>. All rights reserved.</p>
+  </footer>
+
+  <script>
+    const STORAGE_KEY = 'toolbox_revenue';
+    let currentYear, currentMonth;
+
+    function init() {
+      const now = new Date();
+      currentYear = now.getFullYear();
+      currentMonth = now.getMonth();
+      document.getElementById('rev-date').value = now.toISOString().slice(0, 10);
+      render();
+    }
+
+    function getData() {
+      try { return JSON.parse(localStorage.getItem(STORAGE_KEY)) || []; }
+      catch { return []; }
+    }
+
+    function saveData(data) {
+      localStorage.setItem(STORAGE_KEY, JSON.stringify(data));
+    }
+
+    function addRevenue() {
+      const date = document.getElementById('rev-date').value;
+      const client = document.getElementById('rev-client').value.trim();
+      const project = document.getElementById('rev-project').value.trim();
+      const amount = parseInt(document.getElementById('rev-amount').value, 10);
+      const status = document.getElementById('rev-status').value;
+      const category = document.getElementById('rev-category').value;
+      const due = document.getElementById('rev-due').value;
+
+      if (!date || !client || !amount || amount <= 0) {
+        alert('日付・クライアント名・売上額を正しく入力してください。');
+        return;
+      }
+
+      const data = getData();
+      data.push({ id: Date.now(), date, client, project, amount, status, category, due });
+      saveData(data);
+
+      document.getElementById('rev-client').value = '';
+      document.getElementById('rev-project').value = '';
+      document.getElementById('rev-amount').value = '';
+      document.getElementById('rev-due').value = '';
+
+      const d = new Date(date);
+      currentYear = d.getFullYear();
+      currentMonth = d.getMonth();
+      render();
+    }
+
+    function deleteRevenue(id) {
+      const data = getData().filter(e => e.id !== id);
+      saveData(data);
+      render();
+    }
+
+    function toggleStatus(id) {
+      const data = getData();
+      const item = data.find(e => e.id === id);
+      if (item) {
+        item.status = item.status === '入金済' ? '未入金' : '入金済';
+        saveData(data);
+        render();
+      }
+    }
+
+    function clearAll() {
+      if (!confirm('全件削除してよろしいですか？この操作は取り消せません。')) return;
+      localStorage.removeItem(STORAGE_KEY);
+      render();
+    }
+
+    function changeMonth(delta) {
+      currentMonth += delta;
+      if (currentMonth > 11) { currentMonth = 0; currentYear++; }
+      if (currentMonth < 0) { currentMonth = 11; currentYear--; }
+      render();
+    }
+
+    function isOverdue(item) {
+      if (item.status === '入金済' || !item.due) return false;
+      const today = new Date();
+      today.setHours(0, 0, 0, 0);
+      return new Date(item.due) < today;
+    }
+
+    function updateClientFilter(allData) {
+      const select = document.getElementById('filter-client');
+      const currentVal = select.value;
+      const clients = [...new Set(allData.map(e => e.client))].sort();
+      select.innerHTML = '<option value="">すべて</option>';
+      clients.forEach(c => {
+        const opt = document.createElement('option');
+        opt.value = c;
+        opt.textContent = c;
+        if (c === currentVal) opt.selected = true;
+        select.appendChild(opt);
+      });
+    }
+
+    function renderChart(allData) {
+      const chart = document.getElementById('bar-chart');
+      chart.innerHTML = '';
+      const months = [];
+      for (let i = 11; i >= 0; i--) {
+        let m = currentMonth - i;
+        let y = currentYear;
+        while (m < 0) { m += 12; y--; }
+        while (m > 11) { m -= 12; y++; }
+        months.push({ year: y, month: m });
+      }
+
+      const totals = months.map(({ year, month }) => {
+        return allData
+          .filter(e => { const d = new Date(e.date); return d.getFullYear() === year && d.getMonth() === month; })
+          .reduce((s, e) => s + e.amount, 0);
+      });
+
+      const max = Math.max(...totals, 1);
+
+      months.forEach(({ year, month }, i) => {
+        const col = document.createElement('div');
+        col.className = 'bar-col';
+        const pct = (totals[i] / max) * 100;
+        col.innerHTML = `
+          <div class="bar-col__amount">${totals[i] > 0 ? '\u00a5' + (totals[i] >= 10000 ? Math.round(totals[i] / 10000) + '万' : totals[i].toLocaleString()) : ''}</div>
+          <div class="bar-col__bar" style="height:${Math.max(pct, 1)}%"></div>
+          <div class="bar-col__label">${month + 1}月</div>
+        `;
+        chart.appendChild(col);
+      });
+    }
+
+    function render() {
+      const label = `${currentYear}年${currentMonth + 1}月`;
+      document.getElementById('current-month').textContent = label;
+
+      const allData = getData();
+      updateClientFilter(allData);
+
+      const monthData = allData.filter(e => {
+        const d = new Date(e.date);
+        return d.getFullYear() === currentYear && d.getMonth() === currentMonth;
+      }).sort((a, b) => a.date.localeCompare(b.date));
+
+      const totalRev = monthData.reduce((s, e) => s + e.amount, 0);
+      const totalPaid = monthData.filter(e => e.status === '入金済').reduce((s, e) => s + e.amount, 0);
+      const totalUnpaid = monthData.filter(e => e.status === '未入金').reduce((s, e) => s + e.amount, 0);
+
+      document.getElementById('total-revenue').textContent = '\u00a5' + totalRev.toLocaleString();
+      document.getElementById('total-paid').textContent = '\u00a5' + totalPaid.toLocaleString();
+      document.getElementById('total-unpaid').textContent = '\u00a5' + totalUnpaid.toLocaleString();
+      document.getElementById('total-count').textContent = monthData.length;
+
+      const categories = ['デザイン', '開発', 'ライティング', 'コンサル', 'その他'];
+      const catRows = document.getElementById('category-rows');
+      catRows.innerHTML = '';
+      categories.forEach(cat => {
+        const catTotal = monthData.filter(e => e.category === cat).reduce((s, e) => s + e.amount, 0);
+        const row = document.createElement('div');
+        row.className = 'detail-row';
+        row.innerHTML = `<span class="detail-row__label">${cat}</span><span class="detail-row__value">\u00a5${catTotal.toLocaleString()}</span>`;
+        catRows.appendChild(row);
+      });
+
+      renderChart(allData);
+
+      // Filter logic
+      const filterMonth = document.getElementById('filter-month').value;
+      const filterClient = document.getElementById('filter-client').value;
+      const filterCategory = document.getElementById('filter-category').value;
+      const filterStatus = document.getElementById('filter-status').value;
+
+      let filtered = filterMonth === 'all' ? [...allData] : [...monthData];
+      if (filterClient) filtered = filtered.filter(e => e.client === filterClient);
+      if (filterCategory) filtered = filtered.filter(e => e.category === filterCategory);
+      if (filterStatus) filtered = filtered.filter(e => e.status === filterStatus);
+      filtered.sort((a, b) => a.date.localeCompare(b.date));
+
+      const tbody = document.getElementById('revenue-table');
+      const noData = document.getElementById('no-data');
+      tbody.innerHTML = '';
+
+      if (filtered.length === 0) {
+        noData.style.display = 'block';
+      } else {
+        noData.style.display = 'none';
+        filtered.forEach(e => {
+          const tr = document.createElement('tr');
+          const overdue = isOverdue(e);
+          if (overdue) tr.className = 'tr-overdue';
+          const statusClass = e.status === '入金済' ? 'status-paid' : 'status-unpaid';
+          const overdueTag = overdue ? ' <span style="font-size:0.7rem;background:#dc2626;color:#fff;padding:1px 6px;border-radius:4px;margin-left:4px">期限超過</span>' : '';
+          tr.innerHTML = `<td>${e.date}</td><td>${e.client}</td><td>${e.project || ''}</td><td>\u00a5${e.amount.toLocaleString()}</td><td><span class="${statusClass}" style="cursor:pointer" onclick="toggleStatus(${e.id})">${e.status}</span>${overdueTag}</td><td>${e.due || ''}</td><td class="td-actions"><button onclick="deleteRevenue(${e.id})">削除</button></td>`;
+          tbody.appendChild(tr);
+        });
+      }
+    }
+
+    function exportCSV() {
+      const filterMonth = document.getElementById('filter-month').value;
+      const allData = getData();
+      let data;
+
+      if (filterMonth === 'all') {
+        data = [...allData];
+      } else {
+        data = allData.filter(e => {
+          const d = new Date(e.date);
+          return d.getFullYear() === currentYear && d.getMonth() === currentMonth;
+        });
+      }
+      data.sort((a, b) => a.date.localeCompare(b.date));
+
+      if (data.length === 0) { alert('データがありません。'); return; }
+
+      const bom = '\uFEFF';
+      let csv = bom + '日付,クライアント名,案件名,売上額,入金ステータス,カテゴリ,入金予定日\n';
+      data.forEach(e => {
+        csv += `${e.date},"${(e.client || '').replace(/"/g, '""')}","${(e.project || '').replace(/"/g, '""')}",${e.amount},${e.status},${e.category},${e.due || ''}\n`;
+      });
+
+      const blob = new Blob([csv], { type: 'text/csv;charset=utf-8;' });
+      const url = URL.createObjectURL(blob);
+      const a = document.createElement('a');
+      a.href = url;
+      const filename = filterMonth === 'all' ? '売上管理_全期間.csv' : `売上管理_${currentYear}年${currentMonth + 1}月.csv`;
+      a.download = filename;
+      a.click();
+      URL.revokeObjectURL(url);
+    }
+
+    init();
+  </script>
+</body>
+</html>
